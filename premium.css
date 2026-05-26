@@ -1444,13 +1444,6 @@ section { position: relative; }
   margin: 0 0 22px;
 }
 .foot .brand p { font-size: 14px; color: var(--jgc-fg-on-navy-2); max-width: 360px; line-height: 1.6; margin: 0 0 24px; }
-.foot .brand .badges { display: flex; gap: 8px; }
-.foot .brand .badges span {
-  font-family: var(--jgc-font-mono); font-size: 10.5px;
-  padding: 5px 10px; border-radius: 999px;
-  background: rgba(255,255,255,0.06); color: #fff;
-  letter-spacing: 0.12em; text-transform: uppercase;
-}
 .foot h3,
 .foot h5 {
   font-family: var(--jgc-font-display);
