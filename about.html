@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — JGusew Computers</title>
+  <meta name="description" content="Jehiah Gusew is a technology professional based in Sunbury, VIC. JGusew Computers is his one-person technology help and advice service.">
+  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="premium.css">
+  <style>
+    .doc-nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      background: linear-gradient(180deg, rgba(10,23,51,0.65), rgba(10,23,51,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .doc-nav .inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: 18px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .doc-nav .brand {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .doc-nav .brand img { height: 28px; filter: drop-shadow(0 1px 8px rgba(95,163,232,0.45)); }
+    .doc-nav .brand .txt { display: flex; flex-direction: column; line-height: 1.05; }
+    .doc-nav .brand .name {
+      font-family: var(--jgc-font-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.16em; color: #fff;
+    }
+    .doc-nav .brand .tag {
+      font-family: var(--jgc-font-display);
+      font-size: 10px; letter-spacing: 0.22em;
+      color: var(--jgc-fg-on-navy-2); text-transform: uppercase;
+    }
+    .doc-nav .back {
+      font-size: 13.5px; color: var(--jgc-fg-on-navy-2);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+      transition: color 200ms;
+    }
+    .doc-nav .back:hover { color: #fff; text-decoration: none; }
+
+    /* ---- Page layout ---- */
+    .about-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 32px 120px;
+      position: relative; z-index: 2;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* ---- Photo column ---- */
+    .photo-col { position: sticky; top: 100px; }
+
+    .photo-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 40px 80px -20px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,255,255,0.06);
+      aspect-ratio: 3/4;
+    }
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+
+    .photo-caption {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .photo-caption .name {
+      font-family: var(--jgc-font-display);
+      font-size: 17px; font-weight: 600;
+      color: #fff; margin-bottom: 4px;
+    }
+    .photo-caption .role {
+      font-size: 13.5px; color: var(--jgc-fg-on-navy-2); margin-bottom: 14px;
+    }
+    .photo-caption .pills {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .photo-caption .pill {
+      font-family: var(--jgc-font-mono);
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 10px; border-radius: 999px;
+      background: rgba(95,163,232,0.12);
+      color: var(--jgc-glow-300);
+      border: 1px solid rgba(95,163,232,0.18);
+    }
+
+    /* ---- Content column ---- */
+    .content-col {}
+
+    .about-eyebrow {
+      font-family: var(--jgc-font-mono);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--jgc-glow-300);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .about-eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: var(--jgc-glow-400);
+    }
+
+    .content-col h1 {
+      font-family: var(--jgc-font-display);
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 700; line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #fff; margin: 0 0 36px;
+    }
+
+    .content-col p {
+      font-size: 17px; line-height: 1.75;
+      color: var(--jgc-fg-on-navy-2);
+      margin: 0 0 22px;
+      max-width: 600px;
+    }
+
+    .content-col p a {
+      color: #fff; text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .doc-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.08) 80%, transparent);
+      margin: 40px 0;
+    }
+
+    .pillar-block {
+      padding: 24px 28px;
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      margin: 32px 0;
+    }
+    .pillar-block .rule {
+      font-family: var(--jgc-font-display);
+      font-size: 20px; font-weight: 600;
+      color: #fff; line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .pillar-block .rule .chrome {
+      background: linear-gradient(180deg, #f7fbff 0%, #d9e4f0 22%, #7e8ba0 48%, #c7d3e2 55%, #f1f6fb 78%, #92a0b7 100%);
+      background-clip: text; -webkit-background-clip: text; color: transparent;
+    }
+    .pillar-block p {
+      font-size: 14.5px; color: var(--jgc-fg-on-navy-2);
+      margin: 0; line-height: 1.6;
+    }
+
+    .cta-row {
+      display: flex; gap: 14px; align-items: center;
+      flex-wrap: wrap; margin-top: 40px;
+    }
+    .cta-row a.btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600;
+      padding: 14px 24px; border-radius: 999px;
+      background: linear-gradient(180deg, #f6f9ff 0%, #d9e4f1 100%);
+      color: var(--jgc-navy-900); text-decoration: none;
+      box-shadow: 0 12px 30px -10px rgba(95,163,232,0.55);
+      transition: transform 240ms var(--jgc-ease-out), box-shadow 240ms;
+    }
+    .cta-row a.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 38px -10px rgba(95,163,232,0.7); text-decoration: none; }
+    .cta-row a.btn-glass {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 500;
+      padding: 14px 22px; border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      color: #fff; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: background 200ms, border-color 200ms;
+    }
+    .cta-row a.btn-glass:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.22); text-decoration: none; }
+
+    .doc-foot {
+      margin-top: 80px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 12.5px; color: var(--jgc-fg-on-navy-2);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .doc-foot a { color: var(--jgc-fg-on-navy-2); text-decoration: underline; text-underline-offset: 3px; }
+    .doc-foot a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .photo-col { position: static; max-width: 360px; }
+      .photo-frame { aspect-ratio: 4/5; }
+    }
+    @media (max-width: 640px) {
+      .about-wrap { padding: 48px 24px 80px; }
+      .doc-nav .inner { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <nav class="doc-nav">
+    <div class="inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logos/monogram-light.png" alt="JGC monogram" />
+        <div class="txt">
+          <span class="name">JGUSEW COMPUTERS</span>
+          <span class="tag">Computer problems. Sorted.</span>
+        </div>
+      </a>
+      <a href="index.html" class="back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+        Back to site
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="about-wrap">
+      <div class="about-grid">
+
+        <!-- Photo column -->
+        <div class="photo-col">
+          <div class="photo-frame">
+            <img src="assets/photos/jehiah-seated.jpg" alt="Jehiah Gusew, JGusew Computers" />
+          </div>
+          <div class="photo-caption">
+            <div class="name">Jehiah Gusew</div>
+            <div class="role">Technology advisor · JGusew Computers</div>
+            <div class="pills">
+              <span class="pill">Sunbury, VIC</span>
+              <span class="pill">Free during launch</span>
+              <span class="pill">Help by email</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content column -->
+        <div class="content-col">
+          <div class="about-eyebrow">About</div>
+          <h1>I'm Jehiah.</h1>
+
+          <p>
+            I've worked in IT for most of my career — supporting systems, solving
+            problems, and explaining things to people who just want their technology
+            to work without the jargon. JGusew Computers is the natural extension
+            of that: calm, practical help for everyday people and small businesses
+            who need a clear next step, not a sales pitch.
+          </p>
+
+          <p>
+            I'm based in Sunbury, VIC. Everything comes through email — no phone
+            queues, no on-site call-outs at this stage. You describe what you're
+            dealing with in plain English, and I come back with questions, options,
+            and a clear recommendation. If I can't help, I'll tell you who can.
+          </p>
+
+          <div class="doc-divider"></div>
+
+          <p>
+            A lot of technology advice pushes people toward buying something new,
+            signing up for something, or handing over access they shouldn't hand over.
+            I don't do that. The goal is always the simplest, safest next step —
+            even if that step is "don't do anything yet."
+          </p>
+
+          <p>
+            I'm also careful about AI. It can be genuinely useful for organising
+            information and preparing a first draft, but it shouldn't be the thing
+            giving you advice about your banking, your data, or a decision that
+            matters. That's why the rule here is simple:
+          </p>
+
+          <div class="pillar-block">
+            <div class="rule">
+              <span class="chrome">AI drafts. Jehiah reviews.</span>
+            </div>
+            <p>
+              Nothing important leaves my inbox without me reading it first.
+              No automated replies. No bots. Just me being careful with your time.
+            </p>
+          </div>
+
+          <div class="doc-divider"></div>
+
+          <p>
+            The service is currently free. I'm using this period to refine how it
+            works, gather feedback, and make sure the process is genuinely useful
+            before charging for it. No obligation, no marketing list, no upsell.
+          </p>
+
+          <p>
+            If you have a technology problem you're not sure what to do about —
+            a slow computer, a confusing email account, a scam you're worried about,
+            a purchase you're unsure of — send it through. I'll have a look.
+          </p>
+
+          <div class="cta-row">
+            <a href="index.html#contact" class="btn-primary">
+              Get help by email
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="index.html#services" class="btn-glass">
+              See services
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="doc-foot">
+        <span>© 2026 JGusew Computers · led by Jehiah Gusew · Sunbury, VIC, Australia</span>
+        <span>
+          <a href="index.html">Home</a> ·
+          <a href="safety.html">Safety</a> ·
+          <a href="privacy.html">Privacy notice</a>
+        </span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

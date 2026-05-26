@@ -107,6 +107,7 @@
         { id: "services", label: "Services" },
         { id: "process", label: "How it works" },
         { id: "safety", label: "Safety", href: "safety.html" },
+        { id: "about", label: "About", href: "about.html" },
         { id: "contact", label: "Contact" },
       ];
       return (
@@ -581,8 +582,16 @@
               <h5>Trust</h5>
               <ul>
                 <li><a href="#process" onClick={(e)=>{e.preventDefault();onNav("process");}}>How it works</a></li>
-                <li><a href="#safety" onClick={(e)=>{e.preventDefault();onNav("safety");}}>Safety first</a></li>
+                <li><a href="safety.html">Safety first</a></li>
                 <li><a href="#contact" onClick={(e)=>{e.preventDefault();onNav("contact");}}>Get in touch</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>About</h5>
+              <ul>
+                <li><a href="about.html">About Jehiah</a></li>
+                <li><a href="safety.html">Safety first</a></li>
+                <li><a href="privacy.html">Privacy notice</a></li>
               </ul>
             </div>
             <div>
