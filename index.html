@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JGusew Computers — Practical technology help without the hype</title>
+  <meta name="description" content="Practical technology help, advice, and AI automation for everyday people and small businesses. Plain English. Reviewed by Jehiah Gusew before anything important goes out. Free while we're refining the service.">
+  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="premium.css">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JGusew Computers — Practical technology help without the hype">
+  <meta property="og:description" content="Plain-English tech advice for everyday people and small businesses. Reviewed by a real person before anything important goes out.">
+  <meta property="og:image" content="assets/logos/horizontal-lockup-light.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JGusew Computers — Practical technology help without the hype">
+  <meta name="twitter:description" content="Plain-English tech advice. Reviewed by a real person. Free during launch.">
+  <meta name="twitter:image" content="assets/logos/horizontal-lockup-light.png">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Jehiah Gusew",
+        "jobTitle": "Technology advisor",
+        "url": "https://jgusewcomputers.com/",
+        "email": "hello@jgusewcomputers.com",
+        "worksFor": { "@type": "Organization", "name": "JGusew Computers" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "name": "JGusew Computers",
+        "description": "Practical technology help, advice, and automation for everyday people and small businesses. Reviewed by a real person.",
+        "email": "hello@jgusewcomputers.com",
+        "founder": { "@type": "Person", "name": "Jehiah Gusew" },
+        "areaServed": "Online",
+        "serviceType": [
+          "Computer advice",
+          "Slow computer assessment",
+          "Repair vs replace decision",
+          "Email cleanup",
+          "Digital organisation",
+          "Small business tech review",
+          "AI automation starter",
+          "Scam and security triage",
+          "Elderly tech help",
+          "Device setup advice"
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="mesh"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <div id="root"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("dEyzQD3JwgIZVH6vh");</script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+    // ---------- Chrome icons (transparent renders) ----------
+    const ICON = {
+      check:    "assets/icons/check-circle.png",
+      shield:   "assets/icons/shield.png",
+      chat:     "assets/icons/chat.png",
+      pencil:   "assets/icons/pencil.png",
+      alert:    "assets/icons/alert-shield.png",
+      checkAlt: "assets/icons/check-circle-on-light.png",
+    };
+
+    const Arrow = ({ size = 16 }) => (
+      <svg className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+      </svg>
+    );
+
+    function useReveal() {
+      React.useEffect(() => {
+        const els = document.querySelectorAll(".reveal");
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+          }
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+        els.forEach((el) => io.observe(el));
+        return () => io.disconnect();
+      }, []);
+    }
+
+    // ---------- Nav ----------
+    function Nav({ current, onNav }) {
+      const items = [
+        { id: "home", label: "Home" },
+        { id: "services", label: "Services" },
+        { id: "process", label: "How it works" },
+        { id: "safety", label: "Safety" },
+        { id: "contact", label: "Contact" },
+      ];
+      return (
+        <header className="nav">
+          <div className="inner">
+            <div className="brand" onClick={() => onNav("home")}>
+              <img src="assets/logos/monogram-light.png" alt="JGC monogram" />
+              <div className="txt">
+                <span className="name">JGUSEW COMPUTERS</span>
+                <span className="tag">Computer problems. Sorted.</span>
+              </div>
+              <span className="stage-pill" title="Services are free while we refine the offering. No paid work is being charged yet.">Free during launch</span>
+            </div>
+            <div className="menu">
+              {items.map(i => (
+                <button key={i.id}
+                  className={current === i.id ? "active" : ""}
+                  onClick={() => onNav(i.id)}>{i.label}</button>
+              ))}
+              <button className="cta" onClick={() => onNav("contact")}>Get help by email</button>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    // ---------- Hero ----------
+    function HeroStage() {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const el = ref.current; if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const onMove = (ev) => {
+          const r = el.getBoundingClientRect();
+          const x = (ev.clientX - r.left) / r.width - 0.5;
+          const y = (ev.clientY - r.top) / r.height - 0.5;
+          el.style.setProperty("--tilt-y", (x * 14) + "deg");
+          el.style.setProperty("--tilt-x", (-y * 14) + "deg");
+          el.style.setProperty("--plx-x", (x * 18) + "px");
+          el.style.setProperty("--plx-y", (y * 18) + "px");
+        };
+        const onLeave = () => {
+          el.style.setProperty("--tilt-y", "0deg");
+          el.style.setProperty("--tilt-x", "0deg");
+          el.style.setProperty("--plx-x", "0px");
+          el.style.setProperty("--plx-y", "0px");
+        };
+        window.addEventListener("mousemove", onMove);
+        el.addEventListener("mouseleave", onLeave);
+        return () => { window.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
+      }, []);
+      return (
+        <div className="stage" ref={ref}>
+          <div className="ring"></div>
+          <div className="ring-lines"></div>
+          <div className="orb">
+            <img className="monogram" src="assets/logos/monogram-dark.png" alt="" />
+          </div>
+          <div className="satellite s1"><img src={ICON.check} alt="" /></div>
+          <div className="satellite s2"><img src={ICON.chat} alt="" /></div>
+          <div className="satellite s3"><img src={ICON.shield} alt="" /></div>
+          <div className="satellite s4"><img src={ICON.pencil} alt="" /></div>
+        </div>
+      );
+    }
+
+    function Hero({ onContact, onServices }) {
+      return (
+        <section className="hero">
+          <div className="inner">
+            <div className="hero-copy">
+              <div className="eyebrow-row reveal">
+                <span className="dot"></span>
+                <strong>Reply within 1 working day</strong>
+                <span style={{ opacity: 0.5 }}>·</span>
+                <span>Led by Jehiah Gusew</span>
+              </div>
+              <h1 className="reveal d1">
+                <span className="chrome">Practical</span>
+                <span className="chrome">technology help</span>
+                <span className="muted">without the hype.</span>
+              </h1>
+              <p className="lead reveal d2">
+                Practical tech advice for everyday people and small
+                businesses. Plain English. Reviewed by a real person
+                before anything important goes out.
+              </p>
+              <div className="quiet reveal d3">
+                <span className="l"></span>
+                <span>No hype · No pressure · No pretending it's easy</span>
+              </div>
+              <div className="hero-actions reveal d3">
+                <button className="btn primary pill" onClick={onContact}>
+                  Get help by email <Arrow />
+                </button>
+                <button className="btn glass" onClick={onServices}>
+                  See services <Arrow />
+                </button>
+              </div>
+              <div className="reveal d3" style={{
+                marginTop: 18, fontSize: 13.5, color: "var(--jgc-fg-on-navy-2)", maxWidth: 540, lineHeight: 1.55
+              }}>
+                <strong style={{ color: "#fff", fontWeight: 600 }}>Free while we refine the service.</strong>{" "}
+                No paid work is being charged yet — you get the same care as paid work.
+                No obligation, no marketing list, no upsell.
+              </div>
+            </div>
+            <HeroStage />
+          </div>
+
+          <div className="hero-strip reveal d4">
+            <div className="group">
+              <div className="item"><span className="dot"></span><span>Currently <strong>accepting enquiries</strong></span></div>
+              <div className="item"><span>Help by email · <strong>reply within 1 working day</strong></span></div>
+              <div className="item"><span>AI drafts · <strong>Jehiah reviews</strong></span></div>
+            </div>
+            <div className="mail">hello@jgusewcomputers.com →</div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- "What this means" explainer band ----------
+    function ExplainerBand() {
+      return (
+        <section className="explainer">
+          <div className="container">
+            <div className="explainer-grid">
+              <div className="ex reveal">
+                <div className="ex-h">
+                  <span className="ex-num">01</span>
+                  <h4>What "free during launch" means</h4>
+                </div>
+                <p>Services are free right now while we refine the offering. No paid work is being charged yet. You get the same careful review as paid work — we're using this period to gather feedback and improve the service.</p>
+              </div>
+              <div className="ex reveal d1">
+                <div className="ex-h">
+                  <span className="ex-num">02</span>
+                  <h4>What "help by email" means</h4>
+                </div>
+                <p>You explain the issue in plain English by email. We reply with questions, options, and a clear next step — usually within one working day. No phone queues, no remote-control software at this stage. Just careful written advice.</p>
+              </div>
+              <div className="ex reveal d2">
+                <div className="ex-h">
+                  <span className="ex-num">03</span>
+                  <h4>What "AI drafts, Jehiah reviews" means</h4>
+                </div>
+                <p>AI tools may help organise your message or prepare a draft reply. But Jehiah Gusew (who runs JGusew Computers) reviews anything important before it's sent. Nothing goes out on autopilot. No automated bot replies.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Marquee ----------
+    function Marquee() {
+      const items = [
+        "New computer advice", "Slow computer assessment", "Repair vs replace",
+        "Email cleanup", "Digital organisation", "Small business tech review",
+        "AI automation starter", "Scam & security triage", "Elderly tech help",
+        "Device setup advice",
+      ];
+      const row = [...items, ...items];
+      return (
+        <div className="marquee">
+          <div className="track">
+            {row.map((t, i) => (
+              <span className="item" key={i}>
+                {t} <span className="sep"></span>
+              </span>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // ---------- Bento ----------
+    function BentoCard({ size, icon, title, body }) {
+      const ref = React.useRef(null);
+      const tilt = (ev) => {
+        const el = ref.current; if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const r = el.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width - 0.5;
+        const y = (ev.clientY - r.top) / r.height - 0.5;
+        el.style.setProperty("--tx", (-y * 6) + "deg");
+        el.style.setProperty("--ty", (x * 6) + "deg");
+        el.style.setProperty("--gx", ((ev.clientX - r.left) / r.width) * 100 + "%");
+        el.style.setProperty("--gy", ((ev.clientY - r.top) / r.height) * 100 + "%");
+      };
+      const leave = () => {
+        const el = ref.current; if (!el) return;
+        el.style.setProperty("--tx", "0deg");
+        el.style.setProperty("--ty", "0deg");
+      };
+      return (
+        <div ref={ref} className={"bento-card " + size + " reveal"} onMouseMove={tilt} onMouseLeave={leave}>
+          <div className="ico"><img src={icon} alt="" /></div>
+          <h3>{title}</h3>
+          <p>{body}</p>
+        </div>
+      );
+    }
+
+    function BentoServices() {
+      return (
+        <div className="bento">
+          <BentoCard size="feature" icon={ICON.check}
+            title="New computer advice"
+            body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — we compare honestly so you don't overspend." />
+          <BentoCard size="std" icon={ICON.pencil}
+            title="Slow computer assessment"
+            body="If it's slow, the answer isn't always 'buy a new one'. Cleanup, backup, upgrade, repair quote, replacement, or further diagnosis — we work out which." />
+          <BentoCard size="std" icon={ICON.check}
+            title="Repair vs replace decision"
+            body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
+          <BentoCard size="wide" icon={ICON.chat}
+            title="Email cleanup & digital organisation"
+            body="Account separation, labels, retirement of old accounts, safer habits, file structures, a simple device map — a clear picture of where everything lives. We don't log in or ask for your password." />
+          <BentoCard size="wide" icon={ICON.check}
+            title="AI automation starter"
+            body="AI is useful only when the workflow is understood. We map a process, identify repetitive tasks, suggest free-first automation options, and separate safe ideas from risky ones — without recommending automation for sensitive work." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Small business tech review"
+            body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear picture of where money is going and where it shouldn't be." />
+          <BentoCard size="std" icon={ICON.alert}
+            title="Scam & security triage"
+            body="If something feels off, slow down. We help organise the situation and suggest safe next steps — never asking for passwords or codes." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Elderly tech help"
+            body="Patient, plain-English advice for computer choices, basic device issues, email confusion, and avoiding poor-value purchases." />
+        </div>
+      );
+    }
+
+    // ---------- How it works ----------
+    const STEPS = [
+      { n: "Step 01", t: "You explain the issue", b: "Send a plain-English description of what you need help with. No technical wording needed.", icon: ICON.chat },
+      { n: "Step 02", t: "We ask the right questions", b: "If more information is needed, we ask before guessing. Better to be slow and careful than rush.", icon: ICON.pencil },
+      { n: "Step 03", t: "We prepare advice", b: "The issue is reviewed and organised into clear, practical next steps.", icon: ICON.check },
+      { n: "Step 04", t: "Jehiah reviews it", b: "Important recommendations are human-reviewed before being sent. AI drafts; Jehiah reviews.", icon: ICON.shield },
+      { n: "Step 05", t: "You get a clear next step", b: "Understand what to do next, what not to waste money on, and when a specialist is needed.", icon: ICON.check },
+    ];
+
+    function HowItWorks() {
+      const [active, setActive] = React.useState(0);
+      const refs = React.useRef([]);
+      React.useEffect(() => {
+        const io = new IntersectionObserver((entries) => {
+          let best = null;
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+            }
+          }
+          if (best) {
+            const idx = refs.current.indexOf(best.target);
+            if (idx !== -1) setActive(idx);
+          }
+        }, { threshold: [0.5, 0.7, 0.9] });
+        refs.current.forEach((el) => el && io.observe(el));
+        return () => io.disconnect();
+      }, []);
+      return (
+        <section id="process" className="how">
+          <div className="container">
+            <div className="section-head reveal">
+              <span className="num">02 — Process</span>
+              <h2>Five steps.<br />One rule: <span style={{ color: "var(--jgc-glow-300)" }}>AI drafts. Jehiah reviews.</span></h2>
+              <p>Every important reply goes through a human before it leaves the inbox. That's the whole point. Nothing is sent on autopilot.</p>
+            </div>
+            <div className="grid">
+              <div className="steps">
+                {STEPS.map((s, i) => (
+                  <div ref={el => (refs.current[i] = el)}
+                       key={i}
+                       className={"step" + (i === active ? " active" : "")}>
+                    <span className="stepnum">{s.n}</span>
+                    <h3>{s.t}</h3>
+                    <p>{s.b}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div className="stick">
+                  <div className="stick-card">
+                    <span className="stepnum">{STEPS[active].n}</span>
+                    <div className="icon-host">
+                      {STEPS.map((s, i) => (
+                        <img key={i} src={s.icon} alt="" className={i === active ? "" : "fade"} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- AI callout ----------
+    function AICallout() {
+      return (
+        <section className="callout">
+          <div className="container reveal">
+            <div className="rule-pre">Brand pillar · trust statement</div>
+            <div className="rule">
+              <span className="chrome">Agents can help prepare information,</span><br />
+              <span className="quiet">but Jehiah reviews important advice</span><br />
+              <span className="chrome">before it is sent.</span>
+            </div>
+            <div className="signature">— JGusew Computers, led by Jehiah Gusew</div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Jehiah note ----------
+    function JehiahNote() {
+      return (
+        <section className="jehiah-note">
+          <div className="container">
+            <div className="note-card reveal">
+              <div className="signature-block">
+                <span className="hello">Hello.</span>
+                <span className="byline">A short note from Jehiah</span>
+              </div>
+              <p>
+                I'm a one-person operation. If you email <a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a>,
+                I'm the one who reads it, asks questions if needed, and writes you back. The chrome and the
+                glass on this page is the brand; the help underneath is just me — being careful with your
+                time, your money, and your details.
+              </p>
+              <p className="sign-off">— Jehiah Gusew</p>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Safety ----------
+    function SafetyBand() {
+      return (
+        <section id="safety" className="safety-band">
+          <div className="container">
+            <div className="panel reveal">
+              <img className="shield" src={ICON.alert} alt="" />
+              <div>
+                <div className="pill" style={{ marginBottom: 14, display: "inline-block" }}>SAFETY FIRST</div>
+                <h3>Please don't send passwords, banking codes, or identity documents.</h3>
+                <p>JGusew Computers does not need those details to start helping. If something feels suspicious, slow down before clicking, paying, or sharing details — and we'll help organise the next step.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Contact ----------
+    function Contact() {
+      const [s, setS] = React.useState({ name: "", email: "", phone: "", message: "" });
+      const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
+      const u = (k) => (e) => setS({ ...s, [k]: e.target.value });
+      const submit = (e) => {
+        e.preventDefault();
+        setStatus("sending");
+        emailjs.send("service_59pweih", "template_wnuvasi", {
+          from_name:  s.name,
+          from_email: s.email,
+          phone:      s.phone || "Not provided",
+          message:    s.message,
+        })
+        .then(() => {
+          setStatus("sent");
+          setS({ name: "", email: "", phone: "", message: "" });
+        })
+        .catch(() => setStatus("error"));
+      };
+      return (
+        <section id="contact" className="contact">
+          <div className="container">
+            <div className="grid">
+              <div className="copy reveal">
+                <div className="section-head" style={{ marginBottom: 0 }}>
+                  <span className="num">03 — Get in touch</span>
+                </div>
+                <h2>Send through what's going on,<br />and we'll work out the safest next step.</h2>
+                <p>You don't need to know what's wrong. A plain-English description of what you've noticed is enough. We read every message ourselves, ask for more detail if needed, and reply with a clear next step.</p>
+                <div className="facts">
+                  <div className="fact"><span className="dot"></span>Free while we're refining the service.</div>
+                  <div className="fact"><span className="dot"></span>AI may help draft. Jehiah reviews before anything is sent.</div>
+                  <div className="fact"><span className="dot"></span>If we can't help, we'll tell you who can.</div>
+                </div>
+                <div className="quiet" style={{ marginTop: 28 }}>
+                  Or write to <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>hello@jgusewcomputers.com</a>
+                </div>
+              </div>
+              <form className="glass-form reveal d2" onSubmit={submit}>
+                <div className="row">
+                  <div className="field">
+                    <label>Your name</label>
+                    <input value={s.name} onChange={u("name")} placeholder="Sarah Hughes" required />
+                  </div>
+                  <div className="field">
+                    <label>Email</label>
+                    <input type="email" value={s.email} onChange={u("email")} placeholder="sarah@example.com.au" required />
+                  </div>
+                </div>
+                <div className="field">
+                  <label>Phone (optional)</label>
+                  <input value={s.phone} onChange={u("phone")} placeholder="Optional" />
+                </div>
+                <div className="field">
+                  <label>What's going on?</label>
+                  <textarea value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
+                </div>
+                <div className="donot">
+                  <strong>Please don't send:</strong> passwords · banking codes · one-time / MFA codes · credit card numbers · full identity documents · sensitive private documents.
+                </div>
+                <div className="submit">
+                  <span className="note">No marketing list. We don't store anything sensitive. See <a href="#safety" onClick={(e)=>{e.preventDefault();document.getElementById("safety").scrollIntoView({behavior:"smooth"})}}>Safety</a>.</span>
+                  <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent"}>
+                    {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send</span><Arrow /></>}
+                  </button>
+                </div>
+                {status === "error" && (
+                  <div style={{
+                    marginTop: 12, padding: "12px 16px", borderRadius: 10,
+                    background: "rgba(196,122,44,0.10)", border: "1px solid rgba(196,122,44,0.30)",
+                    fontSize: 13.5, color: "#f0c896", lineHeight: 1.5
+                  }}>
+                    Something went wrong — the message wasn't sent. You can try again, or write directly to{" "}
+                    <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline" }}>hello@jgusewcomputers.com</a>.
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Footer ----------
+    function Footer({ onNav }) {
+      return (
+        <footer className="foot">
+          <div className="inner">
+            <div className="brand">
+              <img className="lockup" src="assets/logos/horizontal-lockup-dark.png" alt="JGusew Computers" />
+              <p>Practical technology help, advice, and automation for everyday people and small businesses. Led by Jehiah Gusew.</p>
+              <div className="badges">
+                <span>Free during launch</span>
+                <span>Help by email</span>
+                <span>Human-reviewed</span>
+              </div>
+            </div>
+            <div>
+              <h5>Services</h5>
+              <ul>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>New computer advice</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Slow computer assessment</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Email cleanup</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>AI automation starter</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Small business review</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Trust</h5>
+              <ul>
+                <li><a href="#process" onClick={(e)=>{e.preventDefault();onNav("process");}}>How it works</a></li>
+                <li><a href="#safety" onClick={(e)=>{e.preventDefault();onNav("safety");}}>Safety first</a></li>
+                <li><a href="#contact" onClick={(e)=>{e.preventDefault();onNav("contact");}}>Get in touch</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5>Contact</h5>
+              <ul>
+                <li><a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a></li>
+                <li style={{ opacity: 0.75 }}>Reply within 1 working day</li>
+                <li style={{ opacity: 0.75 }}>Replies are human-reviewed</li>
+              </ul>
+            </div>
+          </div>
+          <div className="legal">
+            <span>© 2026 JGusew Computers · led by Jehiah Gusew</span>
+            <span className="mono">v0.1 · Free during launch · Sunbury, VIC, Australia</span>
+          </div>
+        </footer>
+      );
+    }
+
+    // ---------- App ----------
+    function App() {
+      const [current, setCurrent] = React.useState("home");
+      useReveal();
+      function nav(id) {
+        setCurrent(id);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return (
+        <>
+          <Nav current={current} onNav={nav} />
+          <main>
+            <div id="home" data-screen-label="01 Home">
+              <Hero onContact={() => nav("contact")} onServices={() => nav("services")} />
+            </div>
+
+            <ExplainerBand />
+
+            <Marquee />
+
+            <section id="services" className="section" data-screen-label="02 Services">
+              <div className="container">
+                <div className="section-head reveal">
+                  <span className="num">01 — Services</span>
+                  <h2>A handful of practical things, done carefully.</h2>
+                  <p>We help assess the issue, explain the options, and suggest sensible next steps. No guaranteed repairs, no emergency support, no instant fixes.</p>
+                </div>
+                <BentoServices />
+              </div>
+            </section>
+
+            <HowItWorks />
+
+            <AICallout />
+
+            <JehiahNote />
+
+            <SafetyBand />
+
+            <Contact />
+          </main>
+          <Footer onNav={nav} />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

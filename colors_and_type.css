@@ -1,0 +1,285 @@
+/* ============================================================
+   JGusew Computers — Core Tokens
+   Calm, practical help with technology.
+   ------------------------------------------------------------
+   Default theme is LIGHT (the brand's primary surface).
+   Apply `data-theme="dark"` on a parent (usually <html>) for
+   the deep-navy treatment used on premium covers, slides
+   and luxury panels.
+   ============================================================ */
+
+@font-face {
+  font-family: "Exo 2 Black";
+  src: url("fonts/Exo2-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* ---------- Brand palette ---------- */
+  /* Navy is the brand anchor — pulled from app-icon-dark + compact card. */
+  --jgc-navy-950: #060f24;   /* deepest, used as page bg in dark mode  */
+  --jgc-navy-900: #0a1733;   /* primary navy — luxury cover bg         */
+  --jgc-navy-800: #0f2148;
+  --jgc-navy-700: #18305f;
+  --jgc-navy-600: #244478;
+  --jgc-navy-500: #355a96;
+
+  /* Chrome / silver — the logo treatment.
+     Use for thin dividers and as a metallic accent, never as body text. */
+  --jgc-chrome-100: #f5f7fa;
+  --jgc-chrome-200: #e3e8ee;
+  --jgc-chrome-300: #c9d1da;
+  --jgc-chrome-400: #a4afba;   /* tagline grey on white                 */
+  --jgc-chrome-500: #7e8893;
+  --jgc-chrome-600: #5a636d;
+
+  /* Glow / accent — the subtle blue rim on icons and lockups.
+     Reserved for active states, focus rings, links. */
+  --jgc-glow-200: #d4e8ff;
+  --jgc-glow-300: #9fc8f4;
+  --jgc-glow-400: #5fa3e8;
+  --jgc-glow-500: #2f7fd6;
+  --jgc-glow-600: #1a5fb3;
+
+  /* Surfaces (light) — pulled from letterhead/proposal cover.
+     A breath of cool grey, never bright white-paper. */
+  --jgc-surface-0: #ffffff;
+  --jgc-surface-1: #f6f8fb;   /* page bg                                */
+  --jgc-surface-2: #eef2f7;
+  --jgc-surface-3: #e3e9f0;
+
+  /* Semantic — for the daily-brief / weekly summary patterns. */
+  --jgc-success: #2f8f60;     /* "wins" green, calm not loud            */
+  --jgc-success-bg: #e6f2ec;
+  --jgc-warning: #c47a2c;     /* "urgent" amber — warmer than red       */
+  --jgc-warning-bg: #faf0e2;
+  --jgc-info: var(--jgc-glow-500);
+  --jgc-info-bg: #e6f0fb;
+
+  /* ---------- Foreground / text roles ---------- */
+  --jgc-fg-1: var(--jgc-navy-900);        /* headings, primary copy     */
+  --jgc-fg-2: #2a3958;                    /* body                       */
+  --jgc-fg-3: #5a6884;                    /* supporting / meta          */
+  --jgc-fg-4: #8a93a6;                    /* hint / placeholder         */
+  --jgc-fg-on-navy: #eaf1fb;
+  --jgc-fg-on-navy-2: #aabbd5;
+  --jgc-link: var(--jgc-glow-600);
+
+  /* ---------- Borders ---------- */
+  --jgc-border-1: #dde3ec;                /* default card / divider     */
+  --jgc-border-2: #c9d1da;                /* stronger divider           */
+  --jgc-hairline: rgba(10, 23, 51, 0.08); /* faint silver hairline      */
+
+  /* ---------- Type ---------- */
+  /* Exo 2 — display & UI lockups. Inter — body. JetBrains — mono.
+     Brief tip: Exo 2 echoes the wordmark; Inter keeps body friendly. */
+  --jgc-font-display: "Exo 2", "Exo 2 Black", "Helvetica Neue", sans-serif;
+  --jgc-font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --jgc-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Size scale (1.200 minor third, calm and readable) */
+  --jgc-text-xs: 12px;
+  --jgc-text-sm: 14px;
+  --jgc-text-base: 16px;
+  --jgc-text-md: 18px;
+  --jgc-text-lg: 20px;
+  --jgc-text-xl: 24px;
+  --jgc-text-2xl: 30px;
+  --jgc-text-3xl: 38px;
+  --jgc-text-4xl: 48px;
+  --jgc-text-5xl: 64px;
+  --jgc-text-display: 84px;
+
+  --jgc-leading-tight: 1.15;
+  --jgc-leading-snug: 1.3;
+  --jgc-leading-normal: 1.55;
+  --jgc-leading-loose: 1.7;
+
+  --jgc-tracking-display: -0.01em;
+  --jgc-tracking-tight: -0.005em;
+  --jgc-tracking-normal: 0;
+  --jgc-tracking-wide: 0.04em;       /* for the wordmark all-caps treatment */
+  --jgc-tracking-wider: 0.18em;      /* tagline / eyebrows */
+
+  /* ---------- Spacing (4pt base) ---------- */
+  --jgc-space-1: 4px;
+  --jgc-space-2: 8px;
+  --jgc-space-3: 12px;
+  --jgc-space-4: 16px;
+  --jgc-space-5: 20px;
+  --jgc-space-6: 24px;
+  --jgc-space-8: 32px;
+  --jgc-space-10: 40px;
+  --jgc-space-12: 48px;
+  --jgc-space-16: 64px;
+  --jgc-space-20: 80px;
+  --jgc-space-24: 96px;
+
+  /* ---------- Radii ---------- */
+  --jgc-radius-xs: 4px;
+  --jgc-radius-sm: 8px;
+  --jgc-radius-md: 12px;       /* default card                          */
+  --jgc-radius-lg: 16px;
+  --jgc-radius-xl: 24px;       /* hero surface, large cards             */
+  --jgc-radius-pill: 999px;
+
+  /* ---------- Elevation ----------
+     The chrome/glass identity calls for soft shadows + a thin
+     inner hairline rather than heavy drop shadows. */
+  --jgc-shadow-hairline:
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-sm:
+    0 1px 2px rgba(10, 23, 51, 0.04),
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-md:
+    0 6px 16px -4px rgba(10, 23, 51, 0.10),
+    0 2px 4px rgba(10, 23, 51, 0.04),
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-lg:
+    0 24px 48px -16px rgba(10, 23, 51, 0.18),
+    0 8px 16px -8px rgba(10, 23, 51, 0.08),
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-focus:
+    0 0 0 4px rgba(95, 163, 232, 0.28);
+  --jgc-shadow-glow:
+    0 0 0 1px rgba(95, 163, 232, 0.35),
+    0 0 28px -6px rgba(95, 163, 232, 0.45);
+
+  /* ---------- Motion ---------- */
+  --jgc-ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --jgc-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --jgc-dur-fast: 120ms;
+  --jgc-dur-base: 200ms;
+  --jgc-dur-slow: 320ms;
+
+  /* ---------- Page-level ---------- */
+  --jgc-bg: var(--jgc-surface-1);
+  --jgc-bg-elev: var(--jgc-surface-0);
+}
+
+/* Dark theme — the navy luxury surface (slides, premium covers, hero). */
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --jgc-fg-1: #f3f7ff;
+  --jgc-fg-2: #d6deee;
+  --jgc-fg-3: #aabbd5;
+  --jgc-fg-4: #7e8aa6;
+  --jgc-fg-on-navy: #f3f7ff;
+
+  --jgc-bg: var(--jgc-navy-950);
+  --jgc-bg-elev: var(--jgc-navy-900);
+
+  --jgc-border-1: rgba(255, 255, 255, 0.08);
+  --jgc-border-2: rgba(255, 255, 255, 0.16);
+  --jgc-hairline: rgba(255, 255, 255, 0.10);
+
+  --jgc-shadow-sm:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-md:
+    0 8px 24px -6px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--jgc-hairline);
+  --jgc-shadow-lg:
+    0 32px 60px -20px rgba(0, 0, 0, 0.65),
+    0 0 0 1px var(--jgc-hairline);
+
+  --jgc-link: var(--jgc-glow-300);
+  --jgc-success-bg: rgba(47, 143, 96, 0.18);
+  --jgc-warning-bg: rgba(196, 122, 44, 0.18);
+  --jgc-info-bg: rgba(95, 163, 232, 0.18);
+}
+
+/* ============================================================
+   Semantic element styles
+   These map the tokens above onto plain HTML so a page that
+   just imports this file gets sensible defaults.
+   ============================================================ */
+
+html, body {
+  background: var(--jgc-bg);
+  color: var(--jgc-fg-2);
+  font-family: var(--jgc-font-body);
+  font-size: var(--jgc-text-base);
+  line-height: var(--jgc-leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--jgc-font-display);
+  color: var(--jgc-fg-1);
+  letter-spacing: var(--jgc-tracking-tight);
+  font-weight: 600;
+  margin: 0 0 var(--jgc-space-4);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--jgc-text-4xl); line-height: var(--jgc-leading-tight); font-weight: 700; letter-spacing: var(--jgc-tracking-display); }
+h2 { font-size: var(--jgc-text-3xl); line-height: var(--jgc-leading-tight); }
+h3 { font-size: var(--jgc-text-2xl); line-height: var(--jgc-leading-snug); }
+h4 { font-size: var(--jgc-text-xl); line-height: var(--jgc-leading-snug); }
+h5 { font-size: var(--jgc-text-lg); line-height: var(--jgc-leading-snug); font-weight: 500; }
+
+p {
+  margin: 0 0 var(--jgc-space-4);
+  color: var(--jgc-fg-2);
+  text-wrap: pretty;
+}
+
+small, .jgc-meta {
+  font-size: var(--jgc-text-sm);
+  color: var(--jgc-fg-3);
+}
+
+.jgc-eyebrow {
+  font-family: var(--jgc-font-display);
+  font-size: var(--jgc-text-xs);
+  font-weight: 600;
+  letter-spacing: var(--jgc-tracking-wider);
+  text-transform: uppercase;
+  color: var(--jgc-fg-3);
+}
+
+.jgc-tagline {
+  font-family: var(--jgc-font-display);
+  font-size: var(--jgc-text-md);
+  color: var(--jgc-fg-3);
+  letter-spacing: var(--jgc-tracking-wide);
+}
+
+a {
+  color: var(--jgc-link);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: color var(--jgc-dur-fast) var(--jgc-ease-out);
+}
+a:hover { text-decoration: underline; }
+
+code, kbd, pre {
+  font-family: var(--jgc-font-mono);
+  font-size: 0.92em;
+  background: var(--jgc-surface-2);
+  color: var(--jgc-fg-1);
+  padding: 0.1em 0.4em;
+  border-radius: var(--jgc-radius-xs);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--jgc-border-2) 18%,
+    var(--jgc-border-2) 82%,
+    transparent
+  );
+  margin: var(--jgc-space-8) 0;
+}
+
+::selection { background: var(--jgc-glow-200); color: var(--jgc-navy-900); }
+[data-theme="dark"] ::selection { background: rgba(95, 163, 232, 0.4); color: #fff; }
