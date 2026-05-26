@@ -196,3 +196,60 @@ Working tree clean
 ```
 
 ---
+
+### Session 3 — FIX 3: Sitemap and robots.txt
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was inspected
+
+- No `sitemap.xml` existed at repo root.
+- No `robots.txt` existed at repo root.
+- Cloudflare Pages serves static files from repo root directly — files placed here are reachable at their filename path.
+
+#### Changes made
+
+**New file: `sitemap.xml`**  
+Standard XML sitemap. Includes all four public pages:
+- `https://jgusewcomputers.com/` (priority 1.0, weekly)
+- `https://jgusewcomputers.com/about.html` (priority 0.8, monthly)
+- `https://jgusewcomputers.com/safety.html` (priority 0.7, monthly)
+- `https://jgusewcomputers.com/privacy.html` (priority 0.6, monthly)
+
+**New file: `robots.txt`**  
+Allows all crawlers. References the sitemap:
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://jgusewcomputers.com/sitemap.xml
+```
+
+#### Files changed
+
+- `sitemap.xml` (new)
+- `robots.txt` (new)
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.  
+After deploy: verify `https://jgusewcomputers.com/sitemap.xml` and `https://jgusewcomputers.com/robots.txt` return correctly.
+
+#### External actions recommended (not required for this fix)
+
+- Submit `https://jgusewcomputers.com/sitemap.xml` to Google Search Console once ownership is verified.
+- Submit to Bing Webmaster Tools if desired.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---
