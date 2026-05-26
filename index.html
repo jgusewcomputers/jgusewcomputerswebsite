@@ -167,6 +167,34 @@
       ],
     };
 
+    // ---------- Neural synapse background (shared across all brain modals) ----------
+    // 29 nodes arranged in a brain silhouette shape (580×360 viewBox)
+    const SYNAPSE_NODES = [
+      // Left hemisphere
+      [130,80],[88,145],[80,205],[105,268],[155,308],
+      [188,70],[198,152],[180,228],[205,295],
+      [240,90],[245,175],[232,256],[215,326],
+      // Centre axis
+      [290,48],[288,318],
+      // Right hemisphere
+      [340,70],[345,152],[350,235],[360,300],
+      [392,82],[398,165],[408,250],[395,320],
+      [445,90],[452,185],[440,268],
+      [490,138],[495,202],[482,272],
+    ];
+    // Pairs of node indices to connect (only nearby nodes)
+    const SYNAPSE_EDGES = [
+      [0,1],[0,5],[1,2],[1,6],[2,3],[2,7],[3,4],[3,8],
+      [4,8],[4,12],[5,6],[5,9],[6,7],[6,10],[7,8],[7,11],
+      [8,11],[8,12],[9,10],[9,13],[10,11],[11,12],[11,14],
+      [12,14],[13,15],[13,19],[14,18],[14,22],[15,16],[15,19],
+      [16,17],[16,20],[17,18],[17,21],[18,22],[19,20],[19,23],
+      [20,21],[20,24],[21,22],[21,25],[22,25],[23,24],[23,26],
+      [24,25],[24,27],[25,28],[26,27],[27,28],[9,15],[10,16],
+    ];
+    // Indices of larger "hub" synapse dots
+    const SYN_HUBS = new Set([0,5,9,13,14,15,19,23,26]);
+
     const Arrow = ({ size = 16 }) => (
       <svg aria-hidden="true" focusable="false" className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
@@ -228,30 +256,27 @@
                   </radialGradient>
                 </defs>
 
-                {/* Ambient field */}
+                {/* Ambient glow field */}
                 <ellipse cx="290" cy="196" rx="236" ry="168" fill="url(#brainBgGlow)" />
 
-                {/* Brain silhouette */}
-                <path className="b-outline"
-                  d="M290,40 C220,22 110,48 78,120 C45,195 65,270 118,308 C162,340 220,352 290,352 C360,352 418,340 462,308 C515,270 535,195 502,120 C470,48 360,22 290,40Z"
-                />
-                {/* Medial notch */}
-                <path className="b-outline" style={{ strokeWidth:"0.8", opacity:"0.4" }}
-                  d="M278,40 C283,52 287,60 290,65 C293,60 297,52 302,40"
-                />
-                {/* Centre fold */}
-                <path className="b-fold" d="M290,65 C284,132 282,228 290,352" />
+                {/* Neural synapse network — faded background layer */}
+                {SYNAPSE_EDGES.map(([a, b], i) => (
+                  <line key={`se${i}`} className="syn-edge"
+                    x1={SYNAPSE_NODES[a][0]} y1={SYNAPSE_NODES[a][1]}
+                    x2={SYNAPSE_NODES[b][0]} y2={SYNAPSE_NODES[b][1]}
+                    style={{ animationDelay:`${i * 0.11}s` }}
+                  />
+                ))}
+                {SYNAPSE_NODES.map(([x, y], i) => (
+                  <circle key={`sn${i}`} className="syn-node"
+                    cx={x} cy={y}
+                    r={SYN_HUBS.has(i) ? 2.6 : 1.5}
+                    fill={SYN_HUBS.has(i) ? "rgba(0,210,255,0.24)" : "rgba(0,190,255,0.16)"}
+                    style={{ animationDelay:`${i * 0.21}s` }}
+                  />
+                ))}
 
-                {/* Left sulci */}
-                <path className="b-wrinkle" d="M155,90 C172,108 175,130 162,150" />
-                <path className="b-wrinkle" d="M105,168 C128,180 145,188 140,210" />
-                <path className="b-wrinkle" d="M122,240 C145,232 162,242 158,228" />
-                {/* Right sulci */}
-                <path className="b-wrinkle" d="M425,90 C408,108 405,130 418,150" />
-                <path className="b-wrinkle" d="M475,168 C452,180 435,188 440,210" />
-                <path className="b-wrinkle" d="M458,240 C435,232 418,242 422,228" />
-
-                {/* Spoke lines: hub → each leaf */}
+                {/* Spoke lines: hub → each word label */}
                 {hub && leaves.map((n, i) => (
                   <line key={i} className="b-line"
                     x1={hub.x} y1={hub.y} x2={n.x} y2={n.y}

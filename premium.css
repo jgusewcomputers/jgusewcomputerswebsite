@@ -1757,9 +1757,9 @@ body .photo-frame::after {
 
 .brain-overlay {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(2, 6, 22, 0.9);
-  backdrop-filter: blur(14px) saturate(130%);
-  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  background: rgba(2, 6, 22, 0.52);
+  backdrop-filter: blur(4px) saturate(115%);
+  -webkit-backdrop-filter: blur(4px) saturate(115%);
   display: flex; align-items: center; justify-content: center;
   padding: 24px;
   animation: brainOverlayIn 200ms ease;
@@ -1853,34 +1853,35 @@ body .photo-frame::after {
   display: block; width: 100%; height: auto;
 }
 
-/* SVG elements */
-.b-outline {
-  fill: none;
-  stroke: rgba(0, 210, 255, 0.16);
-  stroke-width: 1.5;
-  filter: drop-shadow(0 0 5px rgba(0,210,255,0.22));
-}
-.b-fold {
-  fill: none;
-  stroke: rgba(0, 210, 255, 0.09);
-  stroke-width: 1;
-  stroke-dasharray: 3 4;
-}
-.b-wrinkle {
-  fill: none;
-  stroke: rgba(0, 210, 255, 0.07);
-  stroke-width: 1;
+/* Synapse background network */
+.syn-edge {
+  stroke: rgba(0, 200, 255, 0.07);
+  stroke-width: 0.6;
   stroke-linecap: round;
+  animation: synEdgePulse 5.5s ease-in-out infinite;
 }
+@keyframes synEdgePulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
+}
+.syn-node {
+  animation: synNodePulse 4.2s ease-in-out infinite;
+}
+@keyframes synNodePulse {
+  0%, 100% { opacity: 0.32; }
+  50%       { opacity: 0.9; }
+}
+
+/* Spoke lines: hub → word labels — should stand out above synapse bg */
 .b-line {
-  stroke: rgba(0, 200, 255, 0.2);
-  stroke-width: 0.9;
+  stroke: rgba(0, 200, 255, 0.22);
+  stroke-width: 0.85;
   stroke-linecap: round;
   animation: bLinePulse 3.2s ease-in-out infinite;
 }
 @keyframes bLinePulse {
-  0%, 100% { opacity: 0.35; }
-  50%       { opacity: 0.85; }
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.8; }
 }
 
 /* Word nodes */
