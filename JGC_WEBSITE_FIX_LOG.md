@@ -2,6 +2,70 @@
 
 ---
 
+## Session 10 — Premium personal-brand and contact intake redesign
+
+**Date:** 2026-05-26
+**Branch:** `codex-premium-personal-brand-contact`
+**Status:** Complete
+
+### What was inspected
+
+- `JGC_WEBSITE_FIX_LOG.md`
+- `JGC_WEBSITE_ACTION_PLAN.md`
+- Git status and branch state
+- `index.html`, including the React/Babel homepage and EmailJS contact form
+- `premium.css` and `colors_and_type.css`
+- Service pages under `/services/`
+- Current image and brand assets under `/assets/`
+- Existing EmailJS IDs and send payload
+
+### Changes made
+
+**New file: `DESIGN_SYSTEM_NOTES.md`**
+- Documents current design weaknesses, premium personal-brand direction, contact form rules, image guidance, reusable design rules, and boundaries.
+
+**`index.html`**
+- Updated homepage hero language so the first impression is a premium personal technology brand rather than a basic computer repair shop.
+- Added a compact service-focus proof grid above the hero CTAs.
+- Updated nav/tagline and CTA language toward “personal technology systems” and “Start an enquiry”.
+- Refined service-card copy to better communicate websites, forms, AI workflows, digital organisation, and business technology judgement.
+- Reworked the contact section into an intake-console style component.
+- Added contact helper copy: imperfect explanations are okay, start with the problem, and do not send sensitive access details.
+- Added a side panel explaining what happens next.
+- Added a calm success state and clearer error state.
+- Kept the existing EmailJS service ID, template ID, public key, and payload fields intact.
+
+**`colors_and_type.css`**
+- Added reusable tokens for glass surfaces, glow borders, teal accents, danger states, premium shadows, section spacing, form controls, and larger radii.
+
+**`premium.css`**
+- Added premium background architecture with restrained blue/teal glow.
+- Improved homepage glass/card rhythm.
+- Added reusable styling for the new contact intake console, form controls, pill choices, helper text, consent row, and status states.
+- Added shared styling for static document and service pages so they feel connected to the homepage without rewriting service content.
+- Fixed shared heading selectors so existing accessibility heading improvements remain styled.
+
+### EmailJS
+
+EmailJS was not replaced or reconfigured. Existing browser SDK, public key, service ID, template ID, and send variables remain unchanged.
+
+### Technical notes
+
+- No backend added.
+- No paid tools added.
+- No build system added.
+- Cloudflare Pages compatibility remains the same: static files served from repo root.
+- Babel standalone is still present and should be productionised in a later performance pass rather than migrated during this design session.
+
+### Image notes
+
+- Existing logo/monogram and portrait assets remain in use.
+- No external images were added.
+- No new heavy image assets were added.
+- Future optimisation should reduce icon/brand asset weight and possibly replace generic large brand panels with a bespoke lightweight abstract system visual.
+
+---
+
 ## Framework and deployment summary
 
 **Framework:** Pure static HTML — no build system, no package.json, no framework.  

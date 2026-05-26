@@ -44,6 +44,9 @@
   --jgc-glow-400: #5fa3e8;
   --jgc-glow-500: #2f7fd6;
   --jgc-glow-600: #1a5fb3;
+  --jgc-teal-300: #9de7dc;
+  --jgc-teal-400: #42d6c8;
+  --jgc-teal-500: #22a99f;
 
   /* Surfaces (light) — pulled from letterhead/proposal cover.
      A breath of cool grey, never bright white-paper. */
@@ -57,6 +60,8 @@
   --jgc-success-bg: #e6f2ec;
   --jgc-warning: #c47a2c;     /* "urgent" amber — warmer than red       */
   --jgc-warning-bg: #faf0e2;
+  --jgc-danger: #d45f5f;
+  --jgc-danger-bg: #f8e8e8;
   --jgc-info: var(--jgc-glow-500);
   --jgc-info-bg: #e6f0fb;
 
@@ -125,6 +130,7 @@
   --jgc-radius-md: 12px;       /* default card                          */
   --jgc-radius-lg: 16px;
   --jgc-radius-xl: 24px;       /* hero surface, large cards             */
+  --jgc-radius-2xl: 32px;
   --jgc-radius-pill: 999px;
 
   /* ---------- Elevation ----------
@@ -148,6 +154,10 @@
   --jgc-shadow-glow:
     0 0 0 1px rgba(95, 163, 232, 0.35),
     0 0 28px -6px rgba(95, 163, 232, 0.45);
+  --jgc-shadow-premium:
+    0 50px 130px -55px rgba(0, 0, 0, 0.70),
+    0 20px 60px -32px rgba(66, 214, 200, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
 
   /* ---------- Motion ---------- */
   --jgc-ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -159,6 +169,18 @@
   /* ---------- Page-level ---------- */
   --jgc-bg: var(--jgc-surface-1);
   --jgc-bg-elev: var(--jgc-surface-0);
+  --jgc-bg-deep: var(--jgc-navy-950);
+  --jgc-surface-glass: rgba(255, 255, 255, 0.06);
+  --jgc-surface-glass-strong: rgba(255, 255, 255, 0.095);
+  --jgc-border-glass: rgba(255, 255, 255, 0.12);
+  --jgc-border-glow: rgba(95, 163, 232, 0.38);
+  --jgc-glow-soft:
+    0 0 24px rgba(95, 163, 232, 0.24),
+    0 0 54px rgba(66, 214, 200, 0.12);
+  --jgc-section-y: clamp(84px, 9vw, 150px);
+  --jgc-control-bg: rgba(10, 23, 51, 0.58);
+  --jgc-control-border: rgba(255, 255, 255, 0.12);
+  --jgc-control-focus: rgba(95, 163, 232, 0.22);
 }
 
 /* Dark theme — the navy luxury surface (slides, premium covers, hero). */
@@ -190,7 +212,13 @@
   --jgc-link: var(--jgc-glow-300);
   --jgc-success-bg: rgba(47, 143, 96, 0.18);
   --jgc-warning-bg: rgba(196, 122, 44, 0.18);
+  --jgc-danger-bg: rgba(212, 95, 95, 0.16);
   --jgc-info-bg: rgba(95, 163, 232, 0.18);
+  --jgc-surface-glass: rgba(255, 255, 255, 0.06);
+  --jgc-surface-glass-strong: rgba(255, 255, 255, 0.10);
+  --jgc-border-glass: rgba(255, 255, 255, 0.12);
+  --jgc-control-bg: rgba(10, 23, 51, 0.58);
+  --jgc-control-border: rgba(255, 255, 255, 0.12);
 }
 
 /* ============================================================

@@ -87,6 +87,16 @@
       pencil:   "assets/icons/pencil.webp",
       alert:    "assets/icons/alert-shield.webp",
       checkAlt: "assets/icons/check-circle-on-light.png",
+      serviceComputer: "assets/icons/service-computer.svg",
+      serviceSpeed: "assets/icons/service-speed.svg",
+      serviceDecision: "assets/icons/service-decision.svg",
+      serviceWebsite: "assets/icons/service-website.svg",
+      serviceForm: "assets/icons/service-form.svg",
+      serviceEmail: "assets/icons/service-email.svg",
+      serviceAi: "assets/icons/service-ai.svg",
+      serviceOps: "assets/icons/service-ops.svg",
+      serviceSecurity: "assets/icons/service-security.svg",
+      serviceHelp: "assets/icons/service-help.svg",
     };
 
     const Arrow = ({ size = 16 }) => (
@@ -128,12 +138,10 @@
               onClick={() => { onNav("home"); closeMenu(); }}
               aria-label="JGusew Computers — back to top"
               style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
-              <img src="assets/logos/monogram-light.webp" alt="JGC monogram" />
               <div className="txt">
                 <span className="name">JGUSEW COMPUTERS</span>
-                <span className="tag">Computer problems. Sorted.</span>
+                <span className="tag">Personal technology systems</span>
               </div>
-              <span className="stage-pill" title="Services are free while we refine the offering. No paid work is being charged yet.">Free during launch</span>
             </button>
             <button
               className={"hamburger" + (menuOpen ? " open" : "")}
@@ -151,7 +159,7 @@
                       className={current === i.id ? "active" : ""}
                       onClick={() => { onNav(i.id); closeMenu(); }}>{i.label}</button>
               ))}
-              <button className="cta" onClick={() => { onNav("contact"); closeMenu(); }}>Get help by email</button>
+              <button className="cta" onClick={() => { onNav("contact"); closeMenu(); }}>Start an enquiry</button>
             </div>
           </div>
         </header>
@@ -161,6 +169,7 @@
     // ---------- Hero ----------
     function HeroStage() {
       const ref = React.useRef(null);
+      const [mood, setMood] = React.useState("idle");
       React.useEffect(() => {
         const el = ref.current; if (!el) return;
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -183,12 +192,29 @@
         el.addEventListener("mouseleave", onLeave);
         return () => { window.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
       }, []);
+      React.useEffect(() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const moods = ["idle", "smile", "curious"];
+        let i = 0;
+        const timer = window.setInterval(() => {
+          i = (i + 1) % moods.length;
+          setMood(moods[i]);
+        }, 4200);
+        return () => window.clearInterval(timer);
+      }, []);
       return (
         <div className="stage" ref={ref}>
           <div className="ring"></div>
           <div className="ring-lines"></div>
           <div className="orb">
-            <img className="monogram" src="assets/logos/monogram-dark.webp" alt="" />
+            <div className={"tech-buddy " + mood} aria-hidden="true">
+              <div className="antenna"></div>
+              <div className="face-screen">
+                <span className="eye left"></span>
+                <span className="eye right"></span>
+                <span className="smile"></span>
+              </div>
+            </div>
           </div>
           <div className="satellite s1"><img src={ICON.check} alt="" /></div>
           <div className="satellite s2"><img src={ICON.chat} alt="" /></div>
@@ -203,29 +229,28 @@
         <section className="hero">
           <div className="inner">
             <div className="hero-copy">
-              <div className="eyebrow-row reveal">
-                <span className="dot"></span>
-                <strong>Reply within 1 working day</strong>
-                <span style={{ opacity: 0.5 }}>·</span>
-                <span>Led by Jehiah Gusew</span>
-              </div>
               <h1 className="reveal d1">
-                <span className="chrome">Practical</span>
-                <span className="chrome">technology help</span>
-                <span className="muted">without the hype.</span>
+                <span className="chrome">Practical technology help,</span>
+                <span className="muted">built with systems thinking.</span>
               </h1>
               <p className="lead reveal d2">
-                Practical tech advice for everyday people and small
-                businesses. Plain English. Reviewed by a real person
-                before anything important goes out.
+                For homes, small businesses, and people who want technology to feel
+                calmer, clearer, and better organised. Computers, websites, forms,
+                email, AI workflows and sensible decisions, explained without jargon.
               </p>
               <div className="quiet reveal d3">
                 <span className="l"></span>
-                <span>No hype · No pressure · No pretending it's easy</span>
+                <span>Plain English · Security-aware · Practical next steps</span>
+              </div>
+              <div className="brand-proof reveal d3" aria-label="Service focus areas">
+                <span>Computer help</span>
+                <span>Websites and forms</span>
+                <span>AI automation</span>
+                <span>Digital organisation</span>
               </div>
               <div className="hero-actions reveal d3">
                 <button className="btn primary pill" onClick={onContact}>
-                  Ask for tech help <Arrow />
+                  Start an enquiry <Arrow />
                 </button>
                 <button className="btn glass" onClick={onServices}>
                   See how I can help <Arrow />
@@ -235,7 +260,7 @@
                 marginTop: 18, fontSize: 13.5, color: "var(--jgc-fg-on-navy-2)", maxWidth: 540, lineHeight: 1.55
               }}>
                 <strong style={{ color: "#fff", fontWeight: 600 }}>Free while we refine the service.</strong>{" "}
-                No paid work is being charged yet — you get the same care as paid work.
+                No paid work is being charged yet. You get careful, structured help while the service is refined.
                 No obligation, no marketing list, no upsell.
               </div>
             </div>
@@ -246,7 +271,7 @@
             <div className="group">
               <div className="item"><span className="dot"></span><span>Currently <strong>accepting enquiries</strong></span></div>
               <div className="item"><span>Help by email · <strong>reply within 1 working day</strong></span></div>
-              <div className="item"><span>AI drafts · <strong>Jehiah reviews</strong></span></div>
+              <div className="item"><span>Websites, forms and AI workflows · <strong>kept practical</strong></span></div>
             </div>
             <div className="mail">hello@jgusewcomputers.com →</div>
           </div>
@@ -277,9 +302,9 @@
               <div className="ex reveal d2">
                 <div className="ex-h">
                   <span className="ex-num">03</span>
-                  <h2>What "AI drafts, Jehiah reviews" means</h2>
+                  <h2>What "AI automation" means</h2>
                 </div>
-                <p>AI tools may help organise your message or prepare a draft reply. But Jehiah Gusew (who runs JGusew Computers) reviews anything important before it's sent. Nothing goes out on autopilot. No automated bot replies.</p>
+                <p>AI is treated as a practical tool, not a magic layer. The useful work is understanding the process first, then deciding whether a simple workflow, form, template, or automation would actually help.</p>
               </div>
             </div>
           </div>
@@ -287,24 +312,25 @@
       );
     }
 
-    // ---------- Marquee ----------
-    function Marquee() {
+    // ---------- Digital side rails ----------
+    function DigitalRails() {
       const items = [
-        "New computer advice", "Slow computer assessment", "Repair vs replace",
-        "Website help", "Forms and enquiry systems", "Email cleanup",
-        "Digital organisation", "Small business tech review",
-        "AI automation starter", "Scam & security triage", "Elderly tech help",
-        "Device setup advice",
+        "Computer advice", "Websites", "Forms", "Email cleanup",
+        "Digital organisation", "Small business tech", "AI automation",
+        "Security triage", "Elderly tech help", "Device setup",
       ];
-      const row = [...items, ...items];
+      const rail = [...items, ...items];
       return (
-        <div className="marquee">
-          <div className="track">
-            {row.map((t, i) => (
-              <span className="item" key={i}>
-                {t} <span className="sep"></span>
-              </span>
-            ))}
+        <div className="digital-rails" aria-hidden="true">
+          <div className="rail left">
+            <div className="rail-track">
+              {rail.map((t, i) => <span key={i}>{t}</span>)}
+            </div>
+          </div>
+          <div className="rail right">
+            <div className="rail-track">
+              {rail.map((t, i) => <span key={i}>{t}</span>)}
+            </div>
           </div>
         </div>
       );
@@ -331,7 +357,7 @@
       };
       return (
         <div ref={ref} className={"bento-card " + size + " reveal"} onMouseMove={tilt} onMouseLeave={leave}>
-          <div className="ico"><img src={icon} alt="" loading="lazy" /></div>
+          <div className="ico" aria-hidden="true"><img src={icon} alt="" loading="lazy" /></div>
           <h3>{title}</h3>
           <p>{body}</p>
           {href && (
@@ -353,42 +379,42 @@
     function BentoServices() {
       return (
         <div className="bento">
-          <BentoCard size="feature" icon={ICON.check}
+          <BentoCard size="feature" icon={ICON.serviceComputer}
             title="New computer advice"
             href="services/computer-help.html"
-            body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — we compare honestly so you don't overspend." />
-          <BentoCard size="std" icon={ICON.pencil}
+            body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — compared honestly." />
+          <BentoCard size="std" icon={ICON.serviceSpeed}
             title="Slow computer assessment"
             href="services/computer-help.html"
             body="If it's slow, the answer isn't always 'buy a new one'. Cleanup, backup, upgrade, repair quote, replacement, or further diagnosis — we work out which." />
-          <BentoCard size="std" icon={ICON.check}
+          <BentoCard size="std" icon={ICON.serviceDecision}
             title="Repair vs replace decision"
             href="services/computer-help.html"
             body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
-          <BentoCard size="std" icon={ICON.pencil}
+          <BentoCard size="std" icon={ICON.serviceWebsite}
             title="Website help"
             href="services/website-help.html"
-            body="A new small-business website or improvements to an existing one. Plain static pages, contact forms, domain and hosting setup — built simply, without ongoing platform fees or lock-in." />
-          <BentoCard size="std" icon={ICON.chat}
+            body="Small-business websites, contact pages, domains and hosting decisions. Clear static sites that load fast, explain the offer, and avoid unnecessary platform fees." />
+          <BentoCard size="std" icon={ICON.serviceForm}
             title="Forms and enquiry systems"
             href="services/forms-enquiry-systems.html"
-            body="A structured contact or enquiry form that collects the right information from your customers. Set up without complex tools, monthly subscriptions, or a developer on call." />
-          <BentoCard size="wide" icon={ICON.chat}
+            body="Structured intake forms that collect the right context, reduce back-and-forth, and send enquiries directly to email without a custom backend." />
+          <BentoCard size="wide" icon={ICON.serviceEmail}
             title="Email cleanup & digital organisation"
             href="services/email-account-cleanup.html"
-            body="Account separation, labels, retirement of old accounts, safer habits, file structures, a simple device map — a clear picture of where everything lives. We don't log in or ask for your password." />
-          <BentoCard size="wide" icon={ICON.check}
+            body="Account separation, labels, safer habits, file structures, and a simple map of where everything lives. We do not log in or ask for your password." />
+          <BentoCard size="wide" icon={ICON.serviceAi}
             title="AI automation starter"
             href="services/ai-automation.html"
             body="AI is useful only when the workflow is understood. We map a process, identify repetitive tasks, suggest free-first automation options, and separate safe ideas from risky ones — without recommending automation for sensitive work." />
-          <BentoCard size="std" icon={ICON.chat}
+          <BentoCard size="std" icon={ICON.serviceOps}
             title="Small business tech review"
             href="services/small-business-tech-advice.html"
-            body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear picture of where money is going and where it shouldn't be." />
-          <BentoCard size="std" icon={ICON.alert}
+            body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear, practical view of what to keep, fix, simplify, or leave alone." />
+          <BentoCard size="std" icon={ICON.serviceSecurity}
             title="Scam & security triage"
             body="If something feels off, slow down. We help organise the situation and suggest safe next steps — never asking for passwords or codes." />
-          <BentoCard size="std" icon={ICON.chat}
+          <BentoCard size="std" icon={ICON.serviceHelp}
             title="Elderly tech help"
             body="Patient, plain-English advice for computer choices, basic device issues, email confusion, and avoiding poor-value purchases." />
         </div>
@@ -397,39 +423,63 @@
 
     // ---------- How it works ----------
     const STEPS = [
-      { n: "Step 01", t: "You explain the issue", b: "Send a plain-English description of what you need help with. No technical wording needed.", icon: ICON.chat },
-      { n: "Step 02", t: "We ask the right questions", b: "If more information is needed, we ask before guessing. Better to be slow and careful than rush.", icon: ICON.pencil },
-      { n: "Step 03", t: "We prepare advice", b: "The issue is reviewed and organised into clear, practical next steps.", icon: ICON.check },
-      { n: "Step 04", t: "Jehiah reviews it", b: "Important recommendations are human-reviewed before being sent. AI drafts; Jehiah reviews.", icon: ICON.shield },
-      { n: "Step 05", t: "You get a clear next step", b: "Understand what to do next, what not to waste money on, and when a specialist is needed.", icon: ICON.check },
+      { n: "Step 01", t: "You explain the issue", b: "Send a plain-English description of what you need help with. No technical wording needed.", scene: "explain" },
+      { n: "Step 02", t: "We ask the right questions", b: "If more information is needed, we ask before guessing. Better to be slow and careful than rush.", scene: "questions" },
+      { n: "Step 03", t: "We prepare advice", b: "The issue is reviewed and organised into clear, practical next steps.", scene: "advice" },
+      { n: "Step 04", t: "You get a careful reply", b: "Recommendations are checked against the situation you described, with safety and cost in mind.", scene: "reply" },
+      { n: "Step 05", t: "You get a clear next step", b: "Understand what to do next, what not to waste money on, and when a specialist is needed.", scene: "next" },
     ];
+
+    function StepScene({ scene, active }) {
+      return (
+        <div className={"step-scene " + scene + " point-" + active} aria-hidden="true">
+          <div className="buddy-mini">
+            <span className="mini-eye left"></span>
+            <span className="mini-eye right"></span>
+            <span className="mini-smile"></span>
+          </div>
+          <div className="scene-orbit"></div>
+          <span className="scene-status"></span>
+        </div>
+      );
+    }
 
     function HowItWorks() {
       const [active, setActive] = React.useState(0);
       const refs = React.useRef([]);
       React.useEffect(() => {
-        const io = new IntersectionObserver((entries) => {
-          let best = null;
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+        const update = () => {
+          const viewportFocus = window.innerHeight * 0.48;
+          let bestIndex = 0;
+          let bestDistance = Infinity;
+          refs.current.forEach((el, idx) => {
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const center = rect.top + rect.height * 0.42;
+            const distance = Math.abs(center - viewportFocus);
+            const visible = rect.bottom > window.innerHeight * 0.18 && rect.top < window.innerHeight * 0.78;
+            if (visible && distance < bestDistance) {
+              bestDistance = distance;
+              bestIndex = idx;
             }
-          }
-          if (best) {
-            const idx = refs.current.indexOf(best.target);
-            if (idx !== -1) setActive(idx);
-          }
-        }, { threshold: [0.5, 0.7, 0.9] });
-        refs.current.forEach((el) => el && io.observe(el));
-        return () => io.disconnect();
+          });
+          setActive(bestIndex);
+        };
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        return () => {
+          window.removeEventListener("scroll", update);
+          window.removeEventListener("resize", update);
+        };
       }, []);
       return (
         <section id="process" className="how">
           <div className="container">
             <div className="section-head reveal">
               <span className="num">02 — Process</span>
-              <h2>Five steps.<br />One rule: <span style={{ color: "var(--jgc-glow-300)" }}>AI drafts. Jehiah reviews.</span></h2>
-              <p>Every important reply goes through a human before it leaves the inbox. That's the whole point. Nothing is sent on autopilot.</p>
+              <h2>Five steps.<br />One rule: <span style={{ color: "var(--jgc-glow-300)" }}>slow down, understand the problem, then act.</span></h2>
+              <p>Good technology advice starts with context. The aim is to avoid rushed purchases, unsafe shortcuts, and unnecessary complexity.</p>
             </div>
             <div className="grid">
               <div className="steps">
@@ -447,11 +497,7 @@
                 <div className="stick">
                   <div className="stick-card">
                     <span className="stepnum">{STEPS[active].n}</span>
-                    <div className="icon-host">
-                      {STEPS.map((s, i) => (
-                        <img key={i} src={s.icon} alt="" className={i === active ? "" : "fade"} />
-                      ))}
-                    </div>
+                    <StepScene scene={STEPS[active].scene} active={active} />
                   </div>
                 </div>
               </div>
@@ -468,11 +514,11 @@
           <div className="container reveal">
             <div className="rule-pre">Brand pillar · trust statement</div>
             <div className="rule">
-              <span className="chrome">Agents can help prepare information,</span><br />
-              <span className="quiet">but Jehiah reviews important advice</span><br />
-              <span className="chrome">before it is sent.</span>
+              <span className="chrome">Useful technology is organised,</span><br />
+              <span className="quiet">safe enough for the situation,</span><br />
+              <span className="chrome">and simple enough to keep using.</span>
             </div>
-            <div className="signature">— JGusew Computers, led by Jehiah Gusew</div>
+            <div className="signature">— JGusew Computers</div>
           </div>
         </section>
       );
@@ -541,20 +587,13 @@
       return (
         <div className="field">
           <label>{label}</label>
-          <div style={{ display: "flex", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
+          <div className="pill-group">
             {options.map(opt => {
               const active = value === (opt.val || opt);
               return (
                 <button type="button" key={opt.val || opt}
                   onClick={() => onChange(opt.val || opt)}
-                  style={{
-                    flex: "1 1 auto", padding: "10px 14px", borderRadius: 10,
-                    fontSize: 13.5, fontWeight: active ? 600 : 400, cursor: "pointer",
-                    background: active ? "rgba(95,163,232,0.18)" : "rgba(255,255,255,0.05)",
-                    border: active ? "1px solid rgba(95,163,232,0.45)" : "1px solid rgba(255,255,255,0.10)",
-                    color: active ? "var(--jgc-glow-200, #a8cef5)" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
-                    transition: "all 180ms",
-                  }}>
+                  className={"pill-option" + (active ? " active" : "")}>
                   {opt.label || opt}
                 </button>
               );
@@ -567,8 +606,17 @@
     function Contact() {
       const [s, setS] = React.useState(EMPTY_FORM);
       const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
-      const u = (k) => (e) => setS(prev => ({ ...prev, [k]: e.target.value }));
-      const set = (k, v) => setS(prev => ({ ...prev, [k]: v }));
+      const markEditing = () => {
+        if (status === "sent" || status === "error") setStatus("idle");
+      };
+      const u = (k) => (e) => {
+        markEditing();
+        setS(prev => ({ ...prev, [k]: e.target.value }));
+      };
+      const set = (k, v) => {
+        markEditing();
+        setS(prev => ({ ...prev, [k]: v }));
+      };
       const submit = (e) => {
         e.preventDefault();
         if (!s.consent) return;
@@ -593,18 +641,40 @@
                 <div className="section-head" style={{ marginBottom: 0 }}>
                   <span className="num">03 — Get in touch</span>
                 </div>
-                <h2>Send through what's going on,<br />and we'll work out the safest next step.</h2>
-                <p>You don't need to know what's wrong. A plain-English description is enough. We only ask for the details needed to understand your enquiry — nothing more.</p>
+                <h2>Send through what's going on,<br />and I'll help work out the next step.</h2>
+                <p>You do not need to explain it perfectly. Start with the problem, the goal, or the thing that feels messy. I only use these details to respond to your enquiry.</p>
                 <div className="facts">
                   <div className="fact"><span className="dot"></span>Free while we're refining the service.</div>
-                  <div className="fact"><span className="dot"></span>AI may help draft. Jehiah reviews before anything is sent.</div>
-                  <div className="fact"><span className="dot"></span>If we can't help, we'll tell you who can.</div>
+                  <div className="fact"><span className="dot"></span>Computer help, websites, forms, email, AI workflows and small-business technology decisions.</div>
+                  <div className="fact"><span className="dot"></span>Replies are written in plain English and focused on the next practical step.</div>
+                  <div className="fact"><span className="dot"></span>If this needs a specialist, I'll say so clearly.</div>
+                </div>
+                <div className="intake-side-panel">
+                  <div>
+                    <span className="panel-kicker">What happens next</span>
+                    <strong>A tailored response, sent back by email.</strong>
+                  </div>
+                  <ol>
+                    <li>You send through an enquiry by email.</li>
+                    <li>A personal, tailored response is prepared.</li>
+                    <li>A practical reply is sent back to you.</li>
+                  </ol>
+                  <p>Please do not send passwords, banking codes, MFA codes, or sensitive access details through this form.</p>
                 </div>
                 <div className="quiet" style={{ marginTop: 28 }}>
                   Or write to <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>hello@jgusewcomputers.com</a>
                 </div>
               </div>
               <form className="glass-form reveal d2" onSubmit={submit}>
+                <div className="form-topline">
+                  <div>
+                    <span className="form-kicker">Intake console</span>
+                    <h3>Start with the situation.</h3>
+                  </div>
+                  <span className="secure-chip">Private enquiry</span>
+                </div>
+                <p className="form-helper">A few structured details help me respond properly. Leave anything optional blank if you are not sure.</p>
+
                 <div className="row">
                   <div className="field">
                     <label htmlFor="f-name">Your name</label>
@@ -625,18 +695,11 @@
 
                 <div className="field">
                   <label htmlFor="f-service">What do you need help with?</label>
-                  <select id="f-service" value={s.service} onChange={u("service")}
-                    style={{
-                      width: "100%", padding: "11px 14px", borderRadius: 10,
-                      background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
-                      color: s.service ? "#fff" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
-                      fontSize: 14.5, appearance: "none", cursor: "pointer",
-                      backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238ca3c0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
-                      backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center",
-                    }}>
+                  <select id="f-service" className={s.service ? "has-value" : ""} value={s.service} onChange={u("service")}>
                     <option value="" disabled>Select a service area…</option>
                     {SERVICES.map(sv => <option key={sv} value={sv}>{sv}</option>)}
                   </select>
+                  <span className="helper-line">Choose the closest match. "Something else" is fine.</span>
                 </div>
 
                 <TogglePills
@@ -654,34 +717,35 @@
                 <div className="field">
                   <label htmlFor="f-message">What's going on?</label>
                   <textarea id="f-message" value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
+                  <span className="helper-line">You do not need to diagnose it. Describe what happened, what changed, and what you want to achieve.</span>
                 </div>
 
                 <div className="donot">
                   <strong>Please don't send:</strong> passwords · banking codes · one-time / MFA codes · credit card numbers · full identity documents · sensitive private documents.
                 </div>
 
-                <label style={{ display: "flex", gap: 12, alignItems: "flex-start", cursor: "pointer", marginTop: 4 }}>
-                  <input type="checkbox" checked={s.consent} onChange={e => set("consent", e.target.checked)} required
-                    style={{ marginTop: 3, flexShrink: 0, accentColor: "#5fa3e8", width: 16, height: 16 }} />
-                  <span style={{ fontSize: 13.5, color: "var(--jgc-fg-on-navy-2, #8ca3c0)", lineHeight: 1.55 }}>
+                <label className="consent-row">
+                  <input type="checkbox" checked={s.consent} onChange={e => set("consent", e.target.checked)} required />
+                  <span>
                     I understand JGusew Computers will use my contact details to respond to this enquiry.{" "}
                     I've read the <a href="privacy.html" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>privacy notice</a>.
                   </span>
                 </label>
 
-                <div className="submit" style={{ marginTop: 20 }}>
-                  <span className="note">No marketing list. We don't store anything sensitive. See <a href="safety.html">Safety</a>.</span>
+                <div className="submit">
+                  <span className="note">No marketing list. No passwords needed. See <a href="safety.html">Safety</a>.</span>
                   <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent" || !s.consent}>
                     {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send enquiry</span><Arrow /></>}
                   </button>
                 </div>
+                {status === "sent" && (
+                  <div className="form-state success">
+                    Thanks — your enquiry has been sent. I’ll read it and reply by email, usually within one working day.
+                  </div>
+                )}
                 {status === "error" && (
-                  <div style={{
-                    marginTop: 12, padding: "12px 16px", borderRadius: 10,
-                    background: "rgba(196,122,44,0.10)", border: "1px solid rgba(196,122,44,0.30)",
-                    fontSize: 13.5, color: "#f0c896", lineHeight: 1.5
-                  }}>
-                    Something went wrong — the message wasn't sent. You can try again, or write directly to{" "}
+                  <div className="form-state error">
+                    The message was not sent. Please try again, or write directly to{" "}
                     <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline" }}>hello@jgusewcomputers.com</a>.
                   </div>
                 )}
@@ -699,11 +763,11 @@
           <div className="inner">
             <div className="brand">
               <img className="lockup" src="assets/logos/horizontal-lockup-dark.webp" alt="JGusew Computers" loading="lazy" />
-              <p>Practical technology help, advice, and automation for everyday people and small businesses. Led by Jehiah Gusew.</p>
+              <p>Practical technology help, advice, and automation for everyday people and small businesses.</p>
               <div className="badges">
                 <span>Free during launch</span>
                 <span>Help by email</span>
-                <span>Human-reviewed</span>
+                <span>Plain-English advice</span>
               </div>
             </div>
             <div>
@@ -738,12 +802,12 @@
               <ul>
                 <li><a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a></li>
                 <li style={{ opacity: 0.75 }}>Reply within 1 working day</li>
-                <li style={{ opacity: 0.75 }}>Replies are human-reviewed</li>
+                <li style={{ opacity: 0.75 }}>Plain-English replies</li>
               </ul>
             </div>
           </div>
           <div className="legal">
-            <span>© 2026 JGusew Computers · led by Jehiah Gusew · Sunbury, VIC, Australia</span>
+            <span>© 2026 JGusew Computers · Sunbury, VIC, Australia</span>
             <span className="mono">
               <a href="safety.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Safety</a>
               {" · "}
@@ -767,6 +831,7 @@
       return (
         <>
           <a href="#main-content" className="skip-link">Skip to main content</a>
+          <DigitalRails />
           <Nav current={current} onNav={nav} />
           <main id="main-content">
             <div id="home" data-screen-label="01 Home">
@@ -774,8 +839,6 @@
             </div>
 
             <ExplainerBand />
-
-            <Marquee />
 
             <section id="services" className="section" data-screen-label="02 Services">
               <div className="container">
