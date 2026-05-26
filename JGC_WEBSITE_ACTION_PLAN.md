@@ -23,6 +23,7 @@
 | 10 | Performance cleanup | Not started | Developer |
 | 11 | Analytics readiness | Not started | Developer + Business owner |
 | 12 | Future automation readiness | Not started | Developer + Automation specialist |
+| 13 | Premium personal-brand and contact intake redesign | **Done** | Developer + Business owner |
 
 ---
 
@@ -328,3 +329,30 @@ Visitor fills form → EmailJS email → Zapier/Make/n8n webhook →
 | Restrict EmailJS allowed origins to `https://jgusewcomputers.com` | EmailJS dashboard | Medium | Not done |
 | Verify Google Search Console ownership | Google Search Console | Medium | Not done |
 | Set up Cloudflare Web Analytics | Cloudflare dashboard | Low | Not done |
+
+---
+
+### FIX 13 — Premium personal-brand and contact intake redesign
+
+**Status:** Done
+**Controlled by:** Repo
+**Owner:** Developer + Business owner
+
+**Business reason:**
+The site should feel like a premium personal technology brand: practical enough for everyday computer help, but clearly capable across websites, forms, AI workflows, digital organisation, small-business systems, and security-aware technology judgement.
+
+**Tasks completed in Codex test branch:**
+- Created `DESIGN_SYSTEM_NOTES.md`
+- Improved homepage positioning and hero language
+- Added a compact proof grid for service focus areas
+- Refined service-card copy
+- Upgraded the contact form into a premium intake-console component
+- Added calm helper copy, next-step explanation, safety copy, success state, and useful error state
+- Expanded reusable design tokens in `colors_and_type.css`
+- Added shared visual alignment for static service/document pages in `premium.css`
+
+**Still recommended after this branch:**
+- Browser review on desktop and mobile before merging
+- Consider optimising heavy image/icon assets
+- Productionise the homepage by replacing React/Babel standalone with compiled or vanilla JS in a separate performance pass
+- Only after Babel is removed, revisit CSP hardening
