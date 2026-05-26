@@ -202,20 +202,30 @@ main { position: relative; z-index: 2; }
   max-width: 610px;
   margin: 0 0 40px;
 }
-.brand-proof span {
+.brand-proof-pill {
   min-height: 46px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   padding: 12px 18px;
   border-radius: var(--jgc-radius-md);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+  background: linear-gradient(135deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
   border: 1px solid rgba(255,255,255,0.09);
   color: var(--jgc-fg-on-navy);
   font-size: 13.5px;
   font-weight: 600;
+  font-family: var(--jgc-font-body);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  cursor: pointer;
+  text-align: left;
+  transition: background 180ms, border-color 200ms, color 180ms, box-shadow 200ms;
 }
+.brand-proof-pill:hover {
+  background: linear-gradient(135deg, rgba(0,200,255,0.11), rgba(0,150,220,0.04));
+  border-color: rgba(0, 200, 255, 0.38);
+  color: #e8f8ff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 0 18px rgba(0,200,255,0.13);
+}
+.brand-proof-pill:active { transform: scale(0.97); }
 
 .btn {
   font-family: var(--jgc-font-body);
@@ -1739,6 +1749,218 @@ body .photo-frame::after {
 
 @media (max-width: 640px) {
   body .doc-nav .brand .name { font-size: 12.5px !important; }
+}
+
+/* ==========================================================
+   Brain Mind-Map Modal
+   ========================================================== */
+
+.brain-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(2, 6, 22, 0.9);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: brainOverlayIn 200ms ease;
+}
+@keyframes brainOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.brain-modal {
+  position: relative;
+  width: min(680px, 100%);
+  background: rgba(2, 9, 30, 0.98);
+  border: 1px solid rgba(0, 200, 255, 0.26);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px rgba(0, 180, 255, 0.07),
+    0 0 80px rgba(0, 180, 255, 0.18),
+    0 0 160px rgba(0, 100, 220, 0.08),
+    inset 0 0 80px rgba(0, 60, 160, 0.04);
+  overflow: hidden;
+  padding: 32px 32px 28px;
+  animation: brainModalIn 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes brainModalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+/* Scanlines */
+.brain-modal::before {
+  content: ""; position: absolute; inset: 0;
+  pointer-events: none; z-index: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0, 180, 255, 0.016) 3px, rgba(0, 180, 255, 0.016) 4px
+  );
+}
+/* Ambient corner glow */
+.brain-modal::after {
+  content: ""; position: absolute; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(circle at 0% 0%,   rgba(0,200,255,0.07) 0%, transparent 45%),
+    radial-gradient(circle at 100% 0%,  rgba(0,200,255,0.07) 0%, transparent 45%),
+    radial-gradient(circle at 50% 105%, rgba(0,100,220,0.05) 0%, transparent 45%);
+}
+
+/* Corner accent brackets */
+.brain-corner {
+  position: absolute; z-index: 2; pointer-events: none;
+  width: 16px; height: 16px;
+  border-color: rgba(0, 200, 255, 0.55); border-style: solid;
+}
+.brain-corner.tl { top: 14px; left: 14px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.brain-corner.tr { top: 14px; right: 14px; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+.brain-corner.bl { bottom: 14px; left: 14px; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+.brain-corner.br { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+.brain-close {
+  position: absolute; top: 16px; right: 20px; z-index: 10;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+  color: rgba(255,255,255,0.45); font-size: 13px; font-weight: 500;
+  width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 180ms, color 180ms;
+}
+.brain-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+.brain-eyebrow {
+  font-family: var(--jgc-font-mono);
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(0, 210, 255, 0.5);
+  margin: 0 0 6px; position: relative; z-index: 2;
+}
+.brain-modal-title {
+  font-family: var(--jgc-font-display);
+  font-size: 21px; font-weight: 700; color: #fff;
+  letter-spacing: -0.01em; margin: 0 0 18px;
+  position: relative; z-index: 2;
+  text-shadow: 0 0 28px rgba(0,200,255,0.28);
+}
+
+/* Brain map container */
+.brain-map {
+  position: relative;
+  width: 100%;
+  margin-bottom: 22px;
+  z-index: 2;
+}
+.brain-svg {
+  display: block; width: 100%; height: auto;
+}
+
+/* SVG elements */
+.b-outline {
+  fill: none;
+  stroke: rgba(0, 210, 255, 0.16);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 5px rgba(0,210,255,0.22));
+}
+.b-fold {
+  fill: none;
+  stroke: rgba(0, 210, 255, 0.09);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+.b-wrinkle {
+  fill: none;
+  stroke: rgba(0, 210, 255, 0.07);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.b-line {
+  stroke: rgba(0, 200, 255, 0.2);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  animation: bLinePulse 3.2s ease-in-out infinite;
+}
+@keyframes bLinePulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.85; }
+}
+
+/* Word nodes */
+.brain-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: var(--jgc-font-display);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.01em;
+  color: rgba(100, 220, 255, 0.78);
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(0, 25, 65, 0.72);
+  border: 1px solid rgba(0, 200, 255, 0.18);
+  white-space: nowrap;
+  z-index: 3;
+  animation: bNodeFloat 4.5s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(0,200,255,0.35);
+  transition: background 200ms, border-color 200ms, color 200ms;
+  cursor: default;
+  user-select: none;
+}
+.brain-node:hover {
+  background: rgba(0, 45, 100, 0.9);
+  border-color: rgba(0, 200, 255, 0.48);
+  color: rgba(180, 240, 255, 1);
+}
+.brain-node.hub {
+  font-size: 13.5px; font-weight: 700;
+  color: #fff;
+  padding: 8px 16px;
+  background: rgba(0, 40, 110, 0.88);
+  border: 1px solid rgba(0, 200, 255, 0.42);
+  border-radius: 999px;
+  animation: bHubGlow 3s ease-in-out infinite;
+  text-shadow: 0 0 18px rgba(0,200,255,0.55);
+  box-shadow: 0 0 0 1px rgba(0,200,255,0.1);
+  cursor: default;
+}
+@keyframes bNodeFloat {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+  50%       { transform: translate(-50%, -50%) translateY(-5px); }
+}
+@keyframes bHubGlow {
+  0%, 100% { box-shadow: 0 0 22px rgba(0,200,255,0.32), 0 0 0 1px rgba(0,200,255,0.1); }
+  50%       { box-shadow: 0 0 36px rgba(0,200,255,0.52), 0 0 0 1px rgba(0,200,255,0.18); }
+}
+
+/* CTA row */
+.brain-cta {
+  display: flex; justify-content: center;
+  padding-top: 6px; position: relative; z-index: 10;
+}
+.brain-enquiry {
+  font-family: var(--jgc-font-display);
+  font-size: 15px; font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0,200,255,0.16) 0%, rgba(0,110,210,0.10) 100%);
+  border: 1px solid rgba(0, 200, 255, 0.38);
+  color: #fff; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 0 0 28px rgba(0,200,255,0.18);
+  text-shadow: 0 0 14px rgba(0,200,255,0.4);
+  transition: background 200ms, box-shadow 200ms, transform 200ms;
+}
+.brain-enquiry:hover {
+  background: linear-gradient(180deg, rgba(0,200,255,0.26) 0%, rgba(0,110,210,0.18) 100%);
+  box-shadow: 0 0 44px rgba(0,200,255,0.34);
+  transform: translateY(-1px);
+}
+.brain-enquiry:active { transform: translateY(0); }
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .brain-modal { padding: 22px 18px 20px; border-radius: 18px; }
+  .brain-modal-title { font-size: 17px; margin-bottom: 12px; }
+  .brain-eyebrow { display: none; }
+  .brain-node { font-size: 8.5px; padding: 3px 7px; }
+  .brain-node.hub { font-size: 10.5px; padding: 5px 11px; }
+  .brain-enquiry { font-size: 14px; padding: 12px 24px; }
 }
 
 @media (max-width: 480px) {
