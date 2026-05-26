@@ -1,8 +1,0 @@
-# Cloudflare Pages redirect rules
-# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
-#
-# IMPORTANT: The www -> apex rule below only fires if www.jgusewcomputers.com
-# is also configured as a custom domain on this Cloudflare Pages project.
-# See JGC_WEBSITE_FIX_LOG.md for the required Cloudflare dashboard steps.
-
-https://www.jgusewcomputers.com/* https://jgusewcomputers.com/:splat 301
