@@ -1625,12 +1625,38 @@ body .photo-frame::after {
 @media (max-width: 640px) {
   .section { padding: 80px 24px; }
   .hero { padding: 60px 24px 80px; }
+  .hero h1 { font-size: clamp(36px, 10vw, 52px); }
+  .section-head h2 { font-size: clamp(28px, 7.5vw, 40px); }
   .brand-proof { grid-template-columns: 1fr; }
   .hero-strip { position: static; margin: 32px 0 0; }
   .glass-form { padding: 24px; border-radius: 24px; }
   .glass-form .row { grid-template-columns: 1fr; }
   .form-topline { flex-direction: column; }
   .secure-chip { align-self: flex-start; }
+
+  /* Bento cards */
+  .bento { grid-template-columns: 1fr; }
+  .bento-card.feature, .bento-card.wide, .bento-card.tall, .bento-card.std { grid-column: span 1; }
+  .bento-card h3 { font-size: 18px; }
+  .bento-card.feature h3 { font-size: 26px; }
+
+  /* How section */
+  .how { padding: 64px 24px 72px; }
+
+  /* Callout section */
+  .callout { padding: 80px 24px; }
+
+  /* Jehiah note */
+  .jehiah-note { padding: 48px 24px 16px; }
+  .jehiah-note .note-card { padding: 28px 24px; }
+  .jehiah-note .hello { font-size: 22px; }
+
+  /* Contact section */
+  .contact { padding: 64px 24px 80px; }
+
+  /* Footer: collapse to single column */
+  .foot { padding: 56px 24px 28px; }
+  .foot .inner { grid-template-columns: 1fr; gap: 32px; }
 }
 
 /* Respect users who prefer reduced motion. Calm by default. */
@@ -1713,4 +1739,15 @@ body .photo-frame::after {
 
 @media (max-width: 640px) {
   body .doc-nav .brand .name { font-size: 12.5px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(30px, 9vw, 36px); }
+  .section-head h2 { font-size: clamp(24px, 7vw, 28px); }
+  .bento-card.feature h3 { font-size: 22px; }
+  .callout { padding: 64px 20px; }
+  .jehiah-note .note-card { padding: 22px 18px; }
+  .contact { padding: 48px 20px 64px; }
+  .how { padding: 48px 20px 56px; }
+  .foot .inner { gap: 24px; }
 }
