@@ -18,7 +18,7 @@
 | 5 | EmailJS contact/intake form improvements | **Done** | Developer + EmailJS admin |
 | 6 | Privacy policy and form trust copy | **Done** | Developer + Business owner |
 | 7 | Service pages | **Done** | Developer + Business owner |
-| 8 | Cloudflare Pages security headers | Not started | Developer + Cloudflare admin |
+| 8 | Cloudflare Pages security headers | **Done** | Developer + Cloudflare admin |
 | 9 | Accessibility and mobile usability pass | Not started | Developer |
 | 10 | Performance cleanup | Not started | Developer |
 | 11 | Analytics readiness | Not started | Developer + Business owner |
@@ -205,7 +205,7 @@ Dedicated service pages improve SEO for specific search queries and give visitor
 
 ### FIX 8 — Cloudflare Pages security headers
 
-**Status:** Not started  
+**Status:** Done (phase 1 — safe headers applied; CSP and HSTS held, see fix log)  
 **Controlled by:** Repo + Cloudflare dashboard  
 **Owner:** Developer
 

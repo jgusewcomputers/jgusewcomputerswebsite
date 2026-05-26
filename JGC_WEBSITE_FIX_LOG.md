@@ -542,3 +542,82 @@ Working tree clean
 ```
 
 ---
+
+### Session 8 — FIX 8: Cloudflare Pages security headers
+
+**Date:** 2026-05-26  
+**Status:** Complete (phase 1 — safe headers applied; CSP and HSTS held)
+
+#### External dependencies audited before writing headers
+
+Scripts loaded by `index.html`:
+- `cdn.jsdelivr.net` — EmailJS browser SDK
+- `unpkg.com` — React 18, ReactDOM 18, Babel standalone
+- `api.emailjs.com` — EmailJS send endpoint (XHR/fetch from browser)
+
+Styles loaded by `colors_and_type.css`:
+- `fonts.googleapis.com` — Google Fonts CSS
+- `fonts.gstatic.com` — Google Fonts actual font files
+
+#### What was applied
+
+**New file: `_headers`** (at repo root = Cloudflare Pages output root)
+
+```
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+Applied to all paths via `/*`. These four headers have no interaction with the CDN scripts, fonts, or EmailJS.
+
+**Header rationale:**
+- `X-Content-Type-Options: nosniff` — prevents MIME-type sniffing; browsers must respect declared Content-Type
+- `Referrer-Policy: strict-origin-when-cross-origin` — sends full URL for same-origin, only origin for cross-origin HTTPS, nothing for downgrade to HTTP
+- `X-Frame-Options: DENY` — prevents any page on this site from being embedded in an iframe on another domain
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()` — disables browser API access to camera, microphone, and geolocation for all origins
+
+#### What was deliberately held
+
+**Content-Security-Policy** — not yet applied. Reason: Babel standalone (loaded from unpkg.com) uses `eval()` internally. A safe CSP must include `'unsafe-eval'` in `script-src`, which significantly weakens the CSP value. When/if Babel CDN is replaced with compiled/vanilla JS (FIX 10 consideration), CSP becomes practical. Full allowlist for reference when ready:
+
+```
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-eval';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  connect-src 'self' https://api.emailjs.com;
+  img-src 'self' data: https:;
+  frame-ancestors 'none';
+```
+
+**Strict-Transport-Security (HSTS)** — not yet applied. Cloudflare Pages already enforces HTTPS, but HSTS commits the browser to HTTPS for the declared `max-age`. Safe to add once HTTPS stability is confirmed; suggested value: `Strict-Transport-Security: max-age=63072000; includeSubDomains`.
+
+#### Files changed
+
+- `_headers` (new)
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.  
+Cloudflare Pages reads `_headers` from the output root on next deploy. Verify with browser DevTools → Network → response headers after deploy.
+
+#### External actions required
+
+None. `_headers` at repo root is picked up automatically by Cloudflare Pages.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---
