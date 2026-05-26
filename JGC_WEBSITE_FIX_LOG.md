@@ -482,3 +482,63 @@ Working tree clean
 ```
 
 ---
+
+### Session 7 — FIX 7: Service pages
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was done
+
+Created six new service pages in `/services/` subdirectory. Each page follows the same `doc-nav` / `doc-wrap` pattern as `about.html`, `safety.html`, and `privacy.html`.
+
+All asset paths use `../` prefix (e.g. `../colors_and_type.css`, `../assets/logos/monogram-light.webp`) since pages live one level below root.
+
+Each page contains: eyebrow, H1, intro, "What we help with" section, "How it works" or equivalent, "Honest expectations" section, CTA with two buttons (service-specific "Ask about…" + "All services"), footer with full site links.
+
+#### Files created
+
+- `services/computer-help.html` — covers: new computer advice, slow computer assessment, repair vs replace
+- `services/website-help.html` — covers: new static sites, improvements, contact forms, domain/hosting, email setup
+- `services/forms-enquiry-systems.html` — covers: contact forms, structured intake forms, enquiry routing
+- `services/ai-automation.html` — covers: workflow mapping, automation identification, free-first options; includes "AI drafts. A person reviews." pillar
+- `services/email-account-cleanup.html` — covers: inbox cleanup, account separation, retiring old accounts, digital organisation; explicitly states no password/login access
+- `services/small-business-tech-advice.html` — covers: tools audit, workflow pain, security gaps, technology decisions
+
+#### Files modified
+
+**`index.html` — BentoCard component**
+- Added optional `href` prop
+- When `href` is present, renders a "Details →" inline link at the bottom of the card
+- Eight cards now link to their corresponding service pages:
+  - New computer advice, Slow computer, Repair vs replace → `services/computer-help.html`
+  - Website help → `services/website-help.html`
+  - Forms and enquiry systems → `services/forms-enquiry-systems.html`
+  - Email cleanup → `services/email-account-cleanup.html`
+  - AI automation → `services/ai-automation.html`
+  - Small business tech review → `services/small-business-tech-advice.html`
+- Scam & security triage and Elderly tech help have no dedicated service page — no link added
+
+**`sitemap.xml`**
+- Added all six service page URLs (priority 0.8, monthly)
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+None new.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---

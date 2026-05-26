@@ -297,7 +297,7 @@
     }
 
     // ---------- Bento ----------
-    function BentoCard({ size, icon, title, body }) {
+    function BentoCard({ size, icon, title, body, href }) {
       const ref = React.useRef(null);
       const tilt = (ev) => {
         const el = ref.current; if (!el) return;
@@ -320,6 +320,17 @@
           <div className="ico"><img src={icon} alt="" loading="lazy" /></div>
           <h3>{title}</h3>
           <p>{body}</p>
+          {href && (
+            <a href={href} style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              fontSize: 13, fontWeight: 500, marginTop: 10,
+              color: "var(--jgc-glow-300)", textDecoration: "none",
+              letterSpacing: "0.01em",
+            }}>
+              Details
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+          )}
         </div>
       );
     }
@@ -329,27 +340,35 @@
         <div className="bento">
           <BentoCard size="feature" icon={ICON.check}
             title="New computer advice"
+            href="services/computer-help.html"
             body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — we compare honestly so you don't overspend." />
           <BentoCard size="std" icon={ICON.pencil}
             title="Slow computer assessment"
+            href="services/computer-help.html"
             body="If it's slow, the answer isn't always 'buy a new one'. Cleanup, backup, upgrade, repair quote, replacement, or further diagnosis — we work out which." />
           <BentoCard size="std" icon={ICON.check}
             title="Repair vs replace decision"
+            href="services/computer-help.html"
             body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
           <BentoCard size="std" icon={ICON.pencil}
             title="Website help"
+            href="services/website-help.html"
             body="A new small-business website or improvements to an existing one. Plain static pages, contact forms, domain and hosting setup — built simply, without ongoing platform fees or lock-in." />
           <BentoCard size="std" icon={ICON.chat}
             title="Forms and enquiry systems"
+            href="services/forms-enquiry-systems.html"
             body="A structured contact or enquiry form that collects the right information from your customers. Set up without complex tools, monthly subscriptions, or a developer on call." />
           <BentoCard size="wide" icon={ICON.chat}
             title="Email cleanup & digital organisation"
+            href="services/email-account-cleanup.html"
             body="Account separation, labels, retirement of old accounts, safer habits, file structures, a simple device map — a clear picture of where everything lives. We don't log in or ask for your password." />
           <BentoCard size="wide" icon={ICON.check}
             title="AI automation starter"
+            href="services/ai-automation.html"
             body="AI is useful only when the workflow is understood. We map a process, identify repetitive tasks, suggest free-first automation options, and separate safe ideas from risky ones — without recommending automation for sensitive work." />
           <BentoCard size="std" icon={ICON.chat}
             title="Small business tech review"
+            href="services/small-business-tech-advice.html"
             body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear picture of where money is going and where it shouldn't be." />
           <BentoCard size="std" icon={ICON.alert}
             title="Scam & security triage"
