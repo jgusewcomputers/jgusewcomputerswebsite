@@ -1430,7 +1430,19 @@ section { position: relative; }
   gap: 48px;
   align-items: start;
 }
-.foot img.lockup { height: 36px; margin-bottom: 18px; }
+.foot-name {
+  font-family: var(--jgc-font-display);
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #fff; margin: 0 0 5px;
+}
+.foot-tag {
+  font-family: var(--jgc-font-display);
+  font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jgc-fg-on-navy-2);
+  margin: 0 0 22px;
+}
 .foot .brand p { font-size: 14px; color: var(--jgc-fg-on-navy-2); max-width: 360px; line-height: 1.6; margin: 0 0 24px; }
 .foot .brand .badges { display: flex; gap: 8px; }
 .foot .brand .badges span {
