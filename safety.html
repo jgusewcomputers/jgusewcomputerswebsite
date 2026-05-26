@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safety first — JGusew Computers</title>
+  <meta name="description" content="What to send, what not to send, and how JGusew Computers handles sensitive situations safely.">
+  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="premium.css">
+  <style>
+    .doc-nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      background: linear-gradient(180deg, rgba(10,23,51,0.65), rgba(10,23,51,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .doc-nav .inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: 18px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .doc-nav .brand {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .doc-nav .brand img { height: 28px; filter: drop-shadow(0 1px 8px rgba(95,163,232,0.45)); }
+    .doc-nav .brand .txt { display: flex; flex-direction: column; line-height: 1.05; }
+    .doc-nav .brand .name {
+      font-family: var(--jgc-font-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.16em; color: #fff;
+    }
+    .doc-nav .brand .tag {
+      font-family: var(--jgc-font-display);
+      font-size: 10px; letter-spacing: 0.22em;
+      color: var(--jgc-fg-on-navy-2); text-transform: uppercase;
+    }
+    .doc-nav .back {
+      font-size: 13.5px; color: var(--jgc-fg-on-navy-2);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+      transition: color 200ms;
+    }
+    .doc-nav .back:hover { color: #fff; text-decoration: none; }
+    .doc-nav .back svg { opacity: 0.7; }
+
+    .doc-wrap {
+      max-width: 760px; margin: 0 auto;
+      padding: 80px 32px 120px;
+      position: relative; z-index: 2;
+    }
+
+    .doc-eyebrow {
+      font-family: var(--jgc-font-mono);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--jgc-glow-300);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .doc-eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: var(--jgc-glow-400);
+    }
+
+    .doc-wrap h1 {
+      font-family: var(--jgc-font-display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700; line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #fff; margin: 0 0 24px;
+    }
+
+    .doc-intro {
+      font-size: 18px; line-height: 1.65;
+      color: var(--jgc-fg-on-navy-2);
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .doc-section { margin-bottom: 48px; }
+
+    .doc-section h2 {
+      font-family: var(--jgc-font-display);
+      font-size: 22px; font-weight: 600;
+      color: #fff; margin: 0 0 16px;
+      letter-spacing: -0.005em;
+    }
+
+    .doc-section p {
+      font-size: 16px; line-height: 1.7;
+      color: var(--jgc-fg-on-navy-2); margin: 0 0 14px;
+    }
+
+    .doc-section ul, .doc-section ol {
+      margin: 0 0 14px; padding-left: 0;
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .doc-section ul li, .doc-section ol li {
+      font-size: 15.5px; line-height: 1.6;
+      color: var(--jgc-fg-on-navy-2);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .doc-section ul li::before {
+      content: "";
+      flex-shrink: 0; margin-top: 9px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--jgc-glow-400);
+      box-shadow: 0 0 6px rgba(95,163,232,0.6);
+    }
+    .doc-section ol { counter-reset: step; }
+    .doc-section ol li { counter-increment: step; }
+    .doc-section ol li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      font-family: var(--jgc-font-mono);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--jgc-glow-300);
+      background: rgba(95,163,232,0.14);
+      border-radius: 6px;
+      padding: 3px 7px;
+      margin-top: 2px;
+    }
+
+    .donot-box {
+      padding: 24px 28px;
+      border-radius: 16px;
+      background: rgba(196,122,44,0.08);
+      border: 1px solid rgba(196,122,44,0.25);
+      margin-bottom: 14px;
+    }
+    .donot-box p {
+      font-size: 15px; color: #f0c896; margin: 0 0 14px;
+    }
+    .donot-box p:last-child { margin: 0; }
+    .donot-box ul { margin: 0; }
+    .donot-box ul li { color: #f0c896; font-size: 15px; }
+    .donot-box ul li::before { background: #f0c896; box-shadow: none; }
+
+    .promise-box {
+      padding: 24px 28px;
+      border-radius: 16px;
+      background: rgba(47,143,96,0.08);
+      border: 1px solid rgba(47,143,96,0.25);
+      margin-bottom: 14px;
+    }
+    .promise-box ul li { color: var(--jgc-fg-on-navy-2); }
+    .promise-box ul li::before { background: #2f8f60; box-shadow: 0 0 6px rgba(47,143,96,0.5); }
+
+    .doc-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.08) 80%, transparent);
+      margin: 48px 0;
+    }
+
+    .doc-cta {
+      margin-top: 56px;
+      padding: 32px 36px;
+      border-radius: 20px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .doc-cta p {
+      font-size: 16px; line-height: 1.65;
+      color: var(--jgc-fg-on-navy-2); margin: 0 0 20px;
+    }
+    .doc-cta a.btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600;
+      padding: 14px 24px; border-radius: 999px;
+      background: linear-gradient(180deg, #f6f9ff 0%, #d9e4f1 100%);
+      color: var(--jgc-navy-900); text-decoration: none;
+      box-shadow: 0 12px 30px -10px rgba(95,163,232,0.55);
+      transition: transform 240ms var(--jgc-ease-out), box-shadow 240ms;
+    }
+    .doc-cta a.btn:hover { transform: translateY(-1px); box-shadow: 0 18px 38px -10px rgba(95,163,232,0.7); text-decoration: none; }
+
+    .doc-foot {
+      margin-top: 80px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 12.5px; color: var(--jgc-fg-on-navy-2);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .doc-foot a { color: var(--jgc-fg-on-navy-2); text-decoration: underline; text-underline-offset: 3px; }
+    .doc-foot a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .doc-wrap { padding: 48px 24px 80px; }
+      .doc-nav .inner { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <nav class="doc-nav">
+    <div class="inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logos/monogram-light.png" alt="JGC monogram" />
+        <div class="txt">
+          <span class="name">JGUSEW COMPUTERS</span>
+          <span class="tag">Computer problems. Sorted.</span>
+        </div>
+      </a>
+      <a href="index.html" class="back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+        Back to site
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="doc-wrap">
+
+      <div class="doc-eyebrow">Safety</div>
+      <h1>Safety first.</h1>
+      <p class="doc-intro">
+        JGusew Computers is built around practical help, but your safety comes first.
+        Some technology problems involve private information, money, identity, accounts,
+        or security. In those situations, it is better to slow down and be careful
+        than rush into a bad fix.
+      </p>
+
+      <div class="doc-section">
+        <h2>Please do not send us</h2>
+        <div class="donot-box">
+          <p>Do not include any of the following in your email or in the contact form:</p>
+          <ul>
+            <li>Passwords of any kind</li>
+            <li>Banking passwords or PINs</li>
+            <li>One-time codes, MFA codes, or SMS verification codes</li>
+            <li>Credit card or debit card numbers</li>
+            <li>Full identity documents (passport, driver licence)</li>
+            <li>Full bank statements</li>
+            <li>Sensitive legal or medical documents</li>
+            <li>Screenshots showing private account details</li>
+          </ul>
+          <p>JGusew Computers does not need these details to start helping.</p>
+        </div>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>We will never ask for</h2>
+        <p>JGusew Computers will never ask you to send:</p>
+        <ul>
+          <li>Your password</li>
+          <li>Your banking code or PIN</li>
+          <li>Your one-time login code</li>
+          <li>Your full credit card number</li>
+          <li>Your full identity documents</li>
+        </ul>
+        <p>If anyone contacts you claiming to be from JGusew Computers and asks for those things, stop and check before responding.</p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>If you think you've been scammed or hacked</h2>
+        <p>Slow down. Take these steps in order:</p>
+        <ol>
+          <li>Do not send more money.</li>
+          <li>Do not share codes or passwords with anyone.</li>
+          <li>Do not let anyone pressure you into acting quickly.</li>
+          <li>Contact your bank urgently if money or banking is involved.</li>
+          <li>Change passwords only from a safe device — ask for help first if you are not sure how.</li>
+          <li>Ask for help before clicking more links or installing software.</li>
+        </ol>
+        <p>JGusew Computers can help you organise the next steps. It is not an emergency cyber incident response service — if you are under active attack, contact your bank and the Australian Cyber Security Centre (cyber.gov.au) directly.</p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>Elderly and vulnerable customers</h2>
+        <p>
+          JGusew Computers takes extra care when money, banking, scams, identity documents,
+          or major purchases are involved for elderly or vulnerable customers.
+        </p>
+        <p>
+          In those situations, it may be sensible to involve a trusted family member or support
+          person. The goal is to help, not pressure.
+        </p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>How AI is used</h2>
+        <p>
+          JGusew Computers may use AI to help organise enquiries, classify issues,
+          and prepare draft replies.
+        </p>
+        <p>
+          The rule is simple: <strong style="color:#fff;">AI drafts. Jehiah reviews.</strong>
+          Nothing important is sent on autopilot. Sensitive customer information is not
+          placed into external AI tools.
+        </p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>No guarantees</h2>
+        <p>Technology advice depends on the information available. JGusew Computers will be practical, honest, and careful — but cannot guarantee:</p>
+        <ul>
+          <li>A device can be fixed</li>
+          <li>A repair will last</li>
+          <li>Data can be recovered</li>
+          <li>A scam loss can be reversed</li>
+          <li>A specific product will stay in stock or at the same price</li>
+        </ul>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>Our promise</h2>
+        <div class="promise-box">
+          <ul>
+            <li>Speak plainly — no jargon</li>
+            <li>Avoid pressure</li>
+            <li>Ask questions when uncertain rather than guess</li>
+            <li>Explain risks clearly</li>
+            <li>Say when a specialist is needed</li>
+            <li>Avoid overpromising</li>
+            <li>Protect your information</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="doc-cta">
+        <p>
+          Not sure what is safe to send? Email with a general description only —
+          do not include passwords, codes, identity documents, or private financial
+          information. We'll ask for what we actually need.
+        </p>
+        <a href="mailto:hello@jgusewcomputers.com" class="btn">
+          hello@jgusewcomputers.com
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="doc-foot">
+        <span>© 2026 JGusew Computers · led by Jehiah Gusew</span>
+        <span>
+          <a href="index.html">Home</a> ·
+          <a href="privacy.html">Privacy notice</a>
+        </span>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

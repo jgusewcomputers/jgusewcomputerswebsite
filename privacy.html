@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy notice — JGusew Computers</title>
+  <meta name="description" content="How JGusew Computers collects, uses, and protects your information.">
+  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="premium.css">
+  <style>
+    .doc-nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      background: linear-gradient(180deg, rgba(10,23,51,0.65), rgba(10,23,51,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .doc-nav .inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: 18px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .doc-nav .brand {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .doc-nav .brand img { height: 28px; filter: drop-shadow(0 1px 8px rgba(95,163,232,0.45)); }
+    .doc-nav .brand .txt { display: flex; flex-direction: column; line-height: 1.05; }
+    .doc-nav .brand .name {
+      font-family: var(--jgc-font-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.16em; color: #fff;
+    }
+    .doc-nav .brand .tag {
+      font-family: var(--jgc-font-display);
+      font-size: 10px; letter-spacing: 0.22em;
+      color: var(--jgc-fg-on-navy-2); text-transform: uppercase;
+    }
+    .doc-nav .back {
+      font-size: 13.5px; color: var(--jgc-fg-on-navy-2);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+      transition: color 200ms;
+    }
+    .doc-nav .back:hover { color: #fff; text-decoration: none; }
+
+    .doc-wrap {
+      max-width: 760px; margin: 0 auto;
+      padding: 80px 32px 120px;
+      position: relative; z-index: 2;
+    }
+
+    .doc-eyebrow {
+      font-family: var(--jgc-font-mono);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--jgc-glow-300);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .doc-eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: var(--jgc-glow-400);
+    }
+
+    .doc-wrap h1 {
+      font-family: var(--jgc-font-display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700; line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #fff; margin: 0 0 24px;
+    }
+
+    .doc-intro {
+      font-size: 18px; line-height: 1.65;
+      color: var(--jgc-fg-on-navy-2);
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .doc-meta {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      margin-bottom: 56px; padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .doc-meta-item {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .doc-meta-item .label {
+      font-family: var(--jgc-font-mono);
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--jgc-fg-on-navy-2);
+    }
+    .doc-meta-item .value {
+      font-size: 14px; color: #fff; font-weight: 500;
+    }
+
+    .doc-section { margin-bottom: 48px; }
+
+    .doc-section h2 {
+      font-family: var(--jgc-font-display);
+      font-size: 22px; font-weight: 600;
+      color: #fff; margin: 0 0 16px;
+      letter-spacing: -0.005em;
+    }
+
+    .doc-section p {
+      font-size: 16px; line-height: 1.7;
+      color: var(--jgc-fg-on-navy-2); margin: 0 0 14px;
+    }
+
+    .doc-section ul {
+      margin: 0 0 14px; padding-left: 0;
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .doc-section ul li {
+      font-size: 15.5px; line-height: 1.6;
+      color: var(--jgc-fg-on-navy-2);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .doc-section ul li::before {
+      content: "";
+      flex-shrink: 0; margin-top: 9px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--jgc-glow-400);
+      box-shadow: 0 0 6px rgba(95,163,232,0.6);
+    }
+
+    .donot-box {
+      padding: 24px 28px;
+      border-radius: 16px;
+      background: rgba(196,122,44,0.08);
+      border: 1px solid rgba(196,122,44,0.25);
+      margin-bottom: 14px;
+    }
+    .donot-box ul { margin: 0; }
+    .donot-box ul li { color: #f0c896; font-size: 15px; }
+    .donot-box ul li::before { background: #f0c896; box-shadow: none; }
+
+    .doc-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.08) 80%, transparent);
+      margin: 48px 0;
+    }
+
+    .doc-cta {
+      margin-top: 56px;
+      padding: 32px 36px;
+      border-radius: 20px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .doc-cta p {
+      font-size: 16px; line-height: 1.65;
+      color: var(--jgc-fg-on-navy-2); margin: 0 0 20px;
+    }
+    .doc-cta a.btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600;
+      padding: 14px 24px; border-radius: 999px;
+      background: linear-gradient(180deg, #f6f9ff 0%, #d9e4f1 100%);
+      color: var(--jgc-navy-900); text-decoration: none;
+      box-shadow: 0 12px 30px -10px rgba(95,163,232,0.55);
+      transition: transform 240ms var(--jgc-ease-out), box-shadow 240ms;
+    }
+    .doc-cta a.btn:hover { transform: translateY(-1px); box-shadow: 0 18px 38px -10px rgba(95,163,232,0.7); text-decoration: none; }
+
+    .doc-foot {
+      margin-top: 80px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 12.5px; color: var(--jgc-fg-on-navy-2);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .doc-foot a { color: var(--jgc-fg-on-navy-2); text-decoration: underline; text-underline-offset: 3px; }
+    .doc-foot a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .doc-wrap { padding: 48px 24px 80px; }
+      .doc-nav .inner { padding: 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <nav class="doc-nav">
+    <div class="inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logos/monogram-light.png" alt="JGC monogram" />
+        <div class="txt">
+          <span class="name">JGUSEW COMPUTERS</span>
+          <span class="tag">Computer problems. Sorted.</span>
+        </div>
+      </a>
+      <a href="index.html" class="back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+        Back to site
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="doc-wrap">
+
+      <div class="doc-eyebrow">Privacy</div>
+      <h1>Privacy notice.</h1>
+      <p class="doc-intro">
+        JGusew Computers collects only the information needed to understand
+        your enquiry and prepare a practical response. Nothing more.
+      </p>
+
+      <div class="doc-meta">
+        <div class="doc-meta-item">
+          <span class="label">Version</span>
+          <span class="value">v0.1 — draft</span>
+        </div>
+        <div class="doc-meta-item">
+          <span class="label">Stage</span>
+          <span class="value">Free testing only</span>
+        </div>
+        <div class="doc-meta-item">
+          <span class="label">Owner</span>
+          <span class="value">Jehiah Gusew</span>
+        </div>
+        <div class="doc-meta-item">
+          <span class="label">Last updated</span>
+          <span class="value">May 2026</span>
+        </div>
+      </div>
+
+      <div class="doc-section">
+        <h2>What we collect</h2>
+        <p>When you contact us, we may collect:</p>
+        <ul>
+          <li>Your name and email address</li>
+          <li>Your phone number, if you provide it</li>
+          <li>A description of your issue</li>
+          <li>Device details — type, age, model, operating system — if relevant</li>
+          <li>General information about your technology needs or budget</li>
+          <li>Small business workflow descriptions, if relevant</li>
+          <li>Notes, draft replies, and the final reply we send you</li>
+        </ul>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>What you should not send</h2>
+        <div class="donot-box">
+          <ul>
+            <li>Passwords of any kind</li>
+            <li>Banking codes or PINs</li>
+            <li>One-time or MFA codes</li>
+            <li>Credit card or debit card numbers</li>
+            <li>Full identity documents</li>
+            <li>Full bank statements</li>
+            <li>Sensitive legal or medical documents</li>
+          </ul>
+        </div>
+        <p>We do not need those details to help. See the <a href="safety.html">Safety page</a> for more.</p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>How we use your information</h2>
+        <p>Information you send is used to:</p>
+        <ul>
+          <li>Understand your enquiry</li>
+          <li>Classify and assess the issue</li>
+          <li>Prepare a draft response for Jehiah to review</li>
+          <li>Send you a clear, practical reply</li>
+          <li>Follow up if needed</li>
+          <li>Improve how the service works</li>
+        </ul>
+        <p>We do not use your information for marketing, and we do not add you to any mailing list.</p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>AI use</h2>
+        <p>
+          JGusew Computers may use AI to help organise information, classify
+          enquiries, and prepare draft replies.
+        </p>
+        <p>
+          The rule is: <strong style="color:#fff;">AI drafts. Jehiah reviews.</strong>
+          Nothing important is sent on autopilot. Customer data is not placed
+          into external AI tools without clear data-handling rules in place.
+        </p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>Where information is stored</h2>
+        <p>Enquiry information may be stored in Gmail, Google Sheets, Google Drive, and Google Docs. Access is limited to Jehiah Gusew.</p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>How long we keep it</h2>
+        <p>
+          During the free testing stage, enquiry records are kept while the service
+          is being refined. We avoid storing unnecessary sensitive information.
+          Any information that should not have been sent is removed or redacted.
+        </p>
+        <p>
+          Retention rules will be reviewed before any paid public launch.
+        </p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>Your rights</h2>
+        <p>
+          If you want your information corrected or removed, email
+          <a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a>.
+          Jehiah will review the request manually and let you know the outcome.
+        </p>
+      </div>
+
+      <div class="doc-divider"></div>
+
+      <div class="doc-section">
+        <h2>Security</h2>
+        <p>Minimum controls in place:</p>
+        <ul>
+          <li>Multi-factor authentication on key accounts</li>
+          <li>Limited sharing of documents</li>
+          <li>No password storage in any internal system</li>
+          <li>No banking or code storage</li>
+          <li>No uncontrolled remote access</li>
+        </ul>
+      </div>
+
+      <div class="doc-cta">
+        <p>
+          Questions about your information? Email us directly.
+        </p>
+        <a href="mailto:hello@jgusewcomputers.com" class="btn">
+          hello@jgusewcomputers.com
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="doc-foot">
+        <span>© 2026 JGusew Computers · led by Jehiah Gusew</span>
+        <span>
+          <a href="index.html">Home</a> ·
+          <a href="safety.html">Safety</a>
+        </span>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

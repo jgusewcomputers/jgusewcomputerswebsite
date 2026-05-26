@@ -106,7 +106,7 @@
         { id: "home", label: "Home" },
         { id: "services", label: "Services" },
         { id: "process", label: "How it works" },
-        { id: "safety", label: "Safety" },
+        { id: "safety", label: "Safety", href: "safety.html" },
         { id: "contact", label: "Contact" },
       ];
       return (
@@ -122,9 +122,11 @@
             </div>
             <div className="menu">
               {items.map(i => (
-                <button key={i.id}
-                  className={current === i.id ? "active" : ""}
-                  onClick={() => onNav(i.id)}>{i.label}</button>
+                i.href
+                  ? <a key={i.id} href={i.href} className="nav-link">{i.label}</a>
+                  : <button key={i.id}
+                      className={current === i.id ? "active" : ""}
+                      onClick={() => onNav(i.id)}>{i.label}</button>
               ))}
               <button className="cta" onClick={() => onNav("contact")}>Get help by email</button>
             </div>
@@ -593,8 +595,12 @@
             </div>
           </div>
           <div className="legal">
-            <span>© 2026 JGusew Computers · led by Jehiah Gusew</span>
-            <span className="mono">v0.1 · Free during launch · Sunbury, VIC, Australia</span>
+            <span>© 2026 JGusew Computers · led by Jehiah Gusew · Sunbury, VIC, Australia</span>
+            <span className="mono">
+              <a href="safety.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Safety</a>
+              {" · "}
+              <a href="privacy.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Privacy notice</a>
+            </span>
           </div>
         </footer>
       );
