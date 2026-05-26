@@ -90,7 +90,7 @@
     };
 
     const Arrow = ({ size = 16 }) => (
-      <svg className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" focusable="false" className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
       </svg>
     );
@@ -110,6 +110,8 @@
 
     // ---------- Nav ----------
     function Nav({ current, onNav }) {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const closeMenu = () => setMenuOpen(false);
       const items = [
         { id: "home", label: "Home" },
         { id: "services", label: "Services" },
@@ -121,23 +123,35 @@
       return (
         <header className="nav">
           <div className="inner">
-            <div className="brand" onClick={() => onNav("home")}>
+            <button
+              className="brand"
+              onClick={() => { onNav("home"); closeMenu(); }}
+              aria-label="JGusew Computers — back to top"
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
               <img src="assets/logos/monogram-light.webp" alt="JGC monogram" />
               <div className="txt">
                 <span className="name">JGUSEW COMPUTERS</span>
                 <span className="tag">Computer problems. Sorted.</span>
               </div>
               <span className="stage-pill" title="Services are free while we refine the offering. No paid work is being charged yet.">Free during launch</span>
-            </div>
-            <div className="menu">
+            </button>
+            <button
+              className={"hamburger" + (menuOpen ? " open" : "")}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-controls="nav-menu"
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}>
+              <span></span><span></span><span></span>
+            </button>
+            <div className={"menu" + (menuOpen ? " open" : "")} id="nav-menu">
               {items.map(i => (
                 i.href
-                  ? <a key={i.id} href={i.href} className="nav-link">{i.label}</a>
+                  ? <a key={i.id} href={i.href} className="nav-link" onClick={closeMenu}>{i.label}</a>
                   : <button key={i.id}
                       className={current === i.id ? "active" : ""}
-                      onClick={() => onNav(i.id)}>{i.label}</button>
+                      onClick={() => { onNav(i.id); closeMenu(); }}>{i.label}</button>
               ))}
-              <button className="cta" onClick={() => onNav("contact")}>Get help by email</button>
+              <button className="cta" onClick={() => { onNav("contact"); closeMenu(); }}>Get help by email</button>
             </div>
           </div>
         </header>
@@ -249,21 +263,21 @@
               <div className="ex reveal">
                 <div className="ex-h">
                   <span className="ex-num">01</span>
-                  <h4>What "free during launch" means</h4>
+                  <h2>What "free during launch" means</h2>
                 </div>
                 <p>Services are free right now while we refine the offering. No paid work is being charged yet. You get the same careful review as paid work — we're using this period to gather feedback and improve the service.</p>
               </div>
               <div className="ex reveal d1">
                 <div className="ex-h">
                   <span className="ex-num">02</span>
-                  <h4>What "help by email" means</h4>
+                  <h2>What "help by email" means</h2>
                 </div>
                 <p>You explain the issue in plain English by email. We reply with questions, options, and a clear next step — usually within one working day. No phone queues, no remote-control software at this stage. Just careful written advice.</p>
               </div>
               <div className="ex reveal d2">
                 <div className="ex-h">
                   <span className="ex-num">03</span>
-                  <h4>What "AI drafts, Jehiah reviews" means</h4>
+                  <h2>What "AI drafts, Jehiah reviews" means</h2>
                 </div>
                 <p>AI tools may help organise your message or prepare a draft reply. But Jehiah Gusew (who runs JGusew Computers) reviews anything important before it's sent. Nothing goes out on autopilot. No automated bot replies.</p>
               </div>
@@ -326,9 +340,10 @@
               fontSize: 13, fontWeight: 500, marginTop: 10,
               color: "var(--jgc-glow-300)", textDecoration: "none",
               letterSpacing: "0.01em",
+              padding: "6px 10px", margin: "-6px -10px",
             }}>
               Details
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
             </a>
           )}
         </div>
@@ -495,7 +510,7 @@
               <img className="shield" src={ICON.alert} alt="" />
               <div>
                 <div className="pill" style={{ marginBottom: 14, display: "inline-block" }}>SAFETY FIRST</div>
-                <h3>Please don't send passwords, banking codes, or identity documents.</h3>
+                <h2>Please don't send passwords, banking codes, or identity documents.</h2>
                 <p>JGusew Computers does not need those details to start helping. If something feels suspicious, slow down before clicking, paying, or sharing details — and we'll help organise the next step.</p>
               </div>
             </div>
@@ -692,7 +707,7 @@
               </div>
             </div>
             <div>
-              <h5>Services</h5>
+              <h3>Services</h3>
               <ul>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>New computer advice</a></li>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Website help</a></li>
@@ -703,7 +718,7 @@
               </ul>
             </div>
             <div>
-              <h5>Trust</h5>
+              <h3>Trust</h3>
               <ul>
                 <li><a href="#process" onClick={(e)=>{e.preventDefault();onNav("process");}}>How it works</a></li>
                 <li><a href="safety.html">Safety first</a></li>
@@ -711,7 +726,7 @@
               </ul>
             </div>
             <div>
-              <h5>About</h5>
+              <h3>About</h3>
               <ul>
                 <li><a href="about.html">About Jehiah</a></li>
                 <li><a href="safety.html">Safety first</a></li>
@@ -719,7 +734,7 @@
               </ul>
             </div>
             <div>
-              <h5>Contact</h5>
+              <h3>Contact</h3>
               <ul>
                 <li><a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a></li>
                 <li style={{ opacity: 0.75 }}>Reply within 1 working day</li>
@@ -751,8 +766,9 @@
       }
       return (
         <>
+          <a href="#main-content" className="skip-link">Skip to main content</a>
           <Nav current={current} onNav={nav} />
-          <main>
+          <main id="main-content">
             <div id="home" data-screen-label="01 Home">
               <Hero onContact={() => nav("contact")} onServices={() => nav("services")} />
             </div>

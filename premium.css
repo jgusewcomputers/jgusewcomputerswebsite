@@ -987,3 +987,65 @@ section { position: relative; }
 @media (max-width: 900px) {
   .explainer-grid { grid-template-columns: 1fr; }
 }
+
+/* ---- Accessibility: skip link ---- */
+.skip-link {
+  position: absolute; top: -100%; left: 16px;
+  background: #fff; color: var(--jgc-navy-900);
+  font-size: 14px; font-weight: 600;
+  padding: 10px 18px; border-radius: 0 0 8px 8px;
+  text-decoration: none; z-index: 9999;
+  transition: top 200ms;
+}
+.skip-link:focus { top: 0; }
+
+/* ---- Accessibility: focus-visible ---- */
+:focus-visible {
+  outline: 2px solid rgba(95, 163, 232, 0.85);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Form inputs have their own focus style — keep it */
+.glass-form input:focus-visible,
+.glass-form textarea:focus-visible,
+.glass-form select:focus-visible {
+  outline: none;
+}
+
+/* ---- Nav hamburger ---- */
+.nav .hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; padding: 8px;
+  background: transparent; border: 0; cursor: pointer;
+  border-radius: 8px; margin-left: auto; flex-shrink: 0;
+}
+.nav .hamburger:hover { background: rgba(255,255,255,0.07); }
+.nav .hamburger span {
+  display: block; height: 2px; border-radius: 2px;
+  background: #fff; transition: transform 220ms, opacity 220ms;
+}
+.nav .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav .hamburger.open span:nth-child(2) { opacity: 0; }
+.nav .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav .hamburger { display: flex; }
+  .nav .inner { flex-wrap: wrap; gap: 0; padding: 14px 24px; }
+  .nav .menu {
+    display: none;
+    width: 100%; flex-direction: column; gap: 2px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 10px; padding: 10px 0 12px;
+  }
+  .nav .menu.open { display: flex; }
+  .nav .menu button, .nav .menu a.nav-link {
+    width: 100%; text-align: left; font-size: 15px;
+    padding: 11px 16px; border-radius: 8px;
+  }
+  .nav .menu .cta {
+    margin-left: 0; margin-top: 10px;
+    width: 100%; justify-content: center; border-radius: 10px;
+  }
+  .nav .stage-pill { display: none; }
+}

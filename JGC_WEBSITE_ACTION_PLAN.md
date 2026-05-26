@@ -19,7 +19,7 @@
 | 6 | Privacy policy and form trust copy | **Done** | Developer + Business owner |
 | 7 | Service pages | **Done** | Developer + Business owner |
 | 8 | Cloudflare Pages security headers | **Done** | Developer + Cloudflare admin |
-| 9 | Accessibility and mobile usability pass | Not started | Developer |
+| 9 | Accessibility and mobile usability pass | **Done** | Developer |
 | 10 | Performance cleanup | Not started | Developer |
 | 11 | Analytics readiness | Not started | Developer + Business owner |
 | 12 | Future automation readiness | Not started | Developer + Automation specialist |
@@ -231,7 +231,7 @@ Basic security headers reduce attack surface and improve browser security scores
 
 ### FIX 9 — Accessibility and mobile usability pass
 
-**Status:** Not started  
+**Status:** Done  
 **Controlled by:** Repo  
 **Owner:** Developer
 
@@ -239,13 +239,13 @@ Basic security headers reduce attack surface and improve browser security scores
 The target audience includes non-technical users and older Australians. Accessibility is also a trust signal.
 
 **Tasks:**
-- Check heading hierarchy on all pages
-- Check form label associations
-- Check button accessible names
-- Check alt text on all images
-- Check focus visible states
-- Check tap target sizes on mobile
-- Check text size and line length
+- Check heading hierarchy on all pages ✓
+- Check form label associations ✓ (done in FIX 5)
+- Check button accessible names ✓
+- Check alt text on all images ✓
+- Check focus visible states ✓
+- Check tap target sizes on mobile ✓
+- Check text size and line length ✓
 
 ---
 

@@ -621,3 +621,69 @@ Working tree clean
 ```
 
 ---
+
+## FIX 9 — Accessibility and mobile usability pass
+
+**Date:** 2026-05-26  
+**Status:** Done  
+**Files changed:** `premium.css`, `index.html`, `about.html`, `safety.html`, `privacy.html`, all 6 service pages
+
+---
+
+### What was done
+
+#### Heading hierarchy
+
+- `index.html` ExplainerBand: all three `<h4>` headings → `<h2>` (correct document outline)
+- `index.html` SafetyBand: `<h3>` → `<h2>` (was nested under H1 incorrectly)
+- `index.html` Footer: all four `<h5>` column headings → `<h3>` (Services, Trust, About, Contact)
+
+#### Skip link
+
+- Added `<a href="#main-content" className="skip-link">Skip to main content</a>` as first element in App render
+- Added `id="main-content"` to `<main>` element
+- Skip link CSS added to `premium.css`: visually hidden until focused, slides in from top on `:focus`
+
+#### Focus visible
+
+- Added global `:focus-visible` rule in `premium.css`: 2px glow-blue outline, 3px offset, 4px border-radius
+- Excluded `.glass-form` inputs (they have their own glow focus style)
+
+#### Mobile navigation hamburger
+
+- Nav brand `<div>` → `<button>` with `aria-label="JGusew Computers — back to top"` and inline style reset
+- Added hamburger `<button>` with `aria-expanded`, `aria-controls="nav-menu"`, `aria-label` (toggles between open/close text)
+- Menu `<div>` given `id="nav-menu"` matching hamburger `aria-controls`
+- All nav item click handlers call `closeMenu()` so menu closes on selection
+- `menuOpen` state drives `.open` class on both hamburger and menu
+- CSS: hamburger hidden on desktop, displayed on `≤768px`; menu hidden by default, shown as `flex-direction: column` when `.open`; hamburger spans animate to ✕ when open
+
+#### Decorative SVG aria-hidden
+
+- `aria-hidden="true" focusable="false"` added to all decorative SVGs across:
+  - `index.html`: Arrow component, BentoCard "Details →" arrow
+  - `about.html`, `safety.html`, `privacy.html`: back-arrow and forward-arrow SVGs (replace_all)
+  - All 6 service pages: back-arrow and forward-arrow SVGs (replace_all)
+
+#### Tap target
+
+- BentoCard "Details →" link: added `padding: "6px 10px", margin: "-6px -10px"` to expand clickable area to ≥44px without changing visual layout
+
+---
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+None.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---
