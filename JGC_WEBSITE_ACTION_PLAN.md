@@ -12,7 +12,7 @@
 | # | Fix | Status | Owner |
 |---|-----|--------|-------|
 | 1 | Cloudflare Pages deployment and canonical domain readiness | **Done** | Developer + Cloudflare admin |
-| 2 | Metadata and technical SEO foundation | Not started | Developer |
+| 2 | Metadata and technical SEO foundation | **Done** | Developer |
 | 3 | Sitemap and robots.txt | Not started | Developer |
 | 4 | Homepage clarity and conversion | Not started | Developer + Business owner |
 | 5 | EmailJS contact/intake form improvements | Not started | Developer + EmailJS admin |
@@ -65,7 +65,7 @@ Option B — Cloudflare Redirect Rule (no Pages custom domain needed):
 
 ### FIX 2 — Metadata and technical SEO foundation
 
-**Status:** Not started  
+**Status:** Done  
 **Controlled by:** Repo  
 **Owner:** Developer
 

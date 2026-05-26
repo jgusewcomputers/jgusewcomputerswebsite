@@ -128,3 +128,71 @@ Working tree clean
 ```
 
 ---
+
+### Session 2 — FIX 2: Metadata and technical SEO foundation
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was inspected
+
+- `index.html`: title informal, description present but not matching recommended copy, OG/Twitter present and absolute, missing `og:site_name` and `og:locale`.
+- `about.html`: title acceptable, description decent, canonical present, OG and Twitter tags completely absent.
+- `safety.html`: title acceptable, description decent, canonical present, OG and Twitter tags completely absent.
+- `privacy.html`: title acceptable, description short but acceptable, canonical present, OG and Twitter tags completely absent.
+
+#### Changes made
+
+**`index.html`**
+- Title updated to: `JGusew Computers | Practical Tech Help, Websites and AI Automation`
+- Meta description updated to match recommended copy (computers, websites, forms, email setup, AI automation, no hype/jargon)
+- Added `og:site_name` = `JGusew Computers`
+- Added `og:locale` = `en_AU`
+- Updated `og:title` and `twitter:title` to match new title
+- Updated `og:description` and `twitter:description` to match recommended copy
+
+**`about.html`**
+- Title updated to: `About Jehiah Gusew — JGusew Computers`
+- Meta description improved
+- Added full OG block: `og:type`, `og:url`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:image`
+- Added full Twitter card block: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+- OG image: `https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png` (absolute)
+
+**`safety.html`**
+- Meta description improved (added context sentence)
+- Added full OG block (same pattern as about.html)
+- Added full Twitter card block
+
+**`privacy.html`**
+- Meta description improved (added "we only ask for the details needed to understand your enquiry")
+- Added full OG block (same pattern as about.html)
+- Added full Twitter card block
+
+#### Files changed
+
+- `index.html`
+- `about.html`
+- `safety.html`
+- `privacy.html`
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+- No build command (static site)
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+None new. See FIX 1 external actions (www redirect, EmailJS origins) — still outstanding.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---
