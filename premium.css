@@ -1757,6 +1757,205 @@ body .photo-frame::after {
 }
 
 /* ==========================================================
+   Brand Comparison Slider
+   ========================================================== */
+
+.brand-compare-section {
+  padding: 100px 32px 80px;
+  position: relative;
+}
+.brand-compare-intro { max-width: 640px; margin: 0 auto 48px; text-align: center; }
+.brand-compare-intro .num {
+  font-family: var(--jgc-font-mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--jgc-fg-on-navy-2);
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.brand-compare-intro .num::before { content: ""; width: 24px; height: 1px; background: var(--jgc-glow-400); }
+.brand-compare-intro h2 {
+  font-family: var(--jgc-font-display);
+  font-size: clamp(26px, 3.5vw, 40px); font-weight: 700;
+  color: #fff; margin: 0 0 14px; letter-spacing: -0.015em;
+}
+.brand-compare-intro p {
+  font-size: 16px; line-height: 1.6; color: var(--jgc-fg-on-navy-2); margin: 0;
+}
+
+.comp-wrap {
+  position: relative;
+  max-width: 1100px; margin: 0 auto;
+  height: 460px;
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: ew-resize;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  user-select: none;
+}
+
+/* ---- Left panel: community / warm ---- */
+.comp-community {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #120d04 0%, #1c1206 45%, #0d1504 100%);
+}
+.comp-community::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 20% 50%, rgba(245,158,11,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(245,158,11,0.05) 0%, transparent 60%);
+}
+
+/* ---- Right panel: professional / cool ---- */
+.comp-professional {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #050d1f 0%, #0a1733 55%, #061226 100%);
+}
+.comp-professional::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 80% 50%, rgba(95,163,232,0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 90% 80%, rgba(95,163,232,0.05) 0%, transparent 60%);
+}
+
+/* ---- Content positioning ---- */
+/* Each side's content is anchored to its own half, staying clear of the centre divider */
+.comp-community .comp-content {
+  position: absolute; inset: 0;
+  padding: 52px 52% 52px 64px; /* large right-padding keeps text in left half */
+  display: flex; flex-direction: column; justify-content: center;
+  pointer-events: none;
+}
+.comp-professional .comp-content {
+  position: absolute; inset: 0;
+  padding: 52px 64px 52px 52%; /* large left-padding keeps text in right half */
+  display: flex; flex-direction: column; justify-content: center;
+  pointer-events: none;
+}
+
+.comp-eyebrow {
+  font-family: var(--jgc-font-mono);
+  font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.comp-community .comp-eyebrow  { color: rgba(245,158,11,0.6); }
+.comp-professional .comp-eyebrow { color: var(--jgc-glow-300); opacity: 0.7; }
+
+.comp-heading {
+  font-family: var(--jgc-font-display);
+  font-size: clamp(22px, 2.8vw, 38px); font-weight: 700;
+  line-height: 1.0; letter-spacing: -0.02em; margin: 0 0 12px;
+}
+.comp-community .comp-heading { color: #fff; }
+.comp-professional .comp-heading {
+  background: linear-gradient(180deg, #f7fbff 0%, #cdd9ea 35%, #8899b2 65%, #e8f0fa 100%);
+  background-clip: text; -webkit-background-clip: text; color: transparent;
+}
+
+.comp-sub {
+  font-size: 13.5px; line-height: 1.6; margin: 0 0 22px;
+}
+.comp-community .comp-sub    { color: rgba(255,220,150,0.6); }
+.comp-professional .comp-sub  { color: var(--jgc-fg-on-navy-2); }
+
+.comp-list {
+  list-style: none; margin: 0 0 28px; padding: 0;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.comp-list li { font-size: 13.5px; font-weight: 500; display: flex; align-items: baseline; gap: 9px; }
+.comp-community .comp-list li    { color: rgba(255,230,170,0.75); }
+.comp-community .comp-list li::before  { content: "✓"; color: #f59e0b; font-size: 11px; flex-shrink: 0; }
+.comp-professional .comp-list li  { color: rgba(180,210,255,0.72); }
+.comp-professional .comp-list li::before { content: "→"; color: var(--jgc-glow-300); font-size: 11px; flex-shrink: 0; }
+
+.comp-cta {
+  display: inline-flex; align-items: center;
+  font-family: var(--jgc-font-display); font-size: 13px; font-weight: 600;
+  padding: 10px 22px; border-radius: 999px; width: fit-content;
+}
+.comp-cta.community {
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: #f5a623;
+}
+.comp-cta.professional {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+/* ---- Divider ---- */
+.comp-divider {
+  position: absolute; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,255,255,0.55) 15%,
+    rgba(255,255,255,0.55) 85%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  z-index: 20;
+  cursor: ew-resize;
+  transition: none;
+}
+.comp-divider::before {
+  content: "";
+  position: absolute; inset: 0;
+  filter: blur(4px);
+  background: rgba(255,255,255,0.3);
+}
+.comp-handle {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; gap: 2px;
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.5);
+  transition: background 160ms, box-shadow 160ms;
+}
+.comp-divider:hover .comp-handle {
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 0 0 8px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* ---- Corner labels ---- */
+.comp-label {
+  position: absolute; top: 22px;
+  font-family: var(--jgc-font-mono); font-size: 9.5px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  pointer-events: none; z-index: 10;
+  padding: 5px 12px; border-radius: 999px;
+  background: rgba(0,0,0,0.28); backdrop-filter: blur(8px);
+  transition: opacity 240ms;
+}
+.comp-label-left  { left: 20px;  color: rgba(245,190,80,0.85); border: 1px solid rgba(245,158,11,0.22); }
+.comp-label-right { right: 20px; color: var(--jgc-glow-300);   border: 1px solid rgba(95,163,232,0.22); }
+
+.comp-hint {
+  text-align: center; margin-top: 18px;
+  font-family: var(--jgc-font-mono); font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--jgc-fg-on-navy-2); opacity: 0.45;
+}
+
+@media (max-width: 900px) {
+  .comp-community .comp-content  { padding: 40px 52% 40px 40px; }
+  .comp-professional .comp-content { padding: 40px 40px 40px 52%; }
+  .comp-heading { font-size: 22px; }
+}
+@media (max-width: 640px) {
+  .brand-compare-section { padding: 64px 16px 48px; }
+  .comp-wrap { height: 500px; border-radius: 20px; }
+  /* On small screens content fills the full panel — readable only when dragged to one side */
+  .comp-community .comp-content  { padding: 36px 56% 36px 28px; }
+  .comp-professional .comp-content { padding: 36px 28px 36px 56%; }
+  .comp-heading { font-size: 20px; }
+  .comp-sub, .comp-list li { font-size: 12.5px; }
+}
+
+/* ==========================================================
    Brain Mind-Map Modal
    ========================================================== */
 

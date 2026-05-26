@@ -313,6 +313,105 @@
       );
     }
 
+    // ---------- Brand Comparison Slider ----------
+    function BrandComparison() {
+      const [pos, setPos]         = React.useState(50);
+      const [dragging, setDragging] = React.useState(false);
+      const ref = React.useRef(null);
+
+      // Mouse drag
+      React.useEffect(() => {
+        if (!dragging) return;
+        const move = (e) => {
+          if (!ref.current) return;
+          const r = ref.current.getBoundingClientRect();
+          setPos(Math.max(3, Math.min(97, ((e.clientX - r.left) / r.width) * 100)));
+        };
+        const up = () => setDragging(false);
+        window.addEventListener("mousemove", move);
+        window.addEventListener("mouseup", up);
+        return () => { window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", up); };
+      }, [dragging]);
+
+      // Touch drag (non-passive so we can prevent scroll)
+      React.useEffect(() => {
+        const el = ref.current; if (!el) return;
+        const move = (e) => {
+          e.preventDefault();
+          const r = el.getBoundingClientRect();
+          setPos(Math.max(3, Math.min(97, ((e.touches[0].clientX - r.left) / r.width) * 100)));
+        };
+        el.addEventListener("touchmove", move, { passive: false });
+        return () => el.removeEventListener("touchmove", move);
+      }, []);
+
+      return (
+        <section className="brand-compare-section reveal">
+          <div className="brand-compare-intro">
+            <div className="num">Who we help</div>
+            <h2>Community repairs to professional systems.</h2>
+            <p>Drag to see how we show up for different people — a neighbour who needs a quick fix, or a business that needs structured help.</p>
+          </div>
+
+          <div className="comp-wrap" ref={ref} onMouseDown={() => setDragging(true)}>
+
+            {/* Left panel — Community */}
+            <div className="comp-panel comp-community">
+              <div className="comp-content">
+                <div className="comp-eyebrow">Local · Community · Repairs</div>
+                <h3 className="comp-heading">JGusew Computers</h3>
+                <p className="comp-sub">Your friendly local tech person. No jargon, no stress, no bill surprise.</p>
+                <ul className="comp-list">
+                  <li>Computers running slow</li>
+                  <li>Virus and pop-up removal</li>
+                  <li>New device setup help</li>
+                  <li>Kids' laptop problems</li>
+                  <li>Easy honest advice</li>
+                </ul>
+                <div className="comp-cta community">Get help today</div>
+              </div>
+            </div>
+
+            {/* Right panel — Professional (clipped by slider) */}
+            <div className="comp-panel comp-professional" style={{ clipPath:`inset(0 0 0 ${pos}%)` }}>
+              <div className="comp-content">
+                <div className="comp-eyebrow">Strategic · Structured · Professional</div>
+                <h3 className="comp-heading">JGusew Computers</h3>
+                <p className="comp-sub">Structured technology help for homes and small businesses.</p>
+                <ul className="comp-list">
+                  <li>Computer assessment &amp; advice</li>
+                  <li>Website &amp; form systems</li>
+                  <li>AI workflow automation</li>
+                  <li>Security &amp; digital organisation</li>
+                  <li>Small business tech review</li>
+                </ul>
+                <div className="comp-cta professional">Start an enquiry</div>
+              </div>
+            </div>
+
+            {/* Draggable divider */}
+            <div className="comp-divider" style={{ left:`${pos}%` }}
+              onMouseDown={(e) => { e.stopPropagation(); setDragging(true); }}
+              onTouchStart={(e) => e.preventDefault()}
+            >
+              <div className="comp-handle" aria-label="Drag to compare">
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Corner labels */}
+            <div className="comp-label comp-label-left"  style={{ opacity: pos > 14 ? 1 : 0 }}>Community</div>
+            <div className="comp-label comp-label-right" style={{ opacity: pos < 86 ? 1 : 0 }}>Professional</div>
+
+          </div>
+          <p className="comp-hint">← drag to compare →</p>
+        </section>
+      );
+    }
+
     // ---------- Nav ----------
     function Nav({ current, onNav }) {
       const [menuOpen, setMenuOpen] = React.useState(false);
@@ -1039,6 +1138,8 @@
             </div>
 
             <ExplainerBand />
+
+            <BrandComparison />
 
             <section id="services" className="section" data-screen-label="02 Services">
               <div className="container">
