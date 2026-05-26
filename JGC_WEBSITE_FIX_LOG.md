@@ -410,3 +410,75 @@ Working tree clean
 ```
 
 ---
+
+### Session 6 — FIX 6: Privacy policy and form trust copy
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was inspected
+
+- `privacy.html` doc-meta block had "v0.1 — draft" (Version) and "Free testing only" (Stage) — internal markers not suitable for a public-facing page.
+- "What we collect" list didn't reflect the new fields added in FIX 5 (enquiry type, service, urgency).
+- "How we use your information" — "Classify and assess the issue" was slightly internal; also missing the reassurance line about only collecting what's needed.
+- No mention of EmailJS anywhere in the privacy notice, despite all form data passing through it.
+- "How long we keep it" used "free testing stage" — internal language.
+- Footer linked only Home and Safety; About was missing.
+- The form CTA section in the notice had no direct email fallback for people who prefer not to use the form.
+
+#### Changes made
+
+**`privacy.html` — doc-meta block**
+- Removed: "Version: v0.1 — draft" (internal marker)
+- Removed: "Stage: Free testing only" (internal marker)
+- Kept: Owner, Last updated
+- Added: Contact field with email address
+
+**`privacy.html` — "What we collect"**
+- Added reassurance line at top: "We only ask for the details needed to understand your enquiry — nothing more."
+- Updated list to reflect new form fields added in FIX 5: enquiry type (home/business), service type, urgency
+
+**`privacy.html` — "How we use your information"**
+- Removed "Classify and assess the issue" (too internal)
+- Tightened bullet list to plain-English purpose statements
+- Expanded non-sharing statement: "We do not share your details with third parties for their own purposes."
+
+**`privacy.html` — New section: "How contact form enquiries are delivered"**
+- Added between "Where information is stored" and "How long we keep it"
+- Explains EmailJS is used to deliver form submissions
+- Notes JGusew Computers does not operate a custom backend
+- Links to EmailJS privacy policy
+- Offers direct email as alternative for users who prefer not to use the form
+
+**`privacy.html` — "How long we keep it"**
+- "free testing stage" → "current launch period"
+- Added "promptly" to the redaction sentence
+
+**`privacy.html` — Footer**
+- Added "About" link between Home and Safety
+- Added "Sunbury, VIC, Australia" to copyright line
+
+#### Files changed
+
+- `privacy.html`
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+None new. FIX 5 external actions (EmailJS template update, Allowed Origins) still outstanding.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---

@@ -16,7 +16,7 @@
 | 3 | Sitemap and robots.txt | **Done** | Developer |
 | 4 | Homepage clarity and conversion | **Done** | Developer + Business owner |
 | 5 | EmailJS contact/intake form improvements | **Done** | Developer + EmailJS admin |
-| 6 | Privacy policy and form trust copy | Not started | Developer + Business owner |
+| 6 | Privacy policy and form trust copy | **Done** | Developer + Business owner |
 | 7 | Service pages | Not started | Developer + Business owner |
 | 8 | Cloudflare Pages security headers | Not started | Developer + Cloudflare admin |
 | 9 | Accessibility and mobile usability pass | Not started | Developer |
@@ -162,7 +162,7 @@ Current form collects name, email, phone, and a message. Adding service type, ur
 
 ### FIX 6 — Privacy policy and form trust copy
 
-**Status:** Not started  
+**Status:** Done  
 **Controlled by:** Repo  
 **Owner:** Developer + Business owner
 
