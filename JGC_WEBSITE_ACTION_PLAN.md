@@ -15,7 +15,7 @@
 | 2 | Metadata and technical SEO foundation | **Done** | Developer |
 | 3 | Sitemap and robots.txt | **Done** | Developer |
 | 4 | Homepage clarity and conversion | **Done** | Developer + Business owner |
-| 5 | EmailJS contact/intake form improvements | Not started | Developer + EmailJS admin |
+| 5 | EmailJS contact/intake form improvements | **Done** | Developer + EmailJS admin |
 | 6 | Privacy policy and form trust copy | Not started | Developer + Business owner |
 | 7 | Service pages | Not started | Developer + Business owner |
 | 8 | Cloudflare Pages security headers | Not started | Developer + Cloudflare admin |
@@ -131,7 +131,7 @@ A non-technical visitor should understand the business within 5 seconds of landi
 
 ### FIX 5 — EmailJS contact/intake form improvements
 
-**Status:** Not started  
+**Status:** Done  
 **Controlled by:** Repo + EmailJS dashboard + Cloudflare Pages env vars  
 **Owner:** Developer + EmailJS admin
 

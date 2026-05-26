@@ -316,3 +316,97 @@ Working tree clean
 ```
 
 ---
+
+### Session 5 — FIX 5: EmailJS contact/intake form improvements
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was inspected
+
+- Existing form fields: name (required), email (required), phone (optional), message (required).
+- Missing context fields: no way to indicate home vs business, no service type, no urgency signal.
+- EmailJS payload only sent: `from_name`, `from_email`, `phone`, `message`.
+- No consent checkbox — users submitting had no explicit acknowledgement of privacy notice.
+- No `htmlFor`/`id` associations on labels and inputs (accessibility gap, addressed here).
+
+#### Changes made
+
+**`index.html` — Contact component (complete rewrite of component)**
+
+New state shape:
+```js
+{ name, email, phone, enquiry_type, service, urgency, message, consent }
+```
+
+New form fields added:
+- **"This is for"** — toggle pill buttons: "Home / personal" / "Small business" (optional, deselectable)
+- **"What do you need help with?"** — `<select>` dropdown with 8 service options matching the services section
+- **"How soon do you need a response?"** — toggle pill buttons: "No rush" / "Soon — within a fortnight" / "Fairly urgent — a few days" (no "emergency" option — site is not an emergency service)
+- **Consent checkbox** — required, links to privacy notice: "I understand JGusew Computers will use my contact details to respond to this enquiry. I've read the privacy notice."
+
+New `TogglePills` component — reusable pill-button toggle group used for enquiry_type and urgency. Deselectable (clicking active option clears it). Dark glass styling to match form aesthetic.
+
+Updated EmailJS payload now sends:
+```js
+{ from_name, from_email, phone, enquiry_type, service, urgency, message }
+```
+Optional fields send "Not specified" if left blank.
+
+Submit button:
+- Disabled when consent unchecked (in addition to existing sending/sent states)
+- Label changed from "Send" → "Send enquiry" for clarity
+- All existing states preserved: idle / sending / sent / error
+
+Accessibility improvements:
+- All inputs now have `id` attributes
+- All labels now use `htmlFor` to match `id`
+
+Copy:
+- Contact section intro updated: "we only ask for the details needed to understand your enquiry — nothing more"
+- Safety note link updated from inline scroll to `safety.html` href (more robust)
+
+**EMPTY_FORM** and **SERVICES** constants extracted to module scope for clean reset on send.
+
+#### ⚠️ MANUAL ACTION REQUIRED — EmailJS dashboard
+
+The new form sends three new template variables: `enquiry_type`, `service`, `urgency`.  
+**The EmailJS template must be updated to include these or they will be silently ignored.**
+
+Steps:
+1. Go to https://www.emailjs.com → Email Templates → `template_wnuvasi` → Edit
+2. Add the new variables to the template body, e.g.:
+   ```
+   Enquiry type: {{enquiry_type}}
+   Service: {{service}}
+   Urgency: {{urgency}}
+   ```
+3. Save the template.
+
+Until the template is updated, submitted forms will still arrive — the existing fields (name, email, phone, message) will continue to work. The new fields will just not appear in the email body.
+
+#### Files changed
+
+- `index.html`
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+1. **EmailJS template update** (required for new fields to appear in emails) — see above.
+2. **EmailJS Allowed Origins** — restrict to `https://jgusewcomputers.com` (outstanding from FIX 1).
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---

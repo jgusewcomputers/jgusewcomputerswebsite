@@ -486,23 +486,69 @@
     }
 
     // ---------- Contact ----------
+    const EMPTY_FORM = { name: "", email: "", phone: "", enquiry_type: "", service: "", urgency: "", message: "", consent: false };
+    const SERVICES = [
+      "Computer help (slow, broken, advice)",
+      "Website help",
+      "Forms and enquiry systems",
+      "Email cleanup and organisation",
+      "AI automation",
+      "Small business tech advice",
+      "Scam or security concern",
+      "Something else",
+    ];
+    const URGENCY_OPTS = [
+      { val: "No rush", label: "No rush" },
+      { val: "Soon — within a fortnight", label: "Soon — within a fortnight" },
+      { val: "Fairly urgent — within a few days", label: "Fairly urgent — a few days" },
+    ];
+
+    function TogglePills({ label, options, value, onChange }) {
+      return (
+        <div className="field">
+          <label>{label}</label>
+          <div style={{ display: "flex", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
+            {options.map(opt => {
+              const active = value === (opt.val || opt);
+              return (
+                <button type="button" key={opt.val || opt}
+                  onClick={() => onChange(opt.val || opt)}
+                  style={{
+                    flex: "1 1 auto", padding: "10px 14px", borderRadius: 10,
+                    fontSize: 13.5, fontWeight: active ? 600 : 400, cursor: "pointer",
+                    background: active ? "rgba(95,163,232,0.18)" : "rgba(255,255,255,0.05)",
+                    border: active ? "1px solid rgba(95,163,232,0.45)" : "1px solid rgba(255,255,255,0.10)",
+                    color: active ? "var(--jgc-glow-200, #a8cef5)" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
+                    transition: "all 180ms",
+                  }}>
+                  {opt.label || opt}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
     function Contact() {
-      const [s, setS] = React.useState({ name: "", email: "", phone: "", message: "" });
+      const [s, setS] = React.useState(EMPTY_FORM);
       const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
-      const u = (k) => (e) => setS({ ...s, [k]: e.target.value });
+      const u = (k) => (e) => setS(prev => ({ ...prev, [k]: e.target.value }));
+      const set = (k, v) => setS(prev => ({ ...prev, [k]: v }));
       const submit = (e) => {
         e.preventDefault();
+        if (!s.consent) return;
         setStatus("sending");
         emailjs.send("service_59pweih", "template_wnuvasi", {
-          from_name:  s.name,
-          from_email: s.email,
-          phone:      s.phone || "Not provided",
-          message:    s.message,
+          from_name:    s.name,
+          from_email:   s.email,
+          phone:        s.phone || "Not provided",
+          enquiry_type: s.enquiry_type || "Not specified",
+          service:      s.service || "Not specified",
+          urgency:      s.urgency || "Not specified",
+          message:      s.message,
         })
-        .then(() => {
-          setStatus("sent");
-          setS({ name: "", email: "", phone: "", message: "" });
-        })
+        .then(() => { setStatus("sent"); setS(EMPTY_FORM); })
         .catch(() => setStatus("error"));
       };
       return (
@@ -514,7 +560,7 @@
                   <span className="num">03 — Get in touch</span>
                 </div>
                 <h2>Send through what's going on,<br />and we'll work out the safest next step.</h2>
-                <p>You don't need to know what's wrong. A plain-English description of what you've noticed is enough. We read every message ourselves, ask for more detail if needed, and reply with a clear next step.</p>
+                <p>You don't need to know what's wrong. A plain-English description is enough. We only ask for the details needed to understand your enquiry — nothing more.</p>
                 <div className="facts">
                   <div className="fact"><span className="dot"></span>Free while we're refining the service.</div>
                   <div className="fact"><span className="dot"></span>AI may help draft. Jehiah reviews before anything is sent.</div>
@@ -527,29 +573,72 @@
               <form className="glass-form reveal d2" onSubmit={submit}>
                 <div className="row">
                   <div className="field">
-                    <label>Your name</label>
-                    <input value={s.name} onChange={u("name")} placeholder="Sarah Hughes" required />
+                    <label htmlFor="f-name">Your name</label>
+                    <input id="f-name" value={s.name} onChange={u("name")} placeholder="Sarah Hughes" required />
                   </div>
                   <div className="field">
-                    <label>Email</label>
-                    <input type="email" value={s.email} onChange={u("email")} placeholder="sarah@example.com.au" required />
+                    <label htmlFor="f-email">Email</label>
+                    <input id="f-email" type="email" value={s.email} onChange={u("email")} placeholder="sarah@example.com.au" required />
                   </div>
                 </div>
+
+                <TogglePills
+                  label="This is for"
+                  options={["Home / personal", "Small business"]}
+                  value={s.enquiry_type}
+                  onChange={v => set("enquiry_type", s.enquiry_type === v ? "" : v)}
+                />
+
                 <div className="field">
-                  <label>Phone (optional)</label>
-                  <input value={s.phone} onChange={u("phone")} placeholder="Optional" />
+                  <label htmlFor="f-service">What do you need help with?</label>
+                  <select id="f-service" value={s.service} onChange={u("service")}
+                    style={{
+                      width: "100%", padding: "11px 14px", borderRadius: 10,
+                      background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
+                      color: s.service ? "#fff" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
+                      fontSize: 14.5, appearance: "none", cursor: "pointer",
+                      backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238ca3c0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+                      backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center",
+                    }}>
+                    <option value="" disabled>Select a service area…</option>
+                    {SERVICES.map(sv => <option key={sv} value={sv}>{sv}</option>)}
+                  </select>
                 </div>
+
+                <TogglePills
+                  label="How soon do you need a response?"
+                  options={URGENCY_OPTS}
+                  value={s.urgency}
+                  onChange={v => set("urgency", s.urgency === v ? "" : v)}
+                />
+
                 <div className="field">
-                  <label>What's going on?</label>
-                  <textarea value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
+                  <label htmlFor="f-phone">Phone (optional)</label>
+                  <input id="f-phone" value={s.phone} onChange={u("phone")} placeholder="Optional" />
                 </div>
+
+                <div className="field">
+                  <label htmlFor="f-message">What's going on?</label>
+                  <textarea id="f-message" value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
+                </div>
+
                 <div className="donot">
                   <strong>Please don't send:</strong> passwords · banking codes · one-time / MFA codes · credit card numbers · full identity documents · sensitive private documents.
                 </div>
-                <div className="submit">
-                  <span className="note">No marketing list. We don't store anything sensitive. See <a href="#safety" onClick={(e)=>{e.preventDefault();document.getElementById("safety").scrollIntoView({behavior:"smooth"})}}>Safety</a>.</span>
-                  <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent"}>
-                    {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send</span><Arrow /></>}
+
+                <label style={{ display: "flex", gap: 12, alignItems: "flex-start", cursor: "pointer", marginTop: 4 }}>
+                  <input type="checkbox" checked={s.consent} onChange={e => set("consent", e.target.checked)} required
+                    style={{ marginTop: 3, flexShrink: 0, accentColor: "#5fa3e8", width: 16, height: 16 }} />
+                  <span style={{ fontSize: 13.5, color: "var(--jgc-fg-on-navy-2, #8ca3c0)", lineHeight: 1.55 }}>
+                    I understand JGusew Computers will use my contact details to respond to this enquiry.{" "}
+                    I've read the <a href="privacy.html" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>privacy notice</a>.
+                  </span>
+                </label>
+
+                <div className="submit" style={{ marginTop: 20 }}>
+                  <span className="note">No marketing list. We don't store anything sensitive. See <a href="safety.html">Safety</a>.</span>
+                  <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent" || !s.consent}>
+                    {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send enquiry</span><Arrow /></>}
                   </button>
                 </div>
                 {status === "error" && (
