@@ -49,6 +49,8 @@
           "Computer advice",
           "Slow computer assessment",
           "Repair vs replace decision",
+          "Website help",
+          "Forms and enquiry systems",
           "Email cleanup",
           "Digital organisation",
           "Small business tech review",
@@ -209,10 +211,10 @@
               </div>
               <div className="hero-actions reveal d3">
                 <button className="btn primary pill" onClick={onContact}>
-                  Get help by email <Arrow />
+                  Ask for tech help <Arrow />
                 </button>
                 <button className="btn glass" onClick={onServices}>
-                  See services <Arrow />
+                  See how I can help <Arrow />
                 </button>
               </div>
               <div className="reveal d3" style={{
@@ -275,7 +277,8 @@
     function Marquee() {
       const items = [
         "New computer advice", "Slow computer assessment", "Repair vs replace",
-        "Email cleanup", "Digital organisation", "Small business tech review",
+        "Website help", "Forms and enquiry systems", "Email cleanup",
+        "Digital organisation", "Small business tech review",
         "AI automation starter", "Scam & security triage", "Elderly tech help",
         "Device setup advice",
       ];
@@ -333,6 +336,12 @@
           <BentoCard size="std" icon={ICON.check}
             title="Repair vs replace decision"
             body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
+          <BentoCard size="std" icon={ICON.pencil}
+            title="Website help"
+            body="A new small-business website or improvements to an existing one. Plain static pages, contact forms, domain and hosting setup — built simply, without ongoing platform fees or lock-in." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Forms and enquiry systems"
+            body="A structured contact or enquiry form that collects the right information from your customers. Set up without complex tools, monthly subscriptions, or a developer on call." />
           <BentoCard size="wide" icon={ICON.chat}
             title="Email cleanup & digital organisation"
             body="Account separation, labels, retirement of old accounts, safer habits, file structures, a simple device map — a clear picture of where everything lives. We don't log in or ask for your password." />
@@ -578,7 +587,8 @@
               <h5>Services</h5>
               <ul>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>New computer advice</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Slow computer assessment</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Website help</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Forms and enquiry systems</a></li>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Email cleanup</a></li>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>AI automation starter</a></li>
                 <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Small business review</a></li>
@@ -647,8 +657,8 @@
               <div className="container">
                 <div className="section-head reveal">
                   <span className="num">01 — Services</span>
-                  <h2>A handful of practical things, done carefully.</h2>
-                  <p>We help assess the issue, explain the options, and suggest sensible next steps. No guaranteed repairs, no emergency support, no instant fixes.</p>
+                  <h2>Computers, websites, forms, email, AI automation and small business tech advice.</h2>
+                  <p>We help assess the issue, explain your options, and suggest sensible next steps — in plain English. No guaranteed repairs, no emergency support, no instant fixes.</p>
                 </div>
                 <BentoServices />
               </div>

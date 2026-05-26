@@ -253,3 +253,66 @@ Working tree clean
 ```
 
 ---
+
+### Session 4 — FIX 4: Homepage clarity and conversion
+
+**Date:** 2026-05-26  
+**Status:** Complete
+
+#### What was inspected
+
+- Hero CTAs: primary said "Get help by email", secondary said "See services" — both needed updating per action plan brief.
+- Services section heading was vague ("A handful of practical things, done carefully").
+- Bento grid had 8 cards but was **missing website help and forms/enquiry systems** — the page title and meta description both mention websites and forms, but neither appeared in the services section, marquee, or footer services list.
+- Marquee did not include website or forms items.
+- Footer services list did not include website or forms items.
+- Structured data serviceType array did not include website or forms.
+- No fake testimonials, no jargon overuse, no excessive animation — these were already in good shape.
+
+#### Changes made
+
+**`index.html` — Hero section**
+- Primary CTA: `"Get help by email"` → `"Ask for tech help"`
+- Secondary CTA: `"See services"` → `"See how I can help"`
+
+**`index.html` — Services section heading**
+- h2: `"A handful of practical things, done carefully."` → `"Computers, websites, forms, email, AI automation and small business tech advice."`
+- Description: added "in plain English" for clarity
+
+**`index.html` — BentoServices**
+- Added card: `"Website help"` (std) — plain static sites, contact forms, domain/hosting setup, no lock-in
+- Added card: `"Forms and enquiry systems"` (std) — structured enquiry forms without complex tools
+
+**`index.html` — Marquee**
+- Added `"Website help"` and `"Forms and enquiry systems"` to items array
+
+**`index.html` — Footer services list**
+- Added `"Website help"` and `"Forms and enquiry systems"` links
+
+**`index.html` — Structured data (ld+json)**
+- Added `"Website help"` and `"Forms and enquiry systems"` to serviceType array
+
+#### Files changed
+
+- `index.html`
+
+#### Commands run
+
+- `git add` + `git commit` + `git push`
+
+#### Build/lint/test result
+
+Not applicable. Static HTML, no build step.
+
+#### External actions required
+
+None.
+
+#### Git status after session
+
+```
+Committed and pushed to main
+Working tree clean
+```
+
+---

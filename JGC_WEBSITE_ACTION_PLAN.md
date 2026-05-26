@@ -14,7 +14,7 @@
 | 1 | Cloudflare Pages deployment and canonical domain readiness | **Done** | Developer + Cloudflare admin |
 | 2 | Metadata and technical SEO foundation | **Done** | Developer |
 | 3 | Sitemap and robots.txt | **Done** | Developer |
-| 4 | Homepage clarity and conversion | Not started | Developer + Business owner |
+| 4 | Homepage clarity and conversion | **Done** | Developer + Business owner |
 | 5 | EmailJS contact/intake form improvements | Not started | Developer + EmailJS admin |
 | 6 | Privacy policy and form trust copy | Not started | Developer + Business owner |
 | 7 | Service pages | Not started | Developer + Business owner |
@@ -109,7 +109,7 @@ Google and Bing cannot reliably discover all pages without a sitemap. robots.txt
 
 ### FIX 4 — Homepage clarity and conversion
 
-**Status:** Not started  
+**Status:** Done  
 **Controlled by:** Repo  
 **Owner:** Developer + Business owner
 
