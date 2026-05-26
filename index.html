@@ -73,11 +73,11 @@
   <script type="text/babel">
     // ---------- Chrome icons (transparent renders) ----------
     const ICON = {
-      check:    "assets/icons/check-circle.png",
-      shield:   "assets/icons/shield.png",
-      chat:     "assets/icons/chat.png",
-      pencil:   "assets/icons/pencil.png",
-      alert:    "assets/icons/alert-shield.png",
+      check:    "assets/icons/check-circle.webp",
+      shield:   "assets/icons/shield.webp",
+      chat:     "assets/icons/chat.webp",
+      pencil:   "assets/icons/pencil.webp",
+      alert:    "assets/icons/alert-shield.webp",
       checkAlt: "assets/icons/check-circle-on-light.png",
     };
 
@@ -114,7 +114,7 @@
         <header className="nav">
           <div className="inner">
             <div className="brand" onClick={() => onNav("home")}>
-              <img src="assets/logos/monogram-light.png" alt="JGC monogram" />
+              <img src="assets/logos/monogram-light.webp" alt="JGC monogram" />
               <div className="txt">
                 <span className="name">JGUSEW COMPUTERS</span>
                 <span className="tag">Computer problems. Sorted.</span>
@@ -166,7 +166,7 @@
           <div className="ring"></div>
           <div className="ring-lines"></div>
           <div className="orb">
-            <img className="monogram" src="assets/logos/monogram-dark.png" alt="" />
+            <img className="monogram" src="assets/logos/monogram-dark.webp" alt="" />
           </div>
           <div className="satellite s1"><img src={ICON.check} alt="" /></div>
           <div className="satellite s2"><img src={ICON.chat} alt="" /></div>
@@ -308,7 +308,7 @@
       };
       return (
         <div ref={ref} className={"bento-card " + size + " reveal"} onMouseMove={tilt} onMouseLeave={leave}>
-          <div className="ico"><img src={icon} alt="" /></div>
+          <div className="ico"><img src={icon} alt="" loading="lazy" /></div>
           <h3>{title}</h3>
           <p>{body}</p>
         </div>
@@ -560,7 +560,7 @@
         <footer className="foot">
           <div className="inner">
             <div className="brand">
-              <img className="lockup" src="assets/logos/horizontal-lockup-dark.png" alt="JGusew Computers" />
+              <img className="lockup" src="assets/logos/horizontal-lockup-dark.webp" alt="JGusew Computers" loading="lazy" />
               <p>Practical technology help, advice, and automation for everyday people and small businesses. Led by Jehiah Gusew.</p>
               <div className="badges">
                 <span>Free during launch</span>
