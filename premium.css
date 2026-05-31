@@ -1626,6 +1626,7 @@ body .photo-frame::after {
    ---------------------------------------------------------- */
 
 @media (max-width: 1100px) {
+  .hero { min-height: 0; }
   .hero .inner { grid-template-columns: 1fr; gap: 48px; }
   .stage { max-width: 460px; margin: 0 auto; }
   .bento { grid-template-columns: repeat(2, 1fr); }
@@ -1643,7 +1644,9 @@ body .photo-frame::after {
   .hero h1 { font-size: clamp(36px, 10vw, 52px); }
   .section-head h2 { font-size: clamp(28px, 7.5vw, 40px); }
   .brand-proof { grid-template-columns: 1fr; }
-  .hero-strip { position: static; margin: 32px 0 0; }
+  .hero-strip { position: static; margin: 32px 0 0; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .hero-strip .group { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .stage { max-width: 280px; }
   .glass-form { padding: 24px; border-radius: 24px; }
   .glass-form .row { grid-template-columns: 1fr; }
   .form-topline { flex-direction: column; }
@@ -2177,4 +2180,7 @@ body .photo-frame::after {
   .contact { padding: 48px 20px 64px; }
   .how { padding: 48px 20px 56px; }
   .foot .inner { gap: 24px; }
+  .callout .rule { font-size: clamp(30px, 8.5vw, 40px); }
+  .form-topline h3 { font-size: 22px; }
+  .safety-band .shield { width: 140px; height: 140px; }
 }

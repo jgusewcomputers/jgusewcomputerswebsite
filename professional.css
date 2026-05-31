@@ -1,0 +1,209 @@
+/* ============================================================
+   JGusew Computers — Professional Theme
+   Deep cobalt authority. Structured. Precise. Systems-thinking.
+   Import AFTER premium.css.
+
+   Cohort brief: James/Sarah/Michael/Emma/David want to feel
+   like they're in safe, expert hands — competence visible in
+   every layout decision. Tone = well-dressed consultant.
+   Colour = deep navy + cobalt precision, clean chrome.
+   ============================================================ */
+
+/* Override glow / accent tokens — cobalt precision family */
+:root,
+[data-theme="dark"] {
+  --jgc-glow-200: #dbeafe;   /* blue-100 */
+  --jgc-glow-300: #93c5fd;   /* blue-300 — clean steel */
+  --jgc-glow-400: #3b82f6;   /* blue-500 — cobalt authority */
+  --jgc-glow-500: #2563eb;   /* blue-600 */
+  --jgc-glow-600: #1d4ed8;   /* blue-700 */
+  --jgc-teal-400: #60a5fa;   /* blue-400 */
+  --jgc-teal-300: #bfdbfe;   /* blue-200 */
+  --jgc-border-glow:  rgba(59, 130, 246, 0.38);
+  --jgc-glow-soft:
+    0 0 24px rgba(59,  130, 246, 0.22),
+    0 0 54px rgba(37,   99, 235, 0.10);
+  --jgc-shadow-focus: 0 0 0 4px rgba(59, 130, 246, 0.28);
+  --jgc-shadow-glow:
+    0 0 0 1px rgba(59, 130, 246, 0.35),
+    0 0 28px -6px rgba(59, 130, 246, 0.45);
+}
+
+/* ---- Deeper navy body background ---- */
+body {
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(37, 99, 235, 0.10), transparent 58%),
+    radial-gradient(1000px 600px at 90%  8%, rgba(59, 130, 246, 0.14), transparent 62%),
+    var(--jgc-bg-deep) !important;
+}
+
+/* ---- Precision mesh: cold cobalt + midnight ---- */
+.mesh {
+  background:
+    radial-gradient(40% 35% at var(--m1x,20%) var(--m1y,28%), rgba(59,130,246,0.28), transparent 70%),
+    radial-gradient(42% 34% at var(--m2x,82%) var(--m2y,18%), rgba(37, 99,235,0.14), transparent 72%),
+    radial-gradient(45% 40% at var(--m3x,60%) var(--m3y,85%), rgba( 8, 21, 66,0.60), transparent 70%) !important;
+}
+
+/* ---- Very subtle structural grid overlay ---- *
+ * Faint graph-paper lines reinforce "systems thinking"
+ * visibility: just enough to register subconsciously.       */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ---- Selection ---- */
+::selection { background: rgba(59, 130, 246, 0.45); color: #fff; }
+
+/* ---- Hero chrome gradient — cobalt precision ---- */
+.hero h1 .chrome,
+.callout .chrome {
+  background: linear-gradient(
+    120deg,
+    #dbeafe  0%,
+    #93c5fd 35%,
+    #3b82f6 65%,
+    #2563eb 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+.hero .quiet .l {
+  background: linear-gradient(to right, #3b82f6, transparent) !important;
+}
+
+/* ---- Primary button — cobalt authority ---- */
+.btn.primary,
+.btn.primary.pill {
+  background: linear-gradient(180deg, #dbeafe 0%, #93c5fd 45%, #3b82f6 100%) !important;
+  box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.55) !important;
+  color: #1e3a8a !important;
+}
+.btn.primary:hover,
+.btn.primary.pill:hover {
+  box-shadow: 0 18px 38px -10px rgba(59, 130, 246, 0.70) !important;
+  color: #1e3a8a !important;
+}
+
+/* ---- Service pills in hero ---- */
+.brand-proof-pill {
+  border-color: rgba(59, 130, 246, 0.22) !important;
+  color: rgba(147, 197, 253, 0.90) !important;
+  background: rgba(59, 130, 246, 0.06) !important;
+}
+.brand-proof-pill:hover {
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.46) !important;
+  box-shadow: 0 0 20px -4px rgba(59, 130, 246, 0.32) !important;
+  color: #fff !important;
+}
+
+/* ---- Hero strip dot ---- */
+.hero-strip .dot {
+  background: #3b82f6 !important;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.68) !important;
+}
+
+/* ---- Nav CTA button ---- */
+.nav .menu .cta {
+  background: linear-gradient(135deg, #93c5fd, #3b82f6) !important;
+  color: #1e3a8a !important;
+}
+
+/* ---- Section numbers ---- */
+.num { color: rgba(59, 130, 246, 0.78) !important; }
+.ex-num { color: rgba(59, 130, 246, 0.52) !important; }
+
+/* ---- How it works steps ---- */
+.step::before       { background: rgba(59, 130, 246, 0.22) !important; }
+.step.active::before { background: #3b82f6 !important; }
+.step.active .stepnum { color: #3b82f6 !important; }
+.step-scene .scene-orbit {
+  border-color: rgba(59, 130, 246, 0.18) !important;
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.10) inset !important;
+}
+
+/* ---- Bento cards hover ---- */
+.bento-card:hover {
+  border-color: rgba(59, 130, 246, 0.22) !important;
+  box-shadow:
+    0 24px 52px -12px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(59, 130, 246, 0.16) !important;
+}
+
+/* ---- Safety band ---- */
+.pill {
+  border-color: rgba(59, 130, 246, 0.30) !important;
+  color: #93c5fd !important;
+}
+
+/* ---- Toggle pill options (contact form) ---- */
+.pill-option.active {
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.50) !important;
+  color: #93c5fd !important;
+  box-shadow: 0 0 12px -3px rgba(59, 130, 246, 0.25) !important;
+}
+
+/* ---- Contact section dots ---- */
+.contact .dot {
+  background: #3b82f6 !important;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.52) !important;
+}
+
+/* ---- Glass form focus ---- */
+.glass-form input:focus,
+.glass-form select:focus,
+.glass-form textarea:focus {
+  border-color: rgba(59, 130, 246, 0.42) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14) !important;
+}
+
+/* ---- Jehiah note ---- */
+.jehiah-note .hello { color: #93c5fd !important; }
+
+/* ---- Callout signature ---- */
+.callout .signature { color: rgba(59, 130, 246, 0.55) !important; }
+
+/* ---- intake-side-panel kicker ---- */
+.panel-kicker { color: rgba(59, 130, 246, 0.80) !important; }
+
+/* ---- Typography authority: tighter tracking on large headings ---- */
+.hero h1 { letter-spacing: -0.025em !important; }
+section h2 { letter-spacing: -0.018em !important; }
+
+/* ---- Brain modal ---- */
+.brain-eyebrow { color: rgba(59, 130, 246, 0.75) !important; }
+.brain-corner {
+  border-color: rgba(59, 130, 246, 0.40) !important;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.20) !important;
+}
+.brain-node {
+  border-color: rgba(59, 130, 246, 0.24) !important;
+  color: rgba(147, 197, 253, 0.92) !important;
+}
+.brain-node.hub {
+  background: rgba(59, 130, 246, 0.14) !important;
+  border-color: rgba(59, 130, 246, 0.52) !important;
+  color: #dbeafe !important;
+}
+.brain-enquiry {
+  background: linear-gradient(180deg, #dbeafe 0%, #93c5fd 50%, #3b82f6 100%) !important;
+  color: #1e3a8a !important;
+  box-shadow: 0 8px 24px -8px rgba(59, 130, 246, 0.55) !important;
+}
+.brain-enquiry:hover {
+  box-shadow: 0 12px 32px -8px rgba(59, 130, 246, 0.70) !important;
+}
+.b-line   { stroke: rgba(59, 130, 246, 0.22) !important; }
+.syn-edge { stroke: rgba(59, 130, 246, 0.10) !important; }

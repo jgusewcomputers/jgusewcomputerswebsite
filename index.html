@@ -1,1173 +1,447 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JGusew Computers | Practical Tech Help, Websites and AI Automation</title>
-  <meta name="description" content="Practical technology help for homes and small businesses. JGusew Computers helps with computers, websites, forms, email setup, AI automation and sensible tech advice without hype or jargon.">
-  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
-  <link rel="stylesheet" href="colors_and_type.css">
-  <link rel="stylesheet" href="premium.css">
-
-  <!-- Canonical -->
+  <title>JGusew Computers | Local Tech Help &amp; Professional Technology Services</title>
+  <meta name="description" content="JGusew Computers — friendly local computer repairs and professional technology services in Sunbury VIC. Drag to compare community and professional sides.">
   <link rel="canonical" href="https://jgusewcomputers.com/">
+  <link rel="icon" href="assets/logos/monogram-flat-navy.png">
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jgusewcomputers.com/">
-  <meta property="og:site_name" content="JGusew Computers">
-  <meta property="og:locale" content="en_AU">
-  <meta property="og:title" content="JGusew Computers | Practical Tech Help, Websites and AI Automation">
-  <meta property="og:description" content="Practical technology help for homes and small businesses. Computers, websites, forms, email setup, AI automation and sensible tech advice — without hype or jargon.">
-  <meta property="og:image" content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JGusew Computers | Practical Tech Help, Websites and AI Automation">
-  <meta name="twitter:description" content="Practical technology help for homes and small businesses. Computers, websites, email, AI automation — without hype or jargon.">
-  <meta name="twitter:image" content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://jgusewcomputers.com/">
+  <meta property="og:site_name"   content="JGusew Computers">
+  <meta property="og:locale"      content="en_AU">
+  <meta property="og:title"       content="JGusew Computers | Local Tech Help &amp; Professional Technology Services">
+  <meta property="og:description" content="Friendly local computer repairs and professional technology services in Sunbury VIC. Drag the slider to compare both sides.">
+  <meta property="og:image"       content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="JGusew Computers | Local Tech Help &amp; Professional Technology Services">
+  <meta name="twitter:description" content="Friendly local computer repairs and professional technology services. Drag to compare.">
+  <meta name="twitter:image"      content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
 
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "name": "Jehiah Gusew",
-        "jobTitle": "Technology advisor",
-        "url": "https://jgusewcomputers.com/",
-        "email": "hello@jgusewcomputers.com",
-        "worksFor": { "@type": "Organization", "name": "JGusew Computers" }
-      },
-      {
-        "@type": "ProfessionalService",
-        "name": "JGusew Computers",
-        "description": "Practical technology help, advice, and automation for everyday people and small businesses. Reviewed by a real person.",
-        "email": "hello@jgusewcomputers.com",
-        "founder": { "@type": "Person", "name": "Jehiah Gusew" },
-        "areaServed": "Online",
-        "serviceType": [
-          "Computer advice",
-          "Slow computer assessment",
-          "Repair vs replace decision",
-          "Website help",
-          "Forms and enquiry systems",
-          "Email cleanup",
-          "Digital organisation",
-          "Small business tech review",
-          "AI automation starter",
-          "Scam and security triage",
-          "Elderly tech help",
-          "Device setup advice"
-        ]
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #060f24;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* ---- Iframes ---- */
+    .frames { position: fixed; inset: 0; }
+
+    iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+
+    #frame-community    { z-index: 1; }
+    #frame-professional { z-index: 2; }
+
+    /* ---- Slider ---- */
+    #comp-slider {
+      position: fixed;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      z-index: 1000;
+      cursor: ew-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    /* Dual-tone vertical line: amber top → white → blue bottom */
+    #comp-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        transparent                     0%,
+        rgba(249, 115, 22, 0.45)       10%,
+        rgba(255, 255, 255, 0.55)      35%,
+        rgba(255, 255, 255, 0.55)      65%,
+        rgba(59,  130, 246, 0.45)      90%,
+        transparent                    100%
+      );
+    }
+
+    /* Split-glow handle: amber left · blue right */
+    #comp-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(
+        90deg,
+        rgba(249, 115, 22, 0.12) 0%,
+        rgba(8,   14,  38, 0.84) 50%,
+        rgba(59, 130, 246, 0.12) 100%
+      );
+      border: 1.5px solid rgba(255, 255, 255, 0.24);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.55),
+        -8px 0 18px rgba(249,115,22,0.12),
+          8px 0 18px rgba(59,130,246,0.12);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    #comp-slider:hover  #comp-handle,
+    #comp-slider.active #comp-handle {
+      transform: translate(-50%, -50%) scale(1.12);
+      border-color: rgba(255, 255, 255, 0.40);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.65),
+        -14px 0 28px rgba(249,115,22,0.22),
+          14px 0 28px rgba(59,130,246,0.22);
+    }
+
+    /* ---- Entry cards (labels) ---- */
+    .comp-label {
+      position: fixed;
+      top: 22px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 16px;
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      transition: opacity 300ms ease, transform 200ms ease, box-shadow 200ms ease;
+      cursor: pointer;
+      max-width: 240px;
+    }
+    .comp-label:hover {
+      transform: translateY(-1px);
+    }
+
+    .label-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .label-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .label-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+    .label-sub {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      opacity: 0.72;
+    }
+    .label-caret {
+      font-size: 11px;
+      opacity: 0.50;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* Community card — warm honey-orange */
+    #label-community {
+      left: 18px;
+      background: rgba(249, 115, 22, 0.13);
+      color: #fed7aa;
+      border: 1px solid rgba(249, 115, 22, 0.30);
+      box-shadow:
+        0 2px 16px rgba(0,0,0,0.40),
+        0 0  24px rgba(249,115,22,0.10);
+    }
+    #label-community:hover {
+      background: rgba(249, 115, 22, 0.20);
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.45),
+        0 0  28px rgba(249,115,22,0.18);
+    }
+
+    /* Professional card — cool cobalt */
+    #label-professional {
+      right: 18px;
+      background: rgba(59, 130, 246, 0.13);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.30);
+      box-shadow:
+        0 2px 16px rgba(0,0,0,0.40),
+        0 0  24px rgba(59,130,246,0.10);
+    }
+    #label-professional:hover {
+      background: rgba(59, 130, 246, 0.20);
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.45),
+        0 0  28px rgba(59,130,246,0.18);
+    }
+
+    /* ---- Drag hint ---- */
+    #comp-hint {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.12em;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: opacity 500ms ease;
+    }
+
+    /* ---- Mobile tab behaviour ---- */
+    @media (max-width: 768px) {
+      /* Both labels stay visible on mobile — active glows, inactive dims */
+      .comp-label {
+        transition: opacity 300ms ease, transform 220ms ease,
+                    box-shadow 220ms ease, background 220ms ease,
+                    border-color 220ms ease;
       }
-    ]
-  }
-  </script>
+      #label-community.active-tab {
+        background: rgba(249, 115, 22, 0.24);
+        border-color: rgba(249, 115, 22, 0.54);
+        box-shadow:
+          0 2px 16px rgba(0,0,0,0.40),
+          0 0  32px rgba(249,115,22,0.30);
+      }
+      #label-professional.active-tab {
+        background: rgba(59, 130, 246, 0.24);
+        border-color: rgba(59, 130, 246, 0.54);
+        box-shadow:
+          0 2px 16px rgba(0,0,0,0.40),
+          0 0  32px rgba(59,130,246,0.30);
+      }
+      .comp-label:not(.active-tab) { opacity: 0.40; transform: translateY(1px); }
+    }
+
+    @media (max-width: 640px) {
+      #comp-hint { font-size: 10px; bottom: 18px; }
+      .comp-label { padding: 8px 11px; top: 14px; }
+      .label-title { font-size: 11px; }
+      .label-sub { display: none; }
+      #comp-handle { width: 42px; height: 42px; }
+      /* Prevent labels from overlapping on small screens */
+      #label-community    { left: 8px;  max-width: calc(50% - 22px); }
+      #label-professional { right: 8px; max-width: calc(50% - 22px); }
+    }
+  </style>
 </head>
 <body>
-  <div class="mesh"></div>
-  <div class="vignette"></div>
-  <div class="grain"></div>
 
-  <div id="root"></div>
+  <div class="frames">
+    <iframe id="frame-community"    src="community.html"    title="Community — JGusew Computers"></iframe>
+    <iframe id="frame-professional" src="professional.html" title="Professional — JGusew Computers"></iframe>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init("dEyzQD3JwgIZVH6vh");</script>
-
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-  <script type="text/babel">
-    // ---------- Chrome icons (transparent renders) ----------
-    const ICON = {
-      check:    "assets/icons/check-circle.webp",
-      shield:   "assets/icons/shield.webp",
-      chat:     "assets/icons/chat.webp",
-      pencil:   "assets/icons/pencil.webp",
-      alert:    "assets/icons/alert-shield.webp",
-      checkAlt: "assets/icons/check-circle-on-light.png",
-      serviceComputer: "assets/icons/service-computer.svg",
-      serviceSpeed: "assets/icons/service-speed.svg",
-      serviceDecision: "assets/icons/service-decision.svg",
-      serviceWebsite: "assets/icons/service-website.svg",
-      serviceForm: "assets/icons/service-form.svg",
-      serviceEmail: "assets/icons/service-email.svg",
-      serviceAi: "assets/icons/service-ai.svg",
-      serviceOps: "assets/icons/service-ops.svg",
-      serviceSecurity: "assets/icons/service-security.svg",
-      serviceHelp: "assets/icons/service-help.svg",
-    };
-
-    // ---------- Brain mind-map data ----------
-    const BRAIN_MAP = {
-      "Computer help": [
-        { x: 290, y: 180, hub: true, text: "Computer help" },
-        { x: 140, y: 108, text: "Slow PC" },
-        { x: 92,  y: 178, text: "Virus removal" },
-        { x: 138, y: 258, text: "Crashes" },
-        { x: 198, y: 90,  text: "Speed boost" },
-        { x: 192, y: 184, text: "Diagnostics" },
-        { x: 178, y: 278, text: "Backup" },
-        { x: 440, y: 108, text: "Repair advice" },
-        { x: 488, y: 178, text: "Drivers" },
-        { x: 442, y: 258, text: "Data recovery" },
-        { x: 382, y: 90,  text: "Windows" },
-        { x: 388, y: 184, text: "Security scan" },
-        { x: 402, y: 278, text: "New device" },
-        { x: 290, y: 58,  text: "Full assessment" },
-      ],
-      "Websites and forms": [
-        { x: 290, y: 180, hub: true, text: "Websites & forms" },
-        { x: 140, y: 108, text: "Static HTML" },
-        { x: 92,  y: 178, text: "No monthly fees" },
-        { x: 138, y: 258, text: "Mobile-friendly" },
-        { x: 198, y: 90,  text: "Fast loading" },
-        { x: 192, y: 184, text: "Domain setup" },
-        { x: 178, y: 278, text: "Email address" },
-        { x: 440, y: 108, text: "Contact forms" },
-        { x: 488, y: 178, text: "No lock-in" },
-        { x: 442, y: 258, text: "Hosting guide" },
-        { x: 382, y: 90,  text: "Clean copy" },
-        { x: 388, y: 184, text: "Intake forms" },
-        { x: 402, y: 278, text: "Form delivery" },
-        { x: 290, y: 58,  text: "Plain & practical" },
-      ],
-      "AI automation": [
-        { x: 290, y: 180, hub: true, text: "AI automation" },
-        { x: 140, y: 108, text: "Save hours" },
-        { x: 92,  y: 178, text: "No hype" },
-        { x: 138, y: 258, text: "Plain English" },
-        { x: 198, y: 90,  text: "Workflow maps" },
-        { x: 192, y: 184, text: "Repetitive tasks" },
-        { x: 178, y: 278, text: "Templates" },
-        { x: 440, y: 108, text: "Right tool" },
-        { x: 488, y: 178, text: "Practical first" },
-        { x: 442, y: 258, text: "Free tools" },
-        { x: 382, y: 90,  text: "Email sorting" },
-        { x: 388, y: 184, text: "Doc generation" },
-        { x: 402, y: 278, text: "Scheduling" },
-        { x: 290, y: 58,  text: "Calm & clear" },
-      ],
-      "Digital organisation": [
-        { x: 290, y: 180, hub: true, text: "Digital org." },
-        { x: 140, y: 108, text: "Inbox zero" },
-        { x: 92,  y: 178, text: "Old accounts" },
-        { x: 138, y: 258, text: "File structure" },
-        { x: 198, y: 90,  text: "Cloud storage" },
-        { x: 192, y: 184, text: "Email cleanup" },
-        { x: 178, y: 278, text: "Safer habits" },
-        { x: 440, y: 108, text: "Backups" },
-        { x: 488, y: 178, text: "Passwords" },
-        { x: 442, y: 258, text: "Account audit" },
-        { x: 382, y: 90,  text: "Device map" },
-        { x: 388, y: 184, text: "Subscriptions" },
-        { x: 402, y: 278, text: "Declutter plan" },
-        { x: 290, y: 58,  text: "Clear picture" },
-      ],
-    };
-
-    // ---------- Neural synapse background (shared across all brain modals) ----------
-    // 29 nodes arranged in a brain silhouette shape (580×360 viewBox)
-    const SYNAPSE_NODES = [
-      // Left hemisphere
-      [130,80],[88,145],[80,205],[105,268],[155,308],
-      [188,70],[198,152],[180,228],[205,295],
-      [240,90],[245,175],[232,256],[215,326],
-      // Centre axis
-      [290,48],[288,318],
-      // Right hemisphere
-      [340,70],[345,152],[350,235],[360,300],
-      [392,82],[398,165],[408,250],[395,320],
-      [445,90],[452,185],[440,268],
-      [490,138],[495,202],[482,272],
-    ];
-    // Pairs of node indices to connect (only nearby nodes)
-    const SYNAPSE_EDGES = [
-      [0,1],[0,5],[1,2],[1,6],[2,3],[2,7],[3,4],[3,8],
-      [4,8],[4,12],[5,6],[5,9],[6,7],[6,10],[7,8],[7,11],
-      [8,11],[8,12],[9,10],[9,13],[10,11],[11,12],[11,14],
-      [12,14],[13,15],[13,19],[14,18],[14,22],[15,16],[15,19],
-      [16,17],[16,20],[17,18],[17,21],[18,22],[19,20],[19,23],
-      [20,21],[20,24],[21,22],[21,25],[22,25],[23,24],[23,26],
-      [24,25],[24,27],[25,28],[26,27],[27,28],[9,15],[10,16],
-    ];
-    // Indices of larger "hub" synapse dots
-    const SYN_HUBS = new Set([0,5,9,13,14,15,19,23,26]);
-
-    const Arrow = ({ size = 16 }) => (
-      <svg aria-hidden="true" focusable="false" className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+  <!-- Comparison slider -->
+  <div id="comp-slider"
+    role="slider" aria-label="Drag to compare community and professional views"
+    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+    <div id="comp-line"></div>
+    <div id="comp-handle" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+        stroke="rgba(255,255,255,0.70)" stroke-width="2.2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
       </svg>
-    );
+    </div>
+  </div>
 
-    function useReveal() {
-      React.useEffect(() => {
-        const els = document.querySelectorAll(".reveal");
-        const io = new IntersectionObserver((entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-          }
-        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-        els.forEach((el) => io.observe(el));
-        return () => io.disconnect();
-      }, []);
-    }
+  <!-- Entry cards — click to snap to that side -->
+  <div id="label-community" class="comp-label"
+    role="button" tabindex="0"
+    aria-label="View community repairs side">
+    <span class="label-icon">🔧</span>
+    <div class="label-body">
+      <span class="label-title">Local Repairs</span>
+      <span class="label-sub">Quick help · No jargon · Sunbury</span>
+    </div>
+    <span class="label-caret">◄</span>
+  </div>
 
-    // ---------- Brain Mind-Map Modal ----------
-    function BrainModal({ service, onClose, onEnquiry }) {
-      React.useEffect(() => {
-        const onKey = (e) => { if (e.key === "Escape") onClose(); };
-        document.addEventListener("keydown", onKey);
-        document.body.style.overflow = "hidden";
-        return () => {
-          document.removeEventListener("keydown", onKey);
-          document.body.style.overflow = "";
-        };
-      }, [onClose]);
+  <div id="label-professional" class="comp-label"
+    role="button" tabindex="0"
+    aria-label="View professional services side">
+    <span class="label-caret">►</span>
+    <div class="label-body">
+      <span class="label-title">Professional Services</span>
+      <span class="label-sub">Systems · Websites · Automation</span>
+    </div>
+    <span class="label-icon">⚡</span>
+  </div>
 
-      const nodes  = BRAIN_MAP[service] || [];
-      const hub    = nodes.find(n => n.hub);
-      const leaves = nodes.filter(n => !n.hub);
-      const VW = 580, VH = 360;
+  <div id="comp-hint">← drag to compare →</div>
 
-      return (
-        <div
-          className="brain-overlay"
-          onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-          role="dialog" aria-modal="true" aria-label={`${service} mind map`}
-        >
-          <div className="brain-modal">
-            <span className="brain-corner tl" aria-hidden="true"></span>
-            <span className="brain-corner tr" aria-hidden="true"></span>
-            <span className="brain-corner bl" aria-hidden="true"></span>
-            <span className="brain-corner br" aria-hidden="true"></span>
+  <script>
+    var community    = document.getElementById('frame-community');
+    var professional = document.getElementById('frame-professional');
+    var sliderEl     = document.getElementById('comp-slider');
+    var labelLeft    = document.getElementById('label-community');
+    var labelRight   = document.getElementById('label-professional');
+    var hintEl       = document.getElementById('comp-hint');
 
-            <button className="brain-close" onClick={onClose} aria-label="Close">✕</button>
-            <p className="brain-eyebrow">Service focus</p>
-            <h2 className="brain-modal-title">{service}</h2>
+    var pos      = 50;
+    var dragging = false;
 
-            <div className="brain-map">
-              <svg viewBox={`0 0 ${VW} ${VH}`} className="brain-svg" aria-hidden="true">
-                <defs>
-                  <radialGradient id="brainBgGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="rgba(0,160,255,0.07)" />
-                    <stop offset="100%" stopColor="rgba(0,160,255,0)" />
-                  </radialGradient>
-                </defs>
-
-                {/* Ambient glow field */}
-                <ellipse cx="290" cy="196" rx="236" ry="168" fill="url(#brainBgGlow)" />
-
-                {/* Neural synapse network — faded background layer */}
-                {SYNAPSE_EDGES.map(([a, b], i) => (
-                  <line key={`se${i}`} className="syn-edge"
-                    x1={SYNAPSE_NODES[a][0]} y1={SYNAPSE_NODES[a][1]}
-                    x2={SYNAPSE_NODES[b][0]} y2={SYNAPSE_NODES[b][1]}
-                    style={{ animationDelay:`${i * 0.11}s` }}
-                  />
-                ))}
-                {SYNAPSE_NODES.map(([x, y], i) => (
-                  <circle key={`sn${i}`} className="syn-node"
-                    cx={x} cy={y}
-                    r={SYN_HUBS.has(i) ? 2.6 : 1.5}
-                    fill={SYN_HUBS.has(i) ? "rgba(0,210,255,0.24)" : "rgba(0,190,255,0.16)"}
-                    style={{ animationDelay:`${i * 0.21}s` }}
-                  />
-                ))}
-
-                {/* Spoke lines: hub → each word label */}
-                {hub && leaves.map((n, i) => (
-                  <line key={i} className="b-line"
-                    x1={hub.x} y1={hub.y} x2={n.x} y2={n.y}
-                    style={{ animationDelay:`${i * 0.18}s` }}
-                  />
-                ))}
-              </svg>
-
-              {/* Floating word nodes */}
-              {nodes.map((n, i) => (
-                <div key={i}
-                  className={`brain-node${n.hub ? " hub" : ""}`}
-                  style={{
-                    left: `${(n.x / VW) * 100}%`,
-                    top:  `${(n.y / VH) * 100}%`,
-                    animationDelay: n.hub ? "0s" : `${i * 0.28}s`,
-                  }}
-                >{n.text}</div>
-              ))}
-            </div>
-
-            <div className="brain-cta">
-              <button className="brain-enquiry" onClick={onEnquiry}>
-                Start an enquiry
-                <svg aria-hidden="true" focusable="false" width="14" height="14"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // ---------- Brand Comparison Slider ----------
-    function BrandComparison() {
-      const [pos, setPos]         = React.useState(50);
-      const [dragging, setDragging] = React.useState(false);
-      const ref = React.useRef(null);
-
-      // Mouse drag
-      React.useEffect(() => {
-        if (!dragging) return;
-        const move = (e) => {
-          if (!ref.current) return;
-          const r = ref.current.getBoundingClientRect();
-          setPos(Math.max(3, Math.min(97, ((e.clientX - r.left) / r.width) * 100)));
-        };
-        const up = () => setDragging(false);
-        window.addEventListener("mousemove", move);
-        window.addEventListener("mouseup", up);
-        return () => { window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", up); };
-      }, [dragging]);
-
-      // Touch drag (non-passive so we can prevent scroll)
-      React.useEffect(() => {
-        const el = ref.current; if (!el) return;
-        const move = (e) => {
-          e.preventDefault();
-          const r = el.getBoundingClientRect();
-          setPos(Math.max(3, Math.min(97, ((e.touches[0].clientX - r.left) / r.width) * 100)));
-        };
-        el.addEventListener("touchmove", move, { passive: false });
-        return () => el.removeEventListener("touchmove", move);
-      }, []);
-
-      return (
-        <section className="brand-compare-section reveal">
-          <div className="brand-compare-intro">
-            <div className="num">Who we help</div>
-            <h2>Community repairs to professional systems.</h2>
-            <p>Drag to see how we show up for different people — a neighbour who needs a quick fix, or a business that needs structured help.</p>
-          </div>
-
-          <div className="comp-wrap" ref={ref} onMouseDown={() => setDragging(true)}>
-
-            {/* Left panel — Community */}
-            <div className="comp-panel comp-community">
-              <div className="comp-content">
-                <div className="comp-eyebrow">Local · Community · Repairs</div>
-                <h3 className="comp-heading">JGusew Computers</h3>
-                <p className="comp-sub">Your friendly local tech person. No jargon, no stress, no bill surprise.</p>
-                <ul className="comp-list">
-                  <li>Computers running slow</li>
-                  <li>Virus and pop-up removal</li>
-                  <li>New device setup help</li>
-                  <li>Kids' laptop problems</li>
-                  <li>Easy honest advice</li>
-                </ul>
-                <div className="comp-cta community">Get help today</div>
-              </div>
-            </div>
-
-            {/* Right panel — Professional (clipped by slider) */}
-            <div className="comp-panel comp-professional" style={{ clipPath:`inset(0 0 0 ${pos}%)` }}>
-              <div className="comp-content">
-                <div className="comp-eyebrow">Strategic · Structured · Professional</div>
-                <h3 className="comp-heading">JGusew Computers</h3>
-                <p className="comp-sub">Structured technology help for homes and small businesses.</p>
-                <ul className="comp-list">
-                  <li>Computer assessment &amp; advice</li>
-                  <li>Website &amp; form systems</li>
-                  <li>AI workflow automation</li>
-                  <li>Security &amp; digital organisation</li>
-                  <li>Small business tech review</li>
-                </ul>
-                <div className="comp-cta professional">Start an enquiry</div>
-              </div>
-            </div>
-
-            {/* Draggable divider */}
-            <div className="comp-divider" style={{ left:`${pos}%` }}
-              onMouseDown={(e) => { e.stopPropagation(); setDragging(true); }}
-              onTouchStart={(e) => e.preventDefault()}
-            >
-              <div className="comp-handle" aria-label="Drag to compare">
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Corner labels */}
-            <div className="comp-label comp-label-left"  style={{ opacity: pos > 14 ? 1 : 0 }}>Community</div>
-            <div className="comp-label comp-label-right" style={{ opacity: pos < 86 ? 1 : 0 }}>Professional</div>
-
-          </div>
-          <p className="comp-hint">← drag to compare →</p>
-        </section>
-      );
-    }
-
-    // ---------- Nav ----------
-    function Nav({ current, onNav }) {
-      const [menuOpen, setMenuOpen] = React.useState(false);
-      const closeMenu = () => setMenuOpen(false);
-      const items = [
-        { id: "home", label: "Home" },
-        { id: "services", label: "Services" },
-        { id: "process", label: "How it works" },
-        { id: "safety", label: "Safety", href: "safety.html" },
-        { id: "about", label: "About", href: "about.html" },
-        { id: "contact", label: "Contact" },
-      ];
-      return (
-        <header className="nav">
-          <div className="inner">
-            <button
-              className="brand"
-              onClick={() => { onNav("home"); closeMenu(); }}
-              aria-label="JGusew Computers — back to top"
-              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
-              <div className="txt">
-                <span className="name">JGUSEW COMPUTERS</span>
-                <span className="tag">Personal technology systems</span>
-              </div>
-            </button>
-            <button
-              className={"hamburger" + (menuOpen ? " open" : "")}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-expanded={menuOpen}
-              aria-controls="nav-menu"
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}>
-              <span></span><span></span><span></span>
-            </button>
-            <div className={"menu" + (menuOpen ? " open" : "")} id="nav-menu">
-              {items.map(i => (
-                i.href
-                  ? <a key={i.id} href={i.href} className="nav-link" onClick={closeMenu}>{i.label}</a>
-                  : <button key={i.id}
-                      className={current === i.id ? "active" : ""}
-                      onClick={() => { onNav(i.id); closeMenu(); }}>{i.label}</button>
-              ))}
-              <button className="cta" onClick={() => { onNav("contact"); closeMenu(); }}>Start an enquiry</button>
-            </div>
-          </div>
-        </header>
-      );
-    }
-
-    // ---------- Hero ----------
-    function HeroStage() {
-      const ref = React.useRef(null);
-      const [mood, setMood] = React.useState("idle");
-      React.useEffect(() => {
-        const el = ref.current; if (!el) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const onMove = (ev) => {
-          const r = el.getBoundingClientRect();
-          const x = (ev.clientX - r.left) / r.width - 0.5;
-          const y = (ev.clientY - r.top) / r.height - 0.5;
-          el.style.setProperty("--tilt-y", (x * 14) + "deg");
-          el.style.setProperty("--tilt-x", (-y * 14) + "deg");
-          el.style.setProperty("--plx-x", (x * 18) + "px");
-          el.style.setProperty("--plx-y", (y * 18) + "px");
-        };
-        const onLeave = () => {
-          el.style.setProperty("--tilt-y", "0deg");
-          el.style.setProperty("--tilt-x", "0deg");
-          el.style.setProperty("--plx-x", "0px");
-          el.style.setProperty("--plx-y", "0px");
-        };
-        window.addEventListener("mousemove", onMove);
-        el.addEventListener("mouseleave", onLeave);
-        return () => { window.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
-      }, []);
-      React.useEffect(() => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const moods = ["idle", "smile", "curious"];
-        let i = 0;
-        const timer = window.setInterval(() => {
-          i = (i + 1) % moods.length;
-          setMood(moods[i]);
-        }, 4200);
-        return () => window.clearInterval(timer);
-      }, []);
-      return (
-        <div className="stage" ref={ref}>
-          <div className="ring"></div>
-          <div className="ring-lines"></div>
-          <div className="orb">
-            <div className={"tech-buddy " + mood} aria-hidden="true">
-              <div className="antenna"></div>
-              <div className="face-screen">
-                <span className="eye left"></span>
-                <span className="eye right"></span>
-                <span className="smile"></span>
-              </div>
-            </div>
-          </div>
-          <div className="satellite s1"><img src={ICON.check} alt="" /></div>
-          <div className="satellite s2"><img src={ICON.chat} alt="" /></div>
-          <div className="satellite s3"><img src={ICON.shield} alt="" /></div>
-          <div className="satellite s4"><img src={ICON.pencil} alt="" /></div>
-        </div>
-      );
-    }
-
-    function Hero({ onContact, onServices }) {
-      const [brainOpen, setBrainOpen] = React.useState(null);
-      return (
-        <>
-        {brainOpen && (
-          <BrainModal
-            service={brainOpen}
-            onClose={() => setBrainOpen(null)}
-            onEnquiry={() => { setBrainOpen(null); onContact(); }}
-          />
-        )}
-        <section className="hero">
-          <div className="inner">
-            <div className="hero-copy">
-              <h1 className="reveal d1">
-                <span className="chrome">Practical technology help,</span>
-                <span className="muted">built with systems thinking.</span>
-              </h1>
-              <p className="lead reveal d2">
-                For homes, small businesses, and people who want technology to feel
-                calmer, clearer, and better organised. Computers, websites, forms,
-                email, AI workflows and sensible decisions, explained without jargon.
-              </p>
-              <div className="quiet reveal d3">
-                <span className="l"></span>
-                <span>Plain English · Security-aware · Practical next steps</span>
-              </div>
-              <div className="brand-proof reveal d3" aria-label="Service focus areas">
-                {["Computer help","Websites and forms","AI automation","Digital organisation"].map(s => (
-                  <button key={s} className="brand-proof-pill" onClick={() => setBrainOpen(s)}>
-                    {s}
-                  </button>
-                ))}
-              </div>
-              <div className="hero-actions reveal d3">
-                <button className="btn primary pill" onClick={onContact}>
-                  Start an enquiry <Arrow />
-                </button>
-                <button className="btn glass" onClick={onServices}>
-                  See how I can help <Arrow />
-                </button>
-              </div>
-              <div className="reveal d3" style={{
-                marginTop: 18, fontSize: 13.5, color: "var(--jgc-fg-on-navy-2)", maxWidth: 540, lineHeight: 1.55
-              }}>
-                <strong style={{ color: "#fff", fontWeight: 600 }}>Free while we refine the service.</strong>{" "}
-                No paid work is being charged yet. You get careful, structured help while the service is refined.
-                No obligation, no marketing list, no upsell.
-              </div>
-            </div>
-            <HeroStage />
-          </div>
-
-          <div className="hero-strip reveal d4">
-            <div className="group">
-              <div className="item"><span className="dot"></span><span>Currently <strong>accepting enquiries</strong></span></div>
-              <div className="item"><span>Help by email · <strong>reply within 1 working day</strong></span></div>
-              <div className="item"><span>Websites, forms and AI workflows · <strong>kept practical</strong></span></div>
-            </div>
-            <div className="mail">hello@jgusewcomputers.com →</div>
-          </div>
-        </section>
-        </>
-      );
-    }
-
-    // ---------- "What this means" explainer band ----------
-    function ExplainerBand() {
-      return (
-        <section className="explainer">
-          <div className="container">
-            <div className="explainer-grid">
-              <div className="ex reveal">
-                <div className="ex-h">
-                  <span className="ex-num">01</span>
-                  <h2>What "free during launch" means</h2>
-                </div>
-                <p>Services are free right now while we refine the offering. No paid work is being charged yet. You get the same careful review as paid work — we're using this period to gather feedback and improve the service.</p>
-              </div>
-              <div className="ex reveal d1">
-                <div className="ex-h">
-                  <span className="ex-num">02</span>
-                  <h2>What "help by email" means</h2>
-                </div>
-                <p>You explain the issue in plain English by email. We reply with questions, options, and a clear next step — usually within one working day. No phone queues, no remote-control software at this stage. Just careful written advice.</p>
-              </div>
-              <div className="ex reveal d2">
-                <div className="ex-h">
-                  <span className="ex-num">03</span>
-                  <h2>What "AI automation" means</h2>
-                </div>
-                <p>AI is treated as a practical tool, not a magic layer. The useful work is understanding the process first, then deciding whether a simple workflow, form, template, or automation would actually help.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- Digital side rails ----------
-    function DigitalRails() {
-      const items = [
-        "Computer advice", "Websites", "Forms", "Email cleanup",
-        "Digital organisation", "Small business tech", "AI automation",
-        "Security triage", "Elderly tech help", "Device setup",
-      ];
-      const rail = [...items, ...items];
-      return (
-        <div className="digital-rails" aria-hidden="true">
-          <div className="rail left">
-            <div className="rail-track">
-              {rail.map((t, i) => <span key={i}>{t}</span>)}
-            </div>
-          </div>
-          <div className="rail right">
-            <div className="rail-track">
-              {rail.map((t, i) => <span key={i}>{t}</span>)}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // ---------- Bento ----------
-    function BentoCard({ size, icon, title, body, href }) {
-      const ref = React.useRef(null);
-      const tilt = (ev) => {
-        const el = ref.current; if (!el) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const r = el.getBoundingClientRect();
-        const x = (ev.clientX - r.left) / r.width - 0.5;
-        const y = (ev.clientY - r.top) / r.height - 0.5;
-        el.style.setProperty("--tx", (-y * 6) + "deg");
-        el.style.setProperty("--ty", (x * 6) + "deg");
-        el.style.setProperty("--gx", ((ev.clientX - r.left) / r.width) * 100 + "%");
-        el.style.setProperty("--gy", ((ev.clientY - r.top) / r.height) * 100 + "%");
-      };
-      const leave = () => {
-        const el = ref.current; if (!el) return;
-        el.style.setProperty("--tx", "0deg");
-        el.style.setProperty("--ty", "0deg");
-      };
-      return (
-        <div ref={ref} className={"bento-card " + size + " reveal"} onMouseMove={tilt} onMouseLeave={leave}>
-          <div className="ico" aria-hidden="true"><img src={icon} alt="" loading="lazy" /></div>
-          <h3>{title}</h3>
-          <p>{body}</p>
-          {href && (
-            <a href={href} style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              fontSize: 13, fontWeight: 500, marginTop: 10,
-              color: "var(--jgc-glow-300)", textDecoration: "none",
-              letterSpacing: "0.01em",
-              padding: "6px 10px", margin: "-6px -10px",
-            }}>
-              Details
-              <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-            </a>
-          )}
-        </div>
-      );
-    }
-
-    function BentoServices() {
-      return (
-        <div className="bento">
-          <BentoCard size="feature" icon={ICON.serviceComputer}
-            title="New computer advice"
-            href="services/computer-help.html"
-            body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — compared honestly." />
-          <BentoCard size="std" icon={ICON.serviceSpeed}
-            title="Slow computer assessment"
-            href="services/computer-help.html"
-            body="If it's slow, the answer isn't always 'buy a new one'. Cleanup, backup, upgrade, repair quote, replacement, or further diagnosis — we work out which." />
-          <BentoCard size="std" icon={ICON.serviceDecision}
-            title="Repair vs replace decision"
-            href="services/computer-help.html"
-            body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
-          <BentoCard size="std" icon={ICON.serviceWebsite}
-            title="Website help"
-            href="services/website-help.html"
-            body="Small-business websites, contact pages, domains and hosting decisions. Clear static sites that load fast, explain the offer, and avoid unnecessary platform fees." />
-          <BentoCard size="std" icon={ICON.serviceForm}
-            title="Forms and enquiry systems"
-            href="services/forms-enquiry-systems.html"
-            body="Structured intake forms that collect the right context, reduce back-and-forth, and send enquiries directly to email without a custom backend." />
-          <BentoCard size="wide" icon={ICON.serviceEmail}
-            title="Email cleanup & digital organisation"
-            href="services/email-account-cleanup.html"
-            body="Account separation, labels, safer habits, file structures, and a simple map of where everything lives. We do not log in or ask for your password." />
-          <BentoCard size="wide" icon={ICON.serviceAi}
-            title="AI automation starter"
-            href="services/ai-automation.html"
-            body="AI is useful only when the workflow is understood. We map a process, identify repetitive tasks, suggest free-first automation options, and separate safe ideas from risky ones — without recommending automation for sensitive work." />
-          <BentoCard size="std" icon={ICON.serviceOps}
-            title="Small business tech review"
-            href="services/small-business-tech-advice.html"
-            body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear, practical view of what to keep, fix, simplify, or leave alone." />
-          <BentoCard size="std" icon={ICON.serviceSecurity}
-            title="Scam & security triage"
-            body="If something feels off, slow down. We help organise the situation and suggest safe next steps — never asking for passwords or codes." />
-          <BentoCard size="std" icon={ICON.serviceHelp}
-            title="Elderly tech help"
-            body="Patient, plain-English advice for computer choices, basic device issues, email confusion, and avoiding poor-value purchases." />
-        </div>
-      );
-    }
-
-    // ---------- How it works ----------
-    const STEPS = [
-      { n: "Step 01", t: "You explain the issue", b: "Send a plain-English description of what you need help with. No technical wording needed.", scene: "explain" },
-      { n: "Step 02", t: "We ask the right questions", b: "If more information is needed, we ask before guessing. Better to be slow and careful than rush.", scene: "questions" },
-      { n: "Step 03", t: "We prepare advice", b: "The issue is reviewed and organised into clear, practical next steps.", scene: "advice" },
-      { n: "Step 04", t: "You get a careful reply", b: "Recommendations are checked against the situation you described, with safety and cost in mind.", scene: "reply" },
-      { n: "Step 05", t: "You get a clear next step", b: "Understand what to do next, what not to waste money on, and when a specialist is needed.", scene: "next" },
-    ];
-
-    function StepScene({ scene, active }) {
-      return (
-        <div className={"step-scene " + scene + " point-" + active} aria-hidden="true">
-          <div className="buddy-mini">
-            <span className="mini-eye left"></span>
-            <span className="mini-eye right"></span>
-            <span className="mini-smile"></span>
-          </div>
-          <div className="scene-orbit"></div>
-          <span className="scene-status"></span>
-        </div>
-      );
-    }
-
-    function HowItWorks() {
-      const [active, setActive] = React.useState(0);
-      const refs = React.useRef([]);
-      React.useEffect(() => {
-        const update = () => {
-          const viewportFocus = window.innerHeight * 0.48;
-          let bestIndex = 0;
-          let bestDistance = Infinity;
-          refs.current.forEach((el, idx) => {
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const center = rect.top + rect.height * 0.42;
-            const distance = Math.abs(center - viewportFocus);
-            const visible = rect.bottom > window.innerHeight * 0.18 && rect.top < window.innerHeight * 0.78;
-            if (visible && distance < bestDistance) {
-              bestDistance = distance;
-              bestIndex = idx;
-            }
-          });
-          setActive(bestIndex);
-        };
-        update();
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
-        return () => {
-          window.removeEventListener("scroll", update);
-          window.removeEventListener("resize", update);
-        };
-      }, []);
-      return (
-        <section id="process" className="how">
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="num">02 — Process</span>
-              <h2>Five steps.<br />One rule: <span style={{ color: "var(--jgc-glow-300)" }}>slow down, understand the problem, then act.</span></h2>
-              <p>Good technology advice starts with context. The aim is to avoid rushed purchases, unsafe shortcuts, and unnecessary complexity.</p>
-            </div>
-            <div className="grid">
-              <div className="steps">
-                {STEPS.map((s, i) => (
-                  <div ref={el => (refs.current[i] = el)}
-                       key={i}
-                       className={"step" + (i === active ? " active" : "")}>
-                    <span className="stepnum">{s.n}</span>
-                    <h3>{s.t}</h3>
-                    <p>{s.b}</p>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="stick">
-                  <div className="stick-card">
-                    <span className="stepnum">{STEPS[active].n}</span>
-                    <StepScene scene={STEPS[active].scene} active={active} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- AI callout ----------
-    function AICallout() {
-      return (
-        <section className="callout">
-          <div className="container reveal">
-            <div className="rule-pre">Brand pillar · trust statement</div>
-            <div className="rule">
-              <span className="chrome">Useful technology is organised,</span><br />
-              <span className="quiet">safe enough for the situation,</span><br />
-              <span className="chrome">and simple enough to keep using.</span>
-            </div>
-            <div className="signature">— JGusew Computers</div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- Jehiah note ----------
-    function JehiahNote() {
-      return (
-        <section className="jehiah-note">
-          <div className="container">
-            <div className="note-card reveal">
-              <div className="signature-block">
-                <span className="hello">Hello.</span>
-                <span className="byline">A short note from Jehiah</span>
-              </div>
-              <p>
-                I'm a one-person operation. If you email <a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a>,
-                I'm the one who reads it, asks questions if needed, and writes you back. The chrome and the
-                glass on this page is the brand; the help underneath is just me — being careful with your
-                time, your money, and your details.
-              </p>
-              <p className="sign-off">— Jehiah Gusew</p>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- Safety ----------
-    function SafetyBand() {
-      return (
-        <section id="safety" className="safety-band">
-          <div className="container">
-            <div className="panel reveal">
-              <img className="shield" src={ICON.alert} alt="" />
-              <div>
-                <div className="pill" style={{ marginBottom: 14, display: "inline-block" }}>SAFETY FIRST</div>
-                <h2>Please don't send passwords, banking codes, or identity documents.</h2>
-                <p>JGusew Computers does not need those details to start helping. If something feels suspicious, slow down before clicking, paying, or sharing details — and we'll help organise the next step.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- Contact ----------
-    const EMPTY_FORM = { name: "", email: "", phone: "", enquiry_type: "", service: "", urgency: "", message: "", consent: false };
-    const SERVICES = [
-      "Computer help (slow, broken, advice)",
-      "Website help",
-      "Forms and enquiry systems",
-      "Email cleanup and organisation",
-      "AI automation",
-      "Small business tech advice",
-      "Scam or security concern",
-      "Something else",
-    ];
-    const URGENCY_OPTS = [
-      { val: "No rush", label: "No rush" },
-      { val: "Soon — within a fortnight", label: "Soon — within a fortnight" },
-      { val: "Fairly urgent — within a few days", label: "Fairly urgent — a few days" },
-    ];
-
-    function TogglePills({ label, options, value, onChange }) {
-      return (
-        <div className="field">
-          <label>{label}</label>
-          <div className="pill-group">
-            {options.map(opt => {
-              const active = value === (opt.val || opt);
-              return (
-                <button type="button" key={opt.val || opt}
-                  onClick={() => onChange(opt.val || opt)}
-                  className={"pill-option" + (active ? " active" : "")}>
-                  {opt.label || opt}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    function Contact() {
-      const [s, setS] = React.useState(EMPTY_FORM);
-      const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
-      const markEditing = () => {
-        if (status === "sent" || status === "error") setStatus("idle");
-      };
-      const u = (k) => (e) => {
-        markEditing();
-        setS(prev => ({ ...prev, [k]: e.target.value }));
-      };
-      const set = (k, v) => {
-        markEditing();
-        setS(prev => ({ ...prev, [k]: v }));
-      };
-      const submit = (e) => {
-        e.preventDefault();
-        if (!s.consent) return;
-        setStatus("sending");
-        emailjs.send("service_59pweih", "template_wnuvasi", {
-          from_name:    s.name,
-          from_email:   s.email,
-          phone:        s.phone || "Not provided",
-          enquiry_type: s.enquiry_type || "Not specified",
-          service:      s.service || "Not specified",
-          urgency:      s.urgency || "Not specified",
-          message:      s.message,
-        })
-        .then(() => { setStatus("sent"); setS(EMPTY_FORM); })
-        .catch(() => setStatus("error"));
-      };
-      return (
-        <section id="contact" className="contact">
-          <div className="container">
-            <div className="grid">
-              <div className="copy reveal">
-                <div className="section-head" style={{ marginBottom: 0 }}>
-                  <span className="num">03 — Get in touch</span>
-                </div>
-                <h2>Send through what's going on,<br />and I'll help work out the next step.</h2>
-                <p>You do not need to explain it perfectly. Start with the problem, the goal, or the thing that feels messy. I only use these details to respond to your enquiry.</p>
-                <div className="facts">
-                  <div className="fact"><span className="dot"></span>Free while we're refining the service.</div>
-                  <div className="fact"><span className="dot"></span>Computer help, websites, forms, email, AI workflows and small-business technology decisions.</div>
-                  <div className="fact"><span className="dot"></span>Replies are written in plain English and focused on the next practical step.</div>
-                  <div className="fact"><span className="dot"></span>If this needs a specialist, I'll say so clearly.</div>
-                </div>
-                <div className="intake-side-panel">
-                  <div>
-                    <span className="panel-kicker">What happens next</span>
-                    <strong>A tailored response, sent back by email.</strong>
-                  </div>
-                  <ol>
-                    <li>You send through an enquiry by email.</li>
-                    <li>A personal, tailored response is prepared.</li>
-                    <li>A practical reply is sent back to you.</li>
-                  </ol>
-                  <p>Please do not send passwords, banking codes, MFA codes, or sensitive access details through this form.</p>
-                </div>
-                <div className="quiet" style={{ marginTop: 28 }}>
-                  Or write to <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>hello@jgusewcomputers.com</a>
-                </div>
-              </div>
-              <form className="glass-form reveal d2" onSubmit={submit}>
-                <div className="form-topline">
-                  <div>
-                    <span className="form-kicker">Intake console</span>
-                    <h3>Start with the situation.</h3>
-                  </div>
-                  <span className="secure-chip">Private enquiry</span>
-                </div>
-                <p className="form-helper">A few structured details help me respond properly. Leave anything optional blank if you are not sure.</p>
-
-                <div className="row">
-                  <div className="field">
-                    <label htmlFor="f-name">Your name</label>
-                    <input id="f-name" value={s.name} onChange={u("name")} placeholder="Sarah Hughes" required />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="f-email">Email</label>
-                    <input id="f-email" type="email" value={s.email} onChange={u("email")} placeholder="sarah@example.com.au" required />
-                  </div>
-                </div>
-
-                <TogglePills
-                  label="This is for"
-                  options={["Home / personal", "Small business"]}
-                  value={s.enquiry_type}
-                  onChange={v => set("enquiry_type", s.enquiry_type === v ? "" : v)}
-                />
-
-                <div className="field">
-                  <label htmlFor="f-service">What do you need help with?</label>
-                  <select id="f-service" className={s.service ? "has-value" : ""} value={s.service} onChange={u("service")}>
-                    <option value="" disabled>Select a service area…</option>
-                    {SERVICES.map(sv => <option key={sv} value={sv}>{sv}</option>)}
-                  </select>
-                  <span className="helper-line">Choose the closest match. "Something else" is fine.</span>
-                </div>
-
-                <TogglePills
-                  label="How soon do you need a response?"
-                  options={URGENCY_OPTS}
-                  value={s.urgency}
-                  onChange={v => set("urgency", s.urgency === v ? "" : v)}
-                />
-
-                <div className="field">
-                  <label htmlFor="f-phone">Phone (optional)</label>
-                  <input id="f-phone" value={s.phone} onChange={u("phone")} placeholder="Optional" />
-                </div>
-
-                <div className="field">
-                  <label htmlFor="f-message">What's going on?</label>
-                  <textarea id="f-message" value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
-                  <span className="helper-line">You do not need to diagnose it. Describe what happened, what changed, and what you want to achieve.</span>
-                </div>
-
-                <div className="donot">
-                  <strong>Please don't send:</strong> passwords · banking codes · one-time / MFA codes · credit card numbers · full identity documents · sensitive private documents.
-                </div>
-
-                <label className="consent-row">
-                  <input type="checkbox" checked={s.consent} onChange={e => set("consent", e.target.checked)} required />
-                  <span>
-                    I understand JGusew Computers will use my contact details to respond to this enquiry.{" "}
-                    I've read the <a href="privacy.html" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>privacy notice</a>.
-                  </span>
-                </label>
-
-                <div className="submit">
-                  <span className="note">No marketing list. No passwords needed. See <a href="safety.html">Safety</a>.</span>
-                  <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent" || !s.consent}>
-                    {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send enquiry</span><Arrow /></>}
-                  </button>
-                </div>
-                {status === "sent" && (
-                  <div className="form-state success">
-                    Thanks — your enquiry has been sent. I’ll read it and reply by email, usually within one working day.
-                  </div>
-                )}
-                {status === "error" && (
-                  <div className="form-state error">
-                    The message was not sent. Please try again, or write directly to{" "}
-                    <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline" }}>hello@jgusewcomputers.com</a>.
-                  </div>
-                )}
-              </form>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    // ---------- Footer ----------
-    function Footer({ onNav }) {
-      return (
-        <footer className="foot">
-          <div className="inner">
-            <div className="brand">
-              <div className="foot-name">JGusew Computers</div>
-              <div className="foot-tag">Personal technology systems</div>
-              <p>Practical technology help, advice, and automation for everyday people and small businesses.</p>
-            </div>
-            <div>
-              <h3>Services</h3>
-              <ul>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>New computer advice</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Website help</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Forms and enquiry systems</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Email cleanup</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>AI automation starter</a></li>
-                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Small business review</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3>Trust</h3>
-              <ul>
-                <li><a href="#process" onClick={(e)=>{e.preventDefault();onNav("process");}}>How it works</a></li>
-                <li><a href="safety.html">Safety first</a></li>
-                <li><a href="#contact" onClick={(e)=>{e.preventDefault();onNav("contact");}}>Get in touch</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3>About</h3>
-              <ul>
-                <li><a href="about.html">About Jehiah</a></li>
-                <li><a href="safety.html">Safety first</a></li>
-                <li><a href="privacy.html">Privacy notice</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3>Contact</h3>
-              <ul>
-                <li><a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="legal">
-            <span>© 2026 JGusew Computers · Sunbury, VIC, Australia</span>
-            <span className="mono">
-              <a href="safety.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Safety</a>
-              {" · "}
-              <a href="privacy.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Privacy notice</a>
-            </span>
-          </div>
-        </footer>
-      );
-    }
-
-    // ---------- App ----------
-    function App() {
-      const [current, setCurrent] = React.useState("home");
-      useReveal();
-      function nav(id) {
-        setCurrent(id);
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        else window.scrollTo({ top: 0, behavior: "smooth" });
+    /* ---- Apply slider position ---- */
+    function applyPos(pct, animate) {
+      pos = Math.max(2, Math.min(98, pct));
+      if (animate) {
+        professional.style.transition = 'clip-path 380ms cubic-bezier(0.2,0.7,0.2,1)';
+        sliderEl.style.transition     = 'left 380ms cubic-bezier(0.2,0.7,0.2,1)';
+        setTimeout(function() {
+          professional.style.transition = '';
+          sliderEl.style.transition     = '';
+        }, 400);
       }
-      return (
-        <>
-          <a href="#main-content" className="skip-link">Skip to main content</a>
-          <DigitalRails />
-          <Nav current={current} onNav={nav} />
-          <main id="main-content">
-            <div id="home" data-screen-label="01 Home">
-              <Hero onContact={() => nav("contact")} onServices={() => nav("services")} />
-            </div>
-
-            <ExplainerBand />
-
-            <BrandComparison />
-
-            <section id="services" className="section" data-screen-label="02 Services">
-              <div className="container">
-                <div className="section-head reveal">
-                  <span className="num">01 — Services</span>
-                  <h2>Computers, websites, forms, email, AI automation and small business tech advice.</h2>
-                  <p>We help assess the issue, explain your options, and suggest sensible next steps — in plain English. No guaranteed repairs, no emergency support, no instant fixes.</p>
-                </div>
-                <BentoServices />
-              </div>
-            </section>
-
-            <HowItWorks />
-
-            <AICallout />
-
-            <JehiahNote />
-
-            <SafetyBand />
-
-            <Contact />
-          </main>
-          <Footer onNav={nav} />
-        </>
-      );
+      professional.style.clipPath = 'inset(0 0 0 ' + pos + '%)';
+      sliderEl.style.left         = pos + '%';
+      // Labels: mobile = both visible with active-tab state; desktop = one at a time
+      if (window.innerWidth <= 768) {
+        labelLeft.style.opacity  = '';
+        labelRight.style.opacity = '';
+        labelLeft.classList.toggle('active-tab',  pos <= 50);
+        labelRight.classList.toggle('active-tab', pos > 50);
+      } else {
+        labelLeft.classList.remove('active-tab');
+        labelRight.classList.remove('active-tab');
+        labelLeft.style.opacity  = (pos <= 50 && pos > 6)   ? '1' : '0';
+        labelRight.style.opacity = (pos >= 50 && pos < 94) ? '1' : '0';
+      }
+      sliderEl.setAttribute('aria-valuenow', Math.round(pos));
     }
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    function pctFromX(clientX) {
+      return (clientX / window.innerWidth) * 100;
+    }
+
+    /* ---- Mouse drag ---- */
+    sliderEl.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      dragging = true;
+      sliderEl.classList.add('active');
+      community.style.pointerEvents    = 'none';
+      professional.style.pointerEvents = 'none';
+      hintEl.style.opacity = '0';
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!dragging) return;
+      applyPos(pctFromX(e.clientX));
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (!dragging) return;
+      dragging = false;
+      sliderEl.classList.remove('active');
+      community.style.pointerEvents    = '';
+      professional.style.pointerEvents = '';
+    });
+
+    /* ---- Touch drag ---- */
+    sliderEl.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      dragging = true;
+      sliderEl.classList.add('active');
+      community.style.pointerEvents    = 'none';
+      professional.style.pointerEvents = 'none';
+      hintEl.style.opacity = '0';
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function(e) {
+      if (!dragging) return;
+      e.preventDefault();
+      applyPos(pctFromX(e.touches[0].clientX));
+    }, { passive: false });
+
+    document.addEventListener('touchend', function() {
+      if (!dragging) return;
+      dragging = false;
+      sliderEl.classList.remove('active');
+      community.style.pointerEvents    = '';
+      professional.style.pointerEvents = '';
+    });
+
+    /* ---- Keyboard accessibility ---- */
+    sliderEl.setAttribute('tabindex', '0');
+    sliderEl.addEventListener('keydown', function(e) {
+      var step = e.shiftKey ? 10 : 2;
+      if (e.key === 'ArrowLeft')  { applyPos(pos - step, true); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { applyPos(pos + step, true); e.preventDefault(); }
+    });
+
+    /* ---- Label click — snap to that side ---- */
+    labelLeft.addEventListener('click', function() {
+      applyPos(8, true);
+      hintEl.style.opacity = '0';
+    });
+    labelLeft.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { applyPos(8, true); e.preventDefault(); }
+    });
+
+    labelRight.addEventListener('click', function() {
+      applyPos(92, true);
+      hintEl.style.opacity = '0';
+    });
+    labelRight.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { applyPos(92, true); e.preventDefault(); }
+    });
+
+    /* ---- Scroll sync — zero-latency relay, no feedback loop ---- *
+     *
+     * Each iframe posts { jgcScroll: y } only when its own _sync flag
+     * is false (i.e. the scroll came from the real user, not from us).
+     * We relay immediately to the other frame. The receiving frame uses
+     * scrollTo({ behavior:'instant' }) which overrides scroll-behavior:smooth
+     * so there is no mid-animation interruption causing wobble.
+     * Dedup skips relays where the position hasn't meaningfully changed.
+     */
+    var _lastRelayedY = -1;
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.jgcScroll === undefined) return;
+      var y = e.data.jgcScroll;
+      if (Math.abs(y - _lastRelayedY) < 1) return; // skip sub-pixel noise
+      _lastRelayedY = y;
+      var sender = e.source;
+      var target = (sender === community.contentWindow)
+        ? professional.contentWindow
+        : community.contentWindow;
+      if (target) target.postMessage({ jgcSync: y }, '*');
+    });
+
+    /* ---- Init ---- */
+    var isMob = window.innerWidth <= 768;
+    if (isMob) hintEl.textContent = '← tap labels to switch →';
+    applyPos(50);
+
+    /* ---- Resize: re-evaluate mobile state ---- */
+    window.addEventListener('resize', function() {
+      var nowMob = window.innerWidth <= 768;
+      hintEl.textContent = nowMob ? '← tap labels to switch →' : '← drag to compare →';
+      applyPos(pos);
+    });
   </script>
 </body>
 </html>

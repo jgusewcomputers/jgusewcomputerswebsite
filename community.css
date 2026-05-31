@@ -1,0 +1,202 @@
+/* ============================================================
+   JGusew Computers — Community Theme
+   Warm honey-orange identity. Accessible, friendly, local.
+   Import AFTER premium.css.
+
+   Cohort brief: Margaret/Dave/Karen/Phil/Aisha want warmth,
+   zero intimidation, neighbourhood trust. Colour = candle /
+   orange blossom — approachable, energetic, not corporate.
+   ============================================================ */
+
+/* Override glow / accent tokens — warm orange family */
+:root,
+[data-theme="dark"] {
+  --jgc-glow-200: #ffedd5;   /* orange-100 — very soft warm tint     */
+  --jgc-glow-300: #fdba74;   /* orange-300 — warm peach              */
+  --jgc-glow-400: #f97316;   /* orange-500 — the main community hue  */
+  --jgc-glow-500: #ea580c;   /* orange-600 — hover/active depth      */
+  --jgc-glow-600: #c2410c;   /* orange-700 — pressed                 */
+  --jgc-teal-400: #fb923c;   /* orange-400 — secondary accent        */
+  --jgc-teal-300: #fed7aa;   /* orange-200 — soft highlight          */
+  --jgc-border-glow:  rgba(249, 115, 22, 0.38);
+  --jgc-glow-soft:
+    0 0 24px rgba(249, 115, 22, 0.26),
+    0 0 54px rgba(234,  88,  12, 0.12);
+  --jgc-shadow-focus: 0 0 0 4px rgba(249, 115, 22, 0.28);
+  --jgc-shadow-glow:
+    0 0 0 1px rgba(249, 115, 22, 0.35),
+    0 0 28px -6px rgba(249, 115, 22, 0.45);
+}
+
+/* ---- Warm body background ---- */
+body {
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(234,  88, 12, 0.09), transparent 58%),
+    radial-gradient(1000px 600px at 90%  8%, rgba(249, 115, 22, 0.11), transparent 62%),
+    var(--jgc-bg-deep) !important;
+}
+
+/* ---- Candle-warm animated mesh ---- */
+.mesh {
+  background:
+    radial-gradient(40% 35% at var(--m1x,20%) var(--m1y,28%), rgba(249,115,22,0.30), transparent 70%),
+    radial-gradient(42% 34% at var(--m2x,82%) var(--m2y,18%), rgba(234, 88,12,0.16), transparent 72%),
+    radial-gradient(45% 40% at var(--m3x,60%) var(--m3y,85%), rgba(124,45, 18,0.50), transparent 70%) !important;
+}
+
+/* ---- Selection ---- */
+::selection { background: rgba(249, 115, 22, 0.45); color: #fff; }
+
+/* ---- Hero chrome gradient — sunrise orange ---- */
+.hero h1 .chrome,
+.callout .chrome {
+  background: linear-gradient(
+    120deg,
+    #ffedd5  0%,
+    #fdba74 30%,
+    #f97316 60%,
+    #ea580c 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+.hero .quiet .l {
+  background: linear-gradient(to right, #f97316, transparent) !important;
+}
+
+/* ---- Primary button — warm orange pill ---- */
+.btn.primary,
+.btn.primary.pill {
+  background: linear-gradient(180deg, #ffedd5 0%, #fdba74 45%, #f97316 100%) !important;
+  box-shadow: 0 12px 30px -10px rgba(249, 115, 22, 0.55) !important;
+  color: #431407 !important;
+}
+.btn.primary:hover,
+.btn.primary.pill:hover {
+  box-shadow: 0 18px 38px -10px rgba(249, 115, 22, 0.70) !important;
+  color: #431407 !important;
+}
+
+/* ---- Service pills in hero ---- */
+.brand-proof-pill {
+  border-color: rgba(249, 115, 22, 0.22) !important;
+  color: rgba(253, 186, 116, 0.90) !important;
+  background: rgba(249, 115, 22, 0.06) !important;
+}
+.brand-proof-pill:hover {
+  background: rgba(249, 115, 22, 0.12) !important;
+  border-color: rgba(249, 115, 22, 0.46) !important;
+  box-shadow: 0 0 20px -4px rgba(249, 115, 22, 0.32) !important;
+  color: #fff !important;
+}
+
+/* ---- Hero strip dot ---- */
+.hero-strip .dot {
+  background: #f97316 !important;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.68) !important;
+}
+
+/* ---- Nav CTA button ---- */
+.nav .menu .cta {
+  background: linear-gradient(135deg, #fdba74, #f97316) !important;
+  color: #431407 !important;
+}
+
+/* ---- Section numbers ---- */
+.num { color: rgba(249, 115, 22, 0.78) !important; }
+.ex-num { color: rgba(249, 115, 22, 0.52) !important; }
+
+/* ---- How it works steps ---- */
+.step::before       { background: rgba(249, 115, 22, 0.22) !important; }
+.step.active::before { background: #f97316 !important; }
+.step.active .stepnum { color: #f97316 !important; }
+.step-scene .scene-orbit {
+  border-color: rgba(249, 115, 22, 0.18) !important;
+  box-shadow: 0 0 32px rgba(249, 115, 22, 0.10) inset !important;
+}
+
+/* ---- Bento cards hover ---- */
+.bento-card:hover {
+  border-color: rgba(249, 115, 22, 0.22) !important;
+  box-shadow:
+    0 24px 52px -12px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(249, 115, 22, 0.16) !important;
+}
+
+/* ---- Safety band ---- */
+.pill {
+  border-color: rgba(249, 115, 22, 0.30) !important;
+  color: #fdba74 !important;
+}
+
+/* ---- Toggle pill options (contact form) ---- */
+.pill-option.active {
+  background: rgba(249, 115, 22, 0.12) !important;
+  border-color: rgba(249, 115, 22, 0.50) !important;
+  color: #fdba74 !important;
+  box-shadow: 0 0 12px -3px rgba(249, 115, 22, 0.25) !important;
+}
+
+/* ---- Contact section dots ---- */
+.contact .dot {
+  background: #f97316 !important;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.52) !important;
+}
+
+/* ---- Glass form focus ---- */
+.glass-form input:focus,
+.glass-form select:focus,
+.glass-form textarea:focus {
+  border-color: rgba(249, 115, 22, 0.42) !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.14) !important;
+}
+
+/* ---- Jehiah note ---- */
+.jehiah-note .hello { color: #fdba74 !important; }
+
+/* ---- Callout signature ---- */
+.callout .signature { color: rgba(249, 115, 22, 0.55) !important; }
+
+/* ---- intake-side-panel kicker ---- */
+.panel-kicker { color: rgba(249, 115, 22, 0.80) !important; }
+
+/* ---- Brain modal — warm orange accent ---- */
+.brain-modal {
+  border-color: rgba(249, 115, 22, 0.16) !important;
+}
+.brain-eyebrow { color: rgba(249, 115, 22, 0.75) !important; }
+.brain-corner {
+  border-color: rgba(249, 115, 22, 0.40) !important;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.20) !important;
+}
+.brain-node {
+  border-color: rgba(249, 115, 22, 0.24) !important;
+  color: rgba(253, 186, 116, 0.92) !important;
+}
+.brain-node.hub {
+  background: rgba(249, 115, 22, 0.14) !important;
+  border-color: rgba(249, 115, 22, 0.52) !important;
+  color: #ffedd5 !important;
+}
+.brain-enquiry {
+  background: linear-gradient(180deg, #ffedd5 0%, #fdba74 50%, #f97316 100%) !important;
+  color: #431407 !important;
+  box-shadow: 0 8px 24px -8px rgba(249, 115, 22, 0.55) !important;
+}
+.brain-enquiry:hover {
+  box-shadow: 0 12px 32px -8px rgba(249, 115, 22, 0.70) !important;
+}
+.b-line   { stroke: rgba(249, 115, 22, 0.24) !important; }
+.syn-edge { stroke: rgba(249, 115, 22, 0.11) !important; }
+
+/* ---- Brain close button ---- */
+.brain-close {
+  border-color: rgba(249, 115, 22, 0.20) !important;
+  color: rgba(253, 186, 116, 0.75) !important;
+}
+.brain-close:hover {
+  background: rgba(249, 115, 22, 0.12) !important;
+  color: #fff !important;
+}
