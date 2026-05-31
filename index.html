@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JGusew Computers | Local Tech Help &amp; Professional Technology Services</title>
-  <meta name="description" content="JGusew Computers — friendly local computer repairs and professional technology services in Sunbury VIC. Drag to compare community and professional sides.">
+  <title>JGusew Computers | Jehiah Gusew — Local IT Help &amp; Professional Tech Services</title>
+  <meta name="description" content="JGusew Computers by Jehiah Gusew, Sunbury VIC. Local computer help for everyday people, and professional technology services for homes and small businesses.">
   <link rel="canonical" href="https://jgusewcomputers.com/">
   <link rel="icon" href="assets/logos/monogram-flat-navy.png">
 
@@ -13,435 +13,439 @@
   <meta property="og:url"         content="https://jgusewcomputers.com/">
   <meta property="og:site_name"   content="JGusew Computers">
   <meta property="og:locale"      content="en_AU">
-  <meta property="og:title"       content="JGusew Computers | Local Tech Help &amp; Professional Technology Services">
-  <meta property="og:description" content="Friendly local computer repairs and professional technology services in Sunbury VIC. Drag the slider to compare both sides.">
+  <meta property="og:title"       content="JGusew Computers | Local IT Help &amp; Professional Tech Services">
+  <meta property="og:description" content="Local computer help for everyday people in Sunbury, and professional technology services for homes and small businesses.">
   <meta property="og:image"       content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
   <meta name="twitter:card"       content="summary_large_image">
-  <meta name="twitter:title"      content="JGusew Computers | Local Tech Help &amp; Professional Technology Services">
-  <meta name="twitter:description" content="Friendly local computer repairs and professional technology services. Drag to compare.">
-  <meta name="twitter:image"      content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:    #f97316;
+      --orange-lt: #fed7aa;
+      --blue:      #3b82f6;
+      --blue-lt:   #bfdbfe;
+      --navy:      #060f24;
+      --ease:      cubic-bezier(0.2, 0.85, 0.2, 1);
+    }
 
     html, body {
       height: 100%;
+      background: var(--navy);
+      color: #fff;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       overflow: hidden;
-      background: #060f24;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
-    /* ---- Iframes ---- */
-    .frames { position: fixed; inset: 0; }
+    /* Subtle grain */
+    .grain {
+      position: fixed; inset: 0; z-index: 200; pointer-events: none;
+      opacity: 0.07; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
 
-    iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
+    /* ---- Three-panel layout ---- */
+    .tri {
+      display: flex;
+      height: 100vh;
+    }
+
+    .panel {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: flex 600ms var(--ease), background 400ms;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .panel.community,
+    .panel.professional { cursor: pointer; }
+
+    .panel.community:hover  { flex: 1.7 1 0; }
+    .panel.professional:hover { flex: 1.7 1 0; }
+    .panel.about:hover { flex: 1.15 1 0; }
+
+    /* Panel backgrounds */
+    .panel.community {
+      background:
+        radial-gradient(75% 85% at 15% 28%, rgba(249,115,22,0.22), transparent 65%),
+        radial-gradient(50% 55% at 8%  82%, rgba(249,115,22,0.10), transparent 65%),
+        var(--navy);
+    }
+    .panel.community:hover {
+      background:
+        radial-gradient(85% 90% at 18% 28%, rgba(249,115,22,0.32), transparent 65%),
+        radial-gradient(60% 65% at 8%  82%, rgba(249,115,22,0.16), transparent 65%),
+        var(--navy);
+    }
+
+    .panel.about {
+      background: var(--navy);
+      border-left:  1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      cursor: default;
+      z-index: 1;
+    }
+
+    .panel.professional {
+      background:
+        radial-gradient(75% 85% at 85% 28%, rgba(59,130,246,0.22), transparent 65%),
+        radial-gradient(50% 55% at 92% 82%, rgba(59,130,246,0.10), transparent 65%),
+        var(--navy);
+    }
+    .panel.professional:hover {
+      background:
+        radial-gradient(85% 90% at 82% 28%, rgba(59,130,246,0.32), transparent 65%),
+        radial-gradient(60% 65% at 92% 82%, rgba(59,130,246,0.16), transparent 65%),
+        var(--navy);
+    }
+
+    /* Focus ring */
+    .panel.community:focus-visible,
+    .panel.professional:focus-visible {
+      outline: 2px solid rgba(255,255,255,0.5);
+      outline-offset: -4px;
+    }
+
+    /* ---- Side panel inner content ---- */
+    .panel-inner {
+      padding: 52px 44px;
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .panel-icon {
+      font-size: 34px;
+      line-height: 1;
       display: block;
     }
 
-    #frame-community    { z-index: 1; }
-    #frame-professional { z-index: 2; }
-
-    /* ---- Slider ---- */
-    #comp-slider {
-      position: fixed;
-      top: 0; bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 64px;
-      z-index: 1000;
-      cursor: ew-resize;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: none;
+    .panel-eyebrow {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
     }
+    .community .panel-eyebrow { color: var(--orange); }
+    .professional .panel-eyebrow { color: var(--blue); }
 
-    /* Dual-tone vertical line: amber top → white → blue bottom */
-    #comp-line {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      background: linear-gradient(
-        180deg,
-        transparent                     0%,
-        rgba(249, 115, 22, 0.45)       10%,
-        rgba(255, 255, 255, 0.55)      35%,
-        rgba(255, 255, 255, 0.55)      65%,
-        rgba(59,  130, 246, 0.45)      90%,
-        transparent                    100%
-      );
+    .panel-heading {
+      font-size: clamp(24px, 2.6vw, 40px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.022em;
+      color: #fff;
     }
 
-    /* Split-glow handle: amber left · blue right */
-    #comp-handle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(
-        90deg,
-        rgba(249, 115, 22, 0.12) 0%,
-        rgba(8,   14,  38, 0.84) 50%,
-        rgba(59, 130, 246, 0.12) 100%
-      );
-      border: 1.5px solid rgba(255, 255, 255, 0.24);
-      backdrop-filter: blur(20px) saturate(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(140%);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow:
-        0 4px 20px rgba(0,0,0,0.55),
-        -8px 0 18px rgba(249,115,22,0.12),
-          8px 0 18px rgba(59,130,246,0.12);
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-    }
-
-    #comp-slider:hover  #comp-handle,
-    #comp-slider.active #comp-handle {
-      transform: translate(-50%, -50%) scale(1.12);
-      border-color: rgba(255, 255, 255, 0.40);
-      box-shadow:
-        0 8px 32px rgba(0,0,0,0.65),
-        -14px 0 28px rgba(249,115,22,0.22),
-          14px 0 28px rgba(59,130,246,0.22);
-    }
-
-    /* ---- Entry cards (labels) ---- */
-    .comp-label {
-      position: fixed;
-      top: 22px;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 16px;
-      border-radius: 16px;
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      transition: opacity 300ms ease, transform 200ms ease, box-shadow 200ms ease;
-      cursor: pointer;
-      max-width: 240px;
-    }
-    .comp-label:hover {
-      transform: translateY(-1px);
-    }
-
-    .label-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-    .label-body {
+    .panel-list {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 10px;
+      margin: 0;
     }
-    .label-title {
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 1.1;
+    .panel-list li {
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: rgba(255,255,255,0.65);
+      transition: color 220ms;
     }
-    .label-sub {
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
-      opacity: 0.72;
-    }
-    .label-caret {
-      font-size: 11px;
-      opacity: 0.50;
+    .panel:hover .panel-list li { color: rgba(255,255,255,0.84); }
+    .panel-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
       flex-shrink: 0;
-      line-height: 1;
+      transition: box-shadow 220ms;
+    }
+    .community .panel-list li::before {
+      background: var(--orange);
+      box-shadow: 0 0 0 rgba(249,115,22,0.7);
+    }
+    .community:hover .panel-list li::before {
+      box-shadow: 0 0 8px rgba(249,115,22,0.7);
+    }
+    .professional .panel-list li::before {
+      background: var(--blue);
+      box-shadow: 0 0 0 rgba(59,130,246,0.7);
+    }
+    .professional:hover .panel-list li::before {
+      box-shadow: 0 0 8px rgba(59,130,246,0.7);
     }
 
-    /* Community card — warm honey-orange */
-    #label-community {
-      left: 18px;
-      background: rgba(249, 115, 22, 0.13);
-      color: #fed7aa;
-      border: 1px solid rgba(249, 115, 22, 0.30);
-      box-shadow:
-        0 2px 16px rgba(0,0,0,0.40),
-        0 0  24px rgba(249,115,22,0.10);
-    }
-    #label-community:hover {
-      background: rgba(249, 115, 22, 0.20);
-      box-shadow:
-        0 4px 20px rgba(0,0,0,0.45),
-        0 0  28px rgba(249,115,22,0.18);
+    .panel-location {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.04em;
     }
 
-    /* Professional card — cool cobalt */
-    #label-professional {
-      right: 18px;
-      background: rgba(59, 130, 246, 0.13);
-      color: #bfdbfe;
-      border: 1px solid rgba(59, 130, 246, 0.30);
-      box-shadow:
-        0 2px 16px rgba(0,0,0,0.40),
-        0 0  24px rgba(59,130,246,0.10);
+    .panel-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 11px 20px;
+      border-radius: 999px;
+      width: fit-content;
+      transition: transform 240ms var(--ease), box-shadow 240ms;
     }
-    #label-professional:hover {
-      background: rgba(59, 130, 246, 0.20);
-      box-shadow:
-        0 4px 20px rgba(0,0,0,0.45),
-        0 0  28px rgba(59,130,246,0.18);
+    .community .panel-cta {
+      background: rgba(249,115,22,0.13);
+      border: 1px solid rgba(249,115,22,0.36);
+      color: var(--orange-lt);
+    }
+    .professional .panel-cta {
+      background: rgba(59,130,246,0.13);
+      border: 1px solid rgba(59,130,246,0.36);
+      color: var(--blue-lt);
+    }
+    .panel:hover .panel-cta {
+      transform: translateX(5px);
+    }
+    .community:hover .panel-cta {
+      box-shadow: 0 0 24px rgba(249,115,22,0.24);
+    }
+    .professional:hover .panel-cta {
+      box-shadow: 0 0 24px rgba(59,130,246,0.24);
+    }
+    .cta-arr { transition: transform 240ms var(--ease); }
+    .panel:hover .cta-arr { transform: translateX(3px); }
+
+    /* ---- About centre panel ---- */
+    .about-inner {
+      padding: 52px 40px;
+      max-width: 300px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* ---- Drag hint ---- */
-    #comp-hint {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 999;
+    .about-logo {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+    }
+    .about-wordmark {
+      font-size: 16px; font-weight: 800;
+      letter-spacing: 0.26em; color: #fff;
+    }
+    .about-sub {
+      font-size: 8.5px; letter-spacing: 0.38em;
+      text-transform: uppercase; color: rgba(255,255,255,0.30);
+    }
+
+    .about-rule {
+      width: 32px; height: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .about-name {
+      font-size: 21px; font-weight: 600;
+      letter-spacing: -0.01em; color: #fff;
+    }
+
+    .about-bio {
+      font-size: 13.5px; line-height: 1.68;
+      color: rgba(255,255,255,0.48);
+      max-width: 240px;
+    }
+
+    .about-links {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+    }
+    .about-link {
+      font-size: 12px; color: rgba(255,255,255,0.40);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color 200ms;
+    }
+    .about-link:hover { color: rgba(255,255,255,0.80); }
+    .about-link.email {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.35);
-      letter-spacing: 0.12em;
-      pointer-events: none;
-      white-space: nowrap;
-      transition: opacity 500ms ease;
     }
 
-    /* ---- Mobile tab behaviour ---- */
+    /* Two-dot bridge: orange · blue */
+    .about-bridge {
+      display: flex; align-items: center; gap: 0;
+      width: 100%; margin-top: 4px;
+    }
+    .bridge-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.10));
+    }
+    .bridge-line.right {
+      background: linear-gradient(to left, transparent, rgba(255,255,255,0.10));
+    }
+    .bridge-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      margin: 0 8px; flex-shrink: 0;
+    }
+    .bridge-dot.orange {
+      background: var(--orange);
+      box-shadow: 0 0 10px rgba(249,115,22,0.65);
+    }
+    .bridge-dot.blue {
+      background: var(--blue);
+      box-shadow: 0 0 10px rgba(59,130,246,0.65);
+    }
+    .bridge-gap { width: 12px; flex-shrink: 0; }
+
+    /* ---- Reveal on load ---- */
+    .panel-inner,
+    .about-inner {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: panelIn 700ms var(--ease) forwards;
+    }
+    .panel.community  .panel-inner { animation-delay: 60ms; }
+    .panel.about      .about-inner { animation-delay: 160ms; }
+    .panel.professional .panel-inner { animation-delay: 100ms; }
+    @keyframes panelIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Mobile ---- */
     @media (max-width: 768px) {
-      /* Both labels stay visible on mobile — active glows, inactive dims */
-      .comp-label {
-        transition: opacity 300ms ease, transform 220ms ease,
-                    box-shadow 220ms ease, background 220ms ease,
-                    border-color 220ms ease;
+      html, body { overflow: auto; height: auto; }
+
+      .tri {
+        flex-direction: column;
+        min-height: 100vh;
+        height: auto;
       }
-      #label-community.active-tab {
-        background: rgba(249, 115, 22, 0.24);
-        border-color: rgba(249, 115, 22, 0.54);
-        box-shadow:
-          0 2px 16px rgba(0,0,0,0.40),
-          0 0  32px rgba(249,115,22,0.30);
+
+      .panel {
+        flex: none !important;
+        width: 100%;
+        min-height: 300px;
+        justify-content: flex-start;
+        transition: background 400ms;
       }
-      #label-professional.active-tab {
-        background: rgba(59, 130, 246, 0.24);
-        border-color: rgba(59, 130, 246, 0.54);
-        box-shadow:
-          0 2px 16px rgba(0,0,0,0.40),
-          0 0  32px rgba(59,130,246,0.30);
+
+      .panel.about {
+        min-height: 260px;
+        border-left: none; border-right: none;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
       }
-      .comp-label:not(.active-tab) { opacity: 0.40; transform: translateY(1px); }
+
+      .panel-inner { padding: 40px 28px; max-width: 100%; }
+      .about-inner { padding: 40px 28px; max-width: 100%; text-align: left; align-items: flex-start; }
+
+      .panel-heading { font-size: clamp(26px, 7vw, 36px); }
+
+      .about-bridge { display: none; }
     }
 
-    @media (max-width: 640px) {
-      #comp-hint { font-size: 10px; bottom: 18px; }
-      .comp-label { padding: 8px 11px; top: 14px; }
-      .label-title { font-size: 11px; }
-      .label-sub { display: none; }
-      #comp-handle { width: 42px; height: 42px; }
-      /* Prevent labels from overlapping on small screens */
-      #label-community    { left: 8px;  max-width: calc(50% - 22px); }
-      #label-professional { right: 8px; max-width: calc(50% - 22px); }
+    @media (max-width: 480px) {
+      .panel { min-height: 260px; }
+      .panel.about { min-height: 240px; }
+      .panel-inner { padding: 32px 22px; }
+      .about-inner { padding: 32px 22px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="frames">
-    <iframe id="frame-community"    src="/community"    title="Community — JGusew Computers"></iframe>
-    <iframe id="frame-professional" src="/professional" title="Professional — JGusew Computers"></iframe>
-  </div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <!-- Comparison slider -->
-  <div id="comp-slider"
-    role="slider" aria-label="Drag to compare community and professional views"
-    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-    <div id="comp-line"></div>
-    <div id="comp-handle" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-        stroke="rgba(255,255,255,0.70)" stroke-width="2.2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
-      </svg>
+  <div class="tri" role="main">
+
+    <!-- ── Left: Community / IT repairs ── -->
+    <a class="panel community"
+       href="https://community.jgusewcomputers.com"
+       aria-label="Local IT help and computer repairs — community site">
+      <div class="panel-inner">
+        <span class="panel-icon" aria-hidden="true">🔧</span>
+        <span class="panel-eyebrow">Local IT Help · Sunbury VIC</span>
+        <h2 class="panel-heading">Tech problems<br>sorted by a real<br>local person.</h2>
+        <ul class="panel-list">
+          <li>Slow computer cleanup</li>
+          <li>Virus &amp; pop-up removal</li>
+          <li>New device setup</li>
+          <li>Email &amp; account help</li>
+          <li>Elderly tech support</li>
+          <li>Scam &amp; security concerns</li>
+        </ul>
+        <div class="panel-location">📍 Based in Sunbury, VIC</div>
+        <div class="panel-cta">
+          Get help today <span class="cta-arr" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ── Centre: About Jehiah ── -->
+    <div class="panel about" aria-label="About Jehiah Gusew">
+      <div class="about-inner">
+        <div class="about-logo">
+          <span class="about-wordmark">JGUSEW</span>
+          <span class="about-sub">Computers</span>
+        </div>
+
+        <div class="about-bridge" aria-hidden="true">
+          <span class="bridge-dot orange"></span>
+          <span class="bridge-line"></span>
+          <span class="bridge-gap"></span>
+          <span class="bridge-line right"></span>
+          <span class="bridge-dot blue"></span>
+        </div>
+
+        <p class="about-name">Jehiah Gusew</p>
+
+        <p class="about-bio">
+          I'm a one-person technology practice in Sunbury, VIC. I help everyday people sort out their computers, and work with homes and small businesses on websites, systems and automation.
+        </p>
+
+        <div class="about-rule"></div>
+
+        <div class="about-links">
+          <a href="about.html" class="about-link">About me →</a>
+          <a href="mailto:hello@jgusewcomputers.com" class="about-link email">hello@jgusewcomputers.com</a>
+        </div>
+      </div>
     </div>
+
+    <!-- ── Right: Professional / Business services ── -->
+    <a class="panel professional"
+       href="https://professional.jgusewcomputers.com"
+       aria-label="Professional technology services — professional site">
+      <div class="panel-inner">
+        <span class="panel-icon" aria-hidden="true">⚡</span>
+        <span class="panel-eyebrow">Professional Services</span>
+        <h2 class="panel-heading">Websites, systems<br>and automation<br>that hold up.</h2>
+        <ul class="panel-list">
+          <li>Websites &amp; contact forms</li>
+          <li>AI automation starter</li>
+          <li>Email cleanup &amp; organisation</li>
+          <li>Small business tech review</li>
+          <li>Digital organisation</li>
+          <li>Scam &amp; security triage</li>
+        </ul>
+        <div class="panel-cta">
+          Start a project <span class="cta-arr" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 
-  <!-- Entry cards — click to snap to that side -->
-  <div id="label-community" class="comp-label"
-    role="button" tabindex="0"
-    aria-label="View community repairs side">
-    <span class="label-icon">🔧</span>
-    <div class="label-body">
-      <span class="label-title">Local Repairs</span>
-      <span class="label-sub">Quick help · No jargon · Sunbury</span>
-    </div>
-    <span class="label-caret">◄</span>
-  </div>
-
-  <div id="label-professional" class="comp-label"
-    role="button" tabindex="0"
-    aria-label="View professional services side">
-    <span class="label-caret">►</span>
-    <div class="label-body">
-      <span class="label-title">Professional Services</span>
-      <span class="label-sub">Systems · Websites · Automation</span>
-    </div>
-    <span class="label-icon">⚡</span>
-  </div>
-
-  <div id="comp-hint">← drag to compare →</div>
-
-  <script>
-    var community    = document.getElementById('frame-community');
-    var professional = document.getElementById('frame-professional');
-    var sliderEl     = document.getElementById('comp-slider');
-    var labelLeft    = document.getElementById('label-community');
-    var labelRight   = document.getElementById('label-professional');
-    var hintEl       = document.getElementById('comp-hint');
-
-    var pos      = 50;
-    var dragging = false;
-
-    /* ---- Apply slider position ---- */
-    function applyPos(pct, animate) {
-      pos = Math.max(2, Math.min(98, pct));
-      if (animate) {
-        professional.style.transition = 'clip-path 380ms cubic-bezier(0.2,0.7,0.2,1)';
-        sliderEl.style.transition     = 'left 380ms cubic-bezier(0.2,0.7,0.2,1)';
-        setTimeout(function() {
-          professional.style.transition = '';
-          sliderEl.style.transition     = '';
-        }, 400);
-      }
-      professional.style.clipPath = 'inset(0 0 0 ' + pos + '%)';
-      sliderEl.style.left         = pos + '%';
-      // Labels: mobile = both visible with active-tab state; desktop = one at a time
-      if (window.innerWidth <= 768) {
-        labelLeft.style.opacity  = '';
-        labelRight.style.opacity = '';
-        labelLeft.classList.toggle('active-tab',  pos <= 50);
-        labelRight.classList.toggle('active-tab', pos > 50);
-      } else {
-        labelLeft.classList.remove('active-tab');
-        labelRight.classList.remove('active-tab');
-        labelLeft.style.opacity  = (pos <= 50 && pos > 6)   ? '1' : '0';
-        labelRight.style.opacity = (pos >= 50 && pos < 94) ? '1' : '0';
-      }
-      sliderEl.setAttribute('aria-valuenow', Math.round(pos));
-    }
-
-    function pctFromX(clientX) {
-      return (clientX / window.innerWidth) * 100;
-    }
-
-    /* ---- Mouse drag ---- */
-    sliderEl.addEventListener('mousedown', function(e) {
-      e.preventDefault();
-      dragging = true;
-      sliderEl.classList.add('active');
-      community.style.pointerEvents    = 'none';
-      professional.style.pointerEvents = 'none';
-      hintEl.style.opacity = '0';
-    });
-
-    document.addEventListener('mousemove', function(e) {
-      if (!dragging) return;
-      applyPos(pctFromX(e.clientX));
-    });
-
-    document.addEventListener('mouseup', function() {
-      if (!dragging) return;
-      dragging = false;
-      sliderEl.classList.remove('active');
-      community.style.pointerEvents    = '';
-      professional.style.pointerEvents = '';
-    });
-
-    /* ---- Touch drag ---- */
-    sliderEl.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      dragging = true;
-      sliderEl.classList.add('active');
-      community.style.pointerEvents    = 'none';
-      professional.style.pointerEvents = 'none';
-      hintEl.style.opacity = '0';
-    }, { passive: false });
-
-    document.addEventListener('touchmove', function(e) {
-      if (!dragging) return;
-      e.preventDefault();
-      applyPos(pctFromX(e.touches[0].clientX));
-    }, { passive: false });
-
-    document.addEventListener('touchend', function() {
-      if (!dragging) return;
-      dragging = false;
-      sliderEl.classList.remove('active');
-      community.style.pointerEvents    = '';
-      professional.style.pointerEvents = '';
-    });
-
-    /* ---- Keyboard accessibility ---- */
-    sliderEl.setAttribute('tabindex', '0');
-    sliderEl.addEventListener('keydown', function(e) {
-      var step = e.shiftKey ? 10 : 2;
-      if (e.key === 'ArrowLeft')  { applyPos(pos - step, true); e.preventDefault(); }
-      if (e.key === 'ArrowRight') { applyPos(pos + step, true); e.preventDefault(); }
-    });
-
-    /* ---- Label click — snap to that side ---- */
-    labelLeft.addEventListener('click', function() {
-      applyPos(8, true);
-      hintEl.style.opacity = '0';
-    });
-    labelLeft.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { applyPos(8, true); e.preventDefault(); }
-    });
-
-    labelRight.addEventListener('click', function() {
-      applyPos(92, true);
-      hintEl.style.opacity = '0';
-    });
-    labelRight.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { applyPos(92, true); e.preventDefault(); }
-    });
-
-    /* ---- Scroll sync — zero-latency relay, no feedback loop ---- *
-     *
-     * Each iframe posts { jgcScroll: y } only when its own _sync flag
-     * is false (i.e. the scroll came from the real user, not from us).
-     * We relay immediately to the other frame. The receiving frame uses
-     * scrollTo({ behavior:'instant' }) which overrides scroll-behavior:smooth
-     * so there is no mid-animation interruption causing wobble.
-     * Dedup skips relays where the position hasn't meaningfully changed.
-     */
-    var _lastRelayedY = -1;
-    window.addEventListener('message', function(e) {
-      if (!e.data || e.data.jgcScroll === undefined) return;
-      var y = e.data.jgcScroll;
-      if (Math.abs(y - _lastRelayedY) < 1) return; // skip sub-pixel noise
-      _lastRelayedY = y;
-      var sender = e.source;
-      var target = (sender === community.contentWindow)
-        ? professional.contentWindow
-        : community.contentWindow;
-      if (target) target.postMessage({ jgcSync: y }, '*');
-    });
-
-    /* ---- Init ---- */
-    var isMob = window.innerWidth <= 768;
-    if (isMob) hintEl.textContent = '← tap labels to switch →';
-    applyPos(50);
-
-    /* ---- Resize: re-evaluate mobile state ---- */
-    window.addEventListener('resize', function() {
-      var nowMob = window.innerWidth <= 768;
-      hintEl.textContent = nowMob ? '← tap labels to switch →' : '← drag to compare →';
-      applyPos(pos);
-    });
-  </script>
 </body>
 </html>
