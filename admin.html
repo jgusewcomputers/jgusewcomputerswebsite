@@ -236,9 +236,51 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .widget-body {
-      padding: 24px 20px 20px;
+      padding: 18px 16px 16px;
       position: relative;
     }
+
+    /* ---- Metrics grid ---- */
+    .metrics-section { margin-bottom: 14px; }
+    .metrics-section:last-child { margin-bottom: 0; }
+    .metrics-section-label {
+      font-family: var(--mono);
+      font-size: 8.5px; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 6px; padding-left: 2px;
+    }
+    .metrics-grid {
+      display: grid; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 3px; overflow: hidden;
+    }
+    .metrics-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .metrics-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .metric-cell {
+      background: var(--surface);
+      padding: 11px 13px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .metric-label-top {
+      font-family: var(--mono);
+      font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-3);
+      line-height: 1.3;
+    }
+    .metric-num {
+      font-family: var(--mono);
+      font-size: 26px; font-weight: 700; line-height: 1;
+      color: var(--cyan);
+      text-shadow: 0 0 14px rgba(0,200,255,0.26);
+      min-height: 26px;
+    }
+    .metric-num.amber {
+      color: var(--amber);
+      text-shadow: 0 0 14px rgba(245,158,11,0.26);
+    }
+    .metric-num.dim { color: var(--text-3); font-size: 18px; }
+    .metric-num.err { color: var(--red); font-size: 13px; letter-spacing: 0; }
 
     .widget-foot {
       position: relative;
@@ -440,57 +482,69 @@
 
     <div class="widget-grid" id="widget-grid">
 
-      <!-- ── Widget 01: CreateSecret counter ── -->
-      <div class="widget" id="w-secrets">
+      <!-- ── Widget 01: CreateSecret Metrics ── -->
+      <div class="widget" id="w-metrics">
         <div class="widget-header">
           <div>
             <div class="widget-id">WGT-001</div>
-            <div class="widget-title">Create Secret · Counter</div>
+            <div class="widget-title">Create Secret · Metrics</div>
           </div>
           <div class="widget-actions">
-            <button class="widget-btn" id="btn-config-secrets" title="Configure" onclick="toggleConfig('secrets')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            </button>
-            <button class="widget-btn" id="btn-refresh-secrets" title="Refresh" onclick="fetchSecretsCount()">
+            <button class="widget-btn" id="btn-refresh-metrics" title="Refresh" onclick="fetchMetrics()">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
             </button>
           </div>
         </div>
 
         <div class="widget-body">
-          <div class="counter-wrap">
-            <div class="counter-number loading" id="secrets-count">···</div>
-            <div class="counter-label">Total secrets created</div>
-            <div class="counter-delta" id="secrets-delta"></div>
+
+          <!-- Volume -->
+          <div class="metrics-section">
+            <div class="metrics-section-label">Volume</div>
+            <div class="metrics-grid metrics-grid-4">
+              <div class="metric-cell">
+                <div class="metric-label-top">Created<br>Today</div>
+                <div class="metric-num dim" id="m-create-today">···</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label-top">Created<br>This Hour</div>
+                <div class="metric-num dim" id="m-create-hour">···</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label-top">Revealed<br>Today</div>
+                <div class="metric-num dim" id="m-reveal-today">···</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label-top">Revealed<br>This Hour</div>
+                <div class="metric-num dim" id="m-reveal-hour">···</div>
+              </div>
+            </div>
           </div>
 
-          <!-- Config panel (hidden by default) -->
-          <div class="config-panel" id="config-secrets">
-            <div class="config-row">
-              <label class="config-label">API Endpoint</label>
-              <input class="config-input" id="cfg-secrets-url"
-                placeholder="https://createsecret.com/api/v1/stats"
-                title="Full URL that returns JSON with the count">
-            </div>
-            <div class="config-row">
-              <label class="config-label">API Key (if required)</label>
-              <input class="config-input" id="cfg-secrets-key"
-                type="password" placeholder="sk_…">
-            </div>
-            <div class="config-row">
-              <label class="config-label">JSON count field path</label>
-              <input class="config-input" id="cfg-secrets-field"
-                placeholder="count  (or data.total_secrets)">
-            </div>
-            <div class="config-row">
-              <button class="config-save" onclick="saveSecretsConfig()">Save &amp; fetch</button>
+          <!-- Security & health -->
+          <div class="metrics-section">
+            <div class="metrics-section-label">Security &amp; Health · Today</div>
+            <div class="metrics-grid metrics-grid-3">
+              <div class="metric-cell">
+                <div class="metric-label-top">Failed<br>Reveals</div>
+                <div class="metric-num amber dim" id="m-fail-today">···</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label-top">Rate<br>Limited</div>
+                <div class="metric-num amber dim" id="m-ratelimit-today">···</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label-top">Turnstile<br>Challenges</div>
+                <div class="metric-num amber dim" id="m-turnstile-today">···</div>
+              </div>
             </div>
           </div>
+
         </div>
 
         <div class="widget-foot">
-          <div class="source-tag">createsecret.com</div>
-          <div class="last-updated" id="secrets-updated">—</div>
+          <div class="source-tag">api.createsecret.com</div>
+          <div class="last-updated" id="metrics-updated">—</div>
         </div>
       </div>
 
@@ -505,14 +559,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ── Config defaults — update these or use the in-widget config panel ──
-    const SECRETS_DEFAULTS = {
-      url:   localStorage.getItem('jgc_secrets_url')   || '',
-      key:   localStorage.getItem('jgc_secrets_key')   || '',
-      field: localStorage.getItem('jgc_secrets_field') || 'count',
-    };
-
-    // ── Clock ──
+    // ── Clock ──────────────────────────────────────────────────────────────
     function tick() {
       const now = new Date();
       const pad = n => String(n).padStart(2, '0');
@@ -525,150 +572,113 @@
     tick();
     setInterval(tick, 1000);
 
-    // ── Read admin email from Cloudflare Access JWT cookie ──
+    // ── Read admin email from Cloudflare Access JWT cookie ──────────────────
     (function () {
       try {
         const raw = document.cookie.split(';').map(c => c.trim())
           .find(c => c.startsWith('CF_Authorization='));
         if (!raw) return;
         const payload = JSON.parse(atob(raw.split('=')[1].split('.')[1]));
-        if (payload.email) {
-          document.getElementById('header-user').textContent = payload.email;
-        }
-      } catch { /* cookie absent or malformed */ }
+        if (payload.email) document.getElementById('header-user').textContent = payload.email;
+      } catch { /* absent or malformed */ }
     })();
 
-    // ── Toast helper ──
-    let toastTimer;
+    // ── Toast ───────────────────────────────────────────────────────────────
+    let _toastTimer;
     function showToast(msg) {
       const el = document.getElementById('toast');
       el.textContent = msg;
       el.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
     }
 
-    // ── Config panel toggle ──
-    function toggleConfig(id) {
-      const panel = document.getElementById('config-' + id);
-      if (!panel) return;
-      const open = panel.classList.toggle('open');
-      if (open && id === 'secrets') {
-        document.getElementById('cfg-secrets-url').value   = SECRETS_DEFAULTS.url;
-        document.getElementById('cfg-secrets-key').value   = SECRETS_DEFAULTS.key;
-        document.getElementById('cfg-secrets-field').value = SECRETS_DEFAULTS.field;
-      }
-    }
-
-    function saveSecretsConfig() {
-      const url   = document.getElementById('cfg-secrets-url').value.trim();
-      const key   = document.getElementById('cfg-secrets-key').value.trim();
-      const field = document.getElementById('cfg-secrets-field').value.trim() || 'count';
-      localStorage.setItem('jgc_secrets_url',   url);
-      localStorage.setItem('jgc_secrets_key',   key);
-      localStorage.setItem('jgc_secrets_field', field);
-      SECRETS_DEFAULTS.url   = url;
-      SECRETS_DEFAULTS.key   = key;
-      SECRETS_DEFAULTS.field = field;
-      document.getElementById('config-secrets').classList.remove('open');
-      fetchSecretsCount();
-    }
-
-    // ── Dig into a nested JSON field path like "data.total_secrets" ──
-    function getNestedField(obj, path) {
-      return path.split('.').reduce((o, k) => (o != null ? o[k] : undefined), obj);
-    }
-
-    // ── Secrets counter ──
-    let _lastSecretsCount = null;
-
-    async function fetchSecretsCount() {
-      const url   = localStorage.getItem('jgc_secrets_url')   || SECRETS_DEFAULTS.url;
-      const key   = localStorage.getItem('jgc_secrets_key')   || SECRETS_DEFAULTS.key;
-      const field = localStorage.getItem('jgc_secrets_field') || SECRETS_DEFAULTS.field;
-
-      const countEl   = document.getElementById('secrets-count');
-      const updatedEl = document.getElementById('secrets-updated');
-      const deltaEl   = document.getElementById('secrets-delta');
-      const btn       = document.getElementById('btn-refresh-secrets');
-
-      if (!url) {
-        countEl.className = 'counter-number error';
-        countEl.textContent = 'Configure endpoint ↑';
-        updatedEl.textContent = '—';
-        toggleConfig('secrets');
-        return;
-      }
-
-      countEl.className = 'counter-number loading';
-      countEl.textContent = '···';
-      btn.classList.add('spinning');
-
-      try {
-        const headers = { 'Accept': 'application/json' };
-        if (key) headers['Authorization'] = `Bearer ${key}`;
-
-        const res = await fetch(url, { headers });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-
-        const raw = getNestedField(data, field);
-        const count = parseInt(raw, 10);
-        if (isNaN(count)) throw new Error(`Field "${field}" not found or not a number`);
-
-        // Animate counter up from current displayed value
-        const prev = _lastSecretsCount;
-        animateCount(countEl, prev ?? count, count);
-
-        // Delta badge
-        if (prev !== null && count !== prev) {
-          const diff = count - prev;
-          deltaEl.textContent = (diff > 0 ? '+' : '') + diff.toLocaleString() + ' since last refresh';
-          deltaEl.className = 'counter-delta visible' + (diff < 0 ? ' down' : '');
-        } else {
-          deltaEl.className = 'counter-delta';
-        }
-        _lastSecretsCount = count;
-
-        const now = new Date();
-        updatedEl.textContent = `Synced ${now.getUTCHours().toString().padStart(2,'0')}:${now.getUTCMinutes().toString().padStart(2,'0')}:${now.getUTCSeconds().toString().padStart(2,'0')} UTC`;
-        countEl.className = 'counter-number';
-
-      } catch (err) {
-        countEl.className = 'counter-number error';
-        countEl.textContent = 'Error';
-        updatedEl.textContent = err.message;
-        showToast('Fetch failed: ' + err.message);
-      } finally {
-        btn.classList.remove('spinning');
-      }
-    }
-
+    // ── Animated number counter ─────────────────────────────────────────────
     function animateCount(el, from, to) {
-      const duration = 900;
+      const duration = 700;
       const start = performance.now();
       function frame(now) {
         const t = Math.min((now - start) / duration, 1);
         const ease = 1 - Math.pow(1 - t, 3);
-        const current = Math.round(from + (to - from) * ease);
-        el.textContent = current.toLocaleString();
+        el.textContent = Math.round(from + (to - from) * ease).toLocaleString();
         if (t < 1) requestAnimationFrame(frame);
         else el.textContent = to.toLocaleString();
       }
       requestAnimationFrame(frame);
     }
 
-    // ── Auto-fetch on load if endpoint is already configured ──
-    window.addEventListener('load', () => {
-      if (SECRETS_DEFAULTS.url) {
-        fetchSecretsCount();
-      } else {
-        const el = document.getElementById('secrets-count');
-        el.className = 'counter-number error';
-        el.textContent = 'Not configured';
-        document.getElementById('secrets-updated').textContent = 'Click ⚙ to set API endpoint';
+    // ── CreateSecret Metrics ────────────────────────────────────────────────
+    // Token lives server-side in CREATESECRET_METRICS_TOKEN env secret.
+    // This page fetches /api/createsecret-metrics — never the upstream directly.
+
+    const _prev = {};  // stores last values for smooth delta animation
+    let   _refreshTimer;
+
+    function setMetric(id, val, isAmber) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const from = _prev[id] ?? 0;
+      _prev[id]  = val;
+      el.className = 'metric-num' + (isAmber ? ' amber' : '');
+      animateCount(el, from, val);
+    }
+
+    function setMetricError(msg) {
+      const ids = [
+        'm-create-today','m-create-hour',
+        'm-reveal-today','m-reveal-hour',
+        'm-fail-today','m-ratelimit-today','m-turnstile-today'
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.className = 'metric-num err'; el.textContent = '—'; }
+      });
+      document.getElementById('metrics-updated').textContent = msg;
+    }
+
+    async function fetchMetrics() {
+      const btn = document.getElementById('btn-refresh-metrics');
+      btn.classList.add('spinning');
+
+      try {
+        const res = await fetch('/api/createsecret-metrics', { cache: 'no-store' });
+        const json = await res.json();
+
+        if (!res.ok) {
+          throw new Error(json.error || `HTTP ${res.status}`);
+        }
+
+        const t = json.today       || {};
+        const h = json.currentHour || {};
+
+        setMetric('m-create-today',   t.create_success  || 0, false);
+        setMetric('m-create-hour',    h.create_success  || 0, false);
+        setMetric('m-reveal-today',   t.reveal_success  || 0, false);
+        setMetric('m-reveal-hour',    h.reveal_success  || 0, false);
+        setMetric('m-fail-today',     t.reveal_failure  || 0, true);
+        setMetric('m-ratelimit-today',
+          (t.rate_limited_create || 0) + (t.rate_limited_reveal || 0), true);
+        setMetric('m-turnstile-today',
+          (t.turnstile_challenge_create || 0) + (t.turnstile_challenge_reveal || 0), true);
+
+        // Timestamp from API response
+        const ts  = json.generatedAt ? new Date(json.generatedAt) : new Date();
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('metrics-updated').textContent =
+          `Synced ${pad(ts.getUTCHours())}:${pad(ts.getUTCMinutes())}:${pad(ts.getUTCSeconds())} UTC`;
+
+      } catch (err) {
+        setMetricError(err.message);
+        showToast('Metrics: ' + err.message);
+      } finally {
+        btn.classList.remove('spinning');
+        // Auto-refresh every 60 s
+        clearTimeout(_refreshTimer);
+        _refreshTimer = setTimeout(fetchMetrics, 60_000);
       }
-    });
+    }
+
+    window.addEventListener('load', fetchMetrics);
   </script>
 
 </body>
