@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADMIN · JGUSEW COMPUTERS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #05080f;
+      --surface:     #080d1a;
+      --surface-2:   #0c1325;
+      --border:      rgba(0, 200, 255, 0.12);
+      --border-hi:   rgba(0, 200, 255, 0.36);
+      --cyan:        #00c8ff;
+      --cyan-dim:    rgba(0, 200, 255, 0.55);
+      --amber:       #f59e0b;
+      --amber-dim:   rgba(245, 158, 11, 0.55);
+      --green:       #22c55e;
+      --red:         #ef4444;
+      --text:        #dce8f5;
+      --text-2:      rgba(220, 232, 245, 0.48);
+      --text-3:      rgba(220, 232, 245, 0.22);
+      --mono:        'Courier New', Courier, monospace;
+      --sans:        system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* ---- Scan lines ---- */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(0,200,255,0.006) 3px, rgba(0,200,255,0.006) 4px
+      );
+    }
+
+    /* ---- Grid background ---- */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      position: sticky; top: 0; z-index: 500;
+      background: rgba(5,8,15,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+
+    .header-left {
+      display: flex; align-items: center; gap: 20px;
+    }
+
+    .header-brand {
+      font-family: var(--mono);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.22em; color: var(--cyan);
+      text-transform: uppercase;
+    }
+
+    .header-divider {
+      width: 1px; height: 20px;
+      background: var(--border);
+    }
+
+    .header-title {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.28em;
+      color: var(--text-2); text-transform: uppercase;
+    }
+
+    .header-right {
+      display: flex; align-items: center; gap: 18px;
+    }
+
+    .status-pill {
+      display: flex; align-items: center; gap: 7px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green);
+      padding: 4px 10px;
+      border: 1px solid rgba(34,197,94,0.24);
+      border-radius: 3px;
+      background: rgba(34,197,94,0.06);
+    }
+
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(34,197,94,0.8);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 85%, 100% { opacity: 1; }
+      92% { opacity: 0.25; }
+    }
+
+    .header-clock {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.08em;
+      color: var(--text-2);
+    }
+
+    .header-user {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.08em;
+      color: var(--amber-dim);
+    }
+
+    /* ---- Main ---- */
+    main {
+      position: relative; z-index: 1;
+      padding: 28px 28px 60px;
+      max-width: 1400px; margin: 0 auto;
+    }
+
+    /* ---- Page header ---- */
+    .page-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+
+    .page-subtitle {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.14em;
+      color: var(--text-3);
+    }
+
+    /* ---- Widget grid ---- */
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* ---- Widget card ---- */
+    .widget {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* Corner brackets */
+    .widget::before, .widget::after {
+      content: '';
+      position: absolute;
+      width: 10px; height: 10px;
+      border-color: var(--cyan-dim);
+      border-style: solid;
+      z-index: 2;
+    }
+    .widget::before { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
+    .widget::after  { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; }
+    .widget-foot::before, .widget-foot::after {
+      content: '';
+      position: absolute;
+      width: 10px; height: 10px;
+      border-color: var(--cyan-dim);
+      border-style: solid;
+    }
+    .widget-foot::before { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; }
+    .widget-foot::after  { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; }
+
+    .widget-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,200,255,0.03);
+    }
+
+    .widget-id {
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.30em;
+      text-transform: uppercase; color: var(--cyan-dim);
+    }
+
+    .widget-title {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text);
+      font-weight: 600;
+    }
+
+    .widget-actions {
+      display: flex; gap: 8px; align-items: center;
+    }
+
+    .widget-btn {
+      background: rgba(0,200,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--cyan-dim);
+      font-family: var(--mono); font-size: 12px;
+      width: 26px; height: 26px;
+      border-radius: 3px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 160ms, border-color 160ms, color 160ms;
+    }
+    .widget-btn:hover {
+      background: rgba(0,200,255,0.14);
+      border-color: var(--border-hi);
+      color: var(--cyan);
+    }
+    .widget-btn.spinning svg { animation: spin 800ms linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .widget-body {
+      padding: 24px 20px 20px;
+      position: relative;
+    }
+
+    .widget-foot {
+      position: relative;
+      padding: 8px 16px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    /* ---- Source tag ---- */
+    .source-tag {
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .source-tag::before {
+      content: 'SRC';
+      padding: 1px 5px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 8px;
+      color: var(--cyan-dim);
+    }
+
+    /* ---- Big counter ---- */
+    .counter-wrap {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .counter-number {
+      font-family: var(--mono);
+      font-size: 64px; font-weight: 700;
+      line-height: 1;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 24px rgba(0,200,255,0.38), 0 0 48px rgba(0,200,255,0.12);
+      min-height: 68px;
+      display: flex; align-items: center;
+    }
+
+    .counter-number.loading {
+      color: var(--text-3);
+      font-size: 48px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .counter-number.error {
+      color: var(--red);
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    .counter-label {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--text-2);
+    }
+
+    .counter-delta {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.06em;
+      color: var(--green);
+      display: none;
+    }
+    .counter-delta.visible { display: block; }
+    .counter-delta.down { color: var(--red); }
+
+    /* ---- Last updated ---- */
+    .last-updated {
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.12em;
+      color: var(--text-3);
+    }
+
+    /* ---- Config panel ---- */
+    .config-panel {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(0,200,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: none;
+    }
+    .config-panel.open { display: block; }
+
+    .config-row {
+      display: flex; flex-direction: column; gap: 4px;
+      margin-bottom: 10px;
+    }
+    .config-row:last-child { margin-bottom: 0; }
+
+    .config-label {
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan-dim);
+    }
+
+    .config-input {
+      font-family: var(--mono); font-size: 12px;
+      background: rgba(0,200,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text); padding: 6px 10px;
+      border-radius: 2px; width: 100%;
+      outline: none;
+    }
+    .config-input:focus {
+      border-color: var(--border-hi);
+      box-shadow: 0 0 0 2px rgba(0,200,255,0.08);
+    }
+    .config-input::placeholder { color: var(--text-3); }
+
+    .config-save {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: rgba(0,200,255,0.10);
+      border: 1px solid var(--border-hi);
+      color: var(--cyan); padding: 6px 14px;
+      border-radius: 2px; cursor: pointer;
+      transition: background 160ms;
+      width: 100%;
+    }
+    .config-save:hover { background: rgba(0,200,255,0.18); }
+
+    /* ---- Add widget placeholder ---- */
+    .widget-add {
+      border: 1px dashed rgba(0,200,255,0.14);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 140px;
+      cursor: pointer;
+      transition: border-color 200ms, background 200ms;
+      background: transparent;
+    }
+    .widget-add:hover {
+      border-color: rgba(0,200,255,0.36);
+      background: rgba(0,200,255,0.03);
+    }
+    .widget-add span {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+    .widget-add:hover span { color: var(--cyan-dim); }
+
+    /* ---- Notification toast ---- */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 800;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em; color: var(--text);
+      border-radius: 3px;
+      transform: translateY(8px); opacity: 0;
+      transition: transform 220ms, opacity 220ms;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 640px) {
+      .header { padding: 0 16px; }
+      .header-title, .header-user { display: none; }
+      main { padding: 16px 16px 48px; }
+      .counter-number { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="header-brand">JGusew</div>
+      <div class="header-divider"></div>
+      <div class="header-title">Operational Dashboard</div>
+    </div>
+    <div class="header-right">
+      <div class="header-user" id="header-user"></div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Secure session
+      </div>
+      <div class="header-clock" id="header-clock"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-title">Intelligence · Overview</div>
+      <div class="page-subtitle" id="page-date"></div>
+    </div>
+
+    <div class="widget-grid" id="widget-grid">
+
+      <!-- ── Widget 01: CreateSecret counter ── -->
+      <div class="widget" id="w-secrets">
+        <div class="widget-header">
+          <div>
+            <div class="widget-id">WGT-001</div>
+            <div class="widget-title">Create Secret · Counter</div>
+          </div>
+          <div class="widget-actions">
+            <button class="widget-btn" id="btn-config-secrets" title="Configure" onclick="toggleConfig('secrets')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </button>
+            <button class="widget-btn" id="btn-refresh-secrets" title="Refresh" onclick="fetchSecretsCount()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="widget-body">
+          <div class="counter-wrap">
+            <div class="counter-number loading" id="secrets-count">···</div>
+            <div class="counter-label">Total secrets created</div>
+            <div class="counter-delta" id="secrets-delta"></div>
+          </div>
+
+          <!-- Config panel (hidden by default) -->
+          <div class="config-panel" id="config-secrets">
+            <div class="config-row">
+              <label class="config-label">API Endpoint</label>
+              <input class="config-input" id="cfg-secrets-url"
+                placeholder="https://createsecret.com/api/v1/stats"
+                title="Full URL that returns JSON with the count">
+            </div>
+            <div class="config-row">
+              <label class="config-label">API Key (if required)</label>
+              <input class="config-input" id="cfg-secrets-key"
+                type="password" placeholder="sk_…">
+            </div>
+            <div class="config-row">
+              <label class="config-label">JSON count field path</label>
+              <input class="config-input" id="cfg-secrets-field"
+                placeholder="count  (or data.total_secrets)">
+            </div>
+            <div class="config-row">
+              <button class="config-save" onclick="saveSecretsConfig()">Save &amp; fetch</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-foot">
+          <div class="source-tag">createsecret.com</div>
+          <div class="last-updated" id="secrets-updated">—</div>
+        </div>
+      </div>
+
+      <!-- ── Add widget placeholder ── -->
+      <div class="widget-add" onclick="showToast('Widget builder coming soon.')">
+        <span>+ Add widget</span>
+      </div>
+
+    </div><!-- /widget-grid -->
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Config defaults — update these or use the in-widget config panel ──
+    const SECRETS_DEFAULTS = {
+      url:   localStorage.getItem('jgc_secrets_url')   || '',
+      key:   localStorage.getItem('jgc_secrets_key')   || '',
+      field: localStorage.getItem('jgc_secrets_field') || 'count',
+    };
+
+    // ── Clock ──
+    function tick() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('header-clock').textContent =
+        `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())} ` +
+        `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())} UTC`;
+      document.getElementById('page-date').textContent =
+        now.toLocaleDateString('en-AU', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ── Read admin email from Cloudflare Access JWT cookie ──
+    (function () {
+      try {
+        const raw = document.cookie.split(';').map(c => c.trim())
+          .find(c => c.startsWith('CF_Authorization='));
+        if (!raw) return;
+        const payload = JSON.parse(atob(raw.split('=')[1].split('.')[1]));
+        if (payload.email) {
+          document.getElementById('header-user').textContent = payload.email;
+        }
+      } catch { /* cookie absent or malformed */ }
+    })();
+
+    // ── Toast helper ──
+    let toastTimer;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+    }
+
+    // ── Config panel toggle ──
+    function toggleConfig(id) {
+      const panel = document.getElementById('config-' + id);
+      if (!panel) return;
+      const open = panel.classList.toggle('open');
+      if (open && id === 'secrets') {
+        document.getElementById('cfg-secrets-url').value   = SECRETS_DEFAULTS.url;
+        document.getElementById('cfg-secrets-key').value   = SECRETS_DEFAULTS.key;
+        document.getElementById('cfg-secrets-field').value = SECRETS_DEFAULTS.field;
+      }
+    }
+
+    function saveSecretsConfig() {
+      const url   = document.getElementById('cfg-secrets-url').value.trim();
+      const key   = document.getElementById('cfg-secrets-key').value.trim();
+      const field = document.getElementById('cfg-secrets-field').value.trim() || 'count';
+      localStorage.setItem('jgc_secrets_url',   url);
+      localStorage.setItem('jgc_secrets_key',   key);
+      localStorage.setItem('jgc_secrets_field', field);
+      SECRETS_DEFAULTS.url   = url;
+      SECRETS_DEFAULTS.key   = key;
+      SECRETS_DEFAULTS.field = field;
+      document.getElementById('config-secrets').classList.remove('open');
+      fetchSecretsCount();
+    }
+
+    // ── Dig into a nested JSON field path like "data.total_secrets" ──
+    function getNestedField(obj, path) {
+      return path.split('.').reduce((o, k) => (o != null ? o[k] : undefined), obj);
+    }
+
+    // ── Secrets counter ──
+    let _lastSecretsCount = null;
+
+    async function fetchSecretsCount() {
+      const url   = localStorage.getItem('jgc_secrets_url')   || SECRETS_DEFAULTS.url;
+      const key   = localStorage.getItem('jgc_secrets_key')   || SECRETS_DEFAULTS.key;
+      const field = localStorage.getItem('jgc_secrets_field') || SECRETS_DEFAULTS.field;
+
+      const countEl   = document.getElementById('secrets-count');
+      const updatedEl = document.getElementById('secrets-updated');
+      const deltaEl   = document.getElementById('secrets-delta');
+      const btn       = document.getElementById('btn-refresh-secrets');
+
+      if (!url) {
+        countEl.className = 'counter-number error';
+        countEl.textContent = 'Configure endpoint ↑';
+        updatedEl.textContent = '—';
+        toggleConfig('secrets');
+        return;
+      }
+
+      countEl.className = 'counter-number loading';
+      countEl.textContent = '···';
+      btn.classList.add('spinning');
+
+      try {
+        const headers = { 'Accept': 'application/json' };
+        if (key) headers['Authorization'] = `Bearer ${key}`;
+
+        const res = await fetch(url, { headers });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        const raw = getNestedField(data, field);
+        const count = parseInt(raw, 10);
+        if (isNaN(count)) throw new Error(`Field "${field}" not found or not a number`);
+
+        // Animate counter up from current displayed value
+        const prev = _lastSecretsCount;
+        animateCount(countEl, prev ?? count, count);
+
+        // Delta badge
+        if (prev !== null && count !== prev) {
+          const diff = count - prev;
+          deltaEl.textContent = (diff > 0 ? '+' : '') + diff.toLocaleString() + ' since last refresh';
+          deltaEl.className = 'counter-delta visible' + (diff < 0 ? ' down' : '');
+        } else {
+          deltaEl.className = 'counter-delta';
+        }
+        _lastSecretsCount = count;
+
+        const now = new Date();
+        updatedEl.textContent = `Synced ${now.getUTCHours().toString().padStart(2,'0')}:${now.getUTCMinutes().toString().padStart(2,'0')}:${now.getUTCSeconds().toString().padStart(2,'0')} UTC`;
+        countEl.className = 'counter-number';
+
+      } catch (err) {
+        countEl.className = 'counter-number error';
+        countEl.textContent = 'Error';
+        updatedEl.textContent = err.message;
+        showToast('Fetch failed: ' + err.message);
+      } finally {
+        btn.classList.remove('spinning');
+      }
+    }
+
+    function animateCount(el, from, to) {
+      const duration = 900;
+      const start = performance.now();
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const current = Math.round(from + (to - from) * ease);
+        el.textContent = current.toLocaleString();
+        if (t < 1) requestAnimationFrame(frame);
+        else el.textContent = to.toLocaleString();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // ── Auto-fetch on load if endpoint is already configured ──
+    window.addEventListener('load', () => {
+      if (SECRETS_DEFAULTS.url) {
+        fetchSecretsCount();
+      } else {
+        const el = document.getElementById('secrets-count');
+        el.className = 'counter-number error';
+        el.textContent = 'Not configured';
+        document.getElementById('secrets-updated').textContent = 'Click ⚙ to set API endpoint';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -34,5 +34,16 @@ export async function onRequest({ request, next, env }) {
     }
   }
 
+  if (host === 'admin.jgusewcomputers.com') {
+    // Serve the admin dashboard.
+    // Cloudflare Access (Zero Trust) handles Google auth before this runs.
+    const assetUrl = new URL('/admin' + url.search, 'https://jgusewcomputers.com');
+    try {
+      return await env.ASSETS.fetch(new Request(assetUrl, request));
+    } catch {
+      return Response.redirect(new URL('/admin', url).href, 302);
+    }
+  }
+
   return next();
 }
