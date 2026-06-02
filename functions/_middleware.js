@@ -1,33 +1,29 @@
 /**
- * Cloudflare Pages Function — subdomain routing middleware
+ * Cloudflare Pages Function — subdomain routing
  *
- * community.jgusewcomputers.com    →  community.html
- * professional.jgusewcomputers.com →  professional.html
- * admin.jgusewcomputers.com        →  admin.html  (protected by Cloudflare Access)
- * jgusewcomputers.com              →  index.html (three-panel landing)
+ * community.jgusewcomputers.com    →  /community.html
+ * professional.jgusewcomputers.com →  /professional.html
+ * admin.jgusewcomputers.com        →  /admin.html  (Cloudflare Access handles auth)
  *
- * env.ASSETS.fetch needs the literal filename (with .html extension) —
- * it does not resolve pretty-URL paths the way Pages routing does.
+ * Strategy: only intercept the root path (/). Redirect to the .html file.
+ * Pages' own pretty-URL handling then serves the file cleanly.
+ * All non-root paths (assets, sub-pages) fall through to Pages normally.
  */
-export async function onRequest({ request, next, env }) {
+export async function onRequest({ request, next }) {
   const url  = new URL(request.url);
   const host = url.hostname;
 
-  const serveFile = async (filename, fallbackPath) => {
-    const assetUrl = new URL(filename, 'https://jgusewcomputers.com');
-    try {
-      return await env.ASSETS.fetch(new Request(assetUrl, request));
-    } catch {
-      // ASSETS binding unavailable — visible redirect as fallback
-      return Response.redirect(
-        new URL(fallbackPath, `https://${host}`).href, 302
-      );
-    }
-  };
+  // Only rewrite the root — let Pages handle everything else
+  if (url.pathname !== '/') return next();
 
-  if (host === 'community.jgusewcomputers.com')    return serveFile('/community.html',    '/community');
-  if (host === 'professional.jgusewcomputers.com') return serveFile('/professional.html', '/professional');
-  if (host === 'admin.jgusewcomputers.com')        return serveFile('/admin.html',        '/admin');
+  if (host === 'community.jgusewcomputers.com')
+    return Response.redirect(`https://community.jgusewcomputers.com/community.html`, 302);
+
+  if (host === 'professional.jgusewcomputers.com')
+    return Response.redirect(`https://professional.jgusewcomputers.com/professional.html`, 302);
+
+  if (host === 'admin.jgusewcomputers.com')
+    return Response.redirect(`https://admin.jgusewcomputers.com/admin.html`, 302);
 
   return next();
 }
