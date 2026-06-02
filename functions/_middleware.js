@@ -1,49 +1,33 @@
 /**
  * Cloudflare Pages Function — subdomain routing middleware
  *
- * community.jgusewcomputers.com   →  serves /community  (community.html)
- * professional.jgusewcomputers.com →  serves /professional (professional.html)
- * jgusewcomputers.com             →  three-panel landing (index.html)
+ * community.jgusewcomputers.com    →  community.html
+ * professional.jgusewcomputers.com →  professional.html
+ * admin.jgusewcomputers.com        →  admin.html  (protected by Cloudflare Access)
+ * jgusewcomputers.com              →  index.html (three-panel landing)
  *
- * env.ASSETS.fetch must be called with the PRIMARY domain URL so Pages
- * can resolve the file path from its own asset manifest.
+ * env.ASSETS.fetch needs the literal filename (with .html extension) —
+ * it does not resolve pretty-URL paths the way Pages routing does.
  */
 export async function onRequest({ request, next, env }) {
   const url  = new URL(request.url);
   const host = url.hostname;
 
-  if (host === 'community.jgusewcomputers.com') {
-    // Rewrite root → /community; pass through any other path unchanged
-    const path = url.pathname === '/' ? '/community' : url.pathname;
-    const assetUrl = new URL(path + url.search, 'https://jgusewcomputers.com');
+  const serveFile = async (filename, fallbackPath) => {
+    const assetUrl = new URL(filename, 'https://jgusewcomputers.com');
     try {
       return await env.ASSETS.fetch(new Request(assetUrl, request));
     } catch {
-      // ASSETS binding unavailable — fall back to visible redirect
-      return Response.redirect(new URL('/community', url).href, 302);
+      // ASSETS binding unavailable — visible redirect as fallback
+      return Response.redirect(
+        new URL(fallbackPath, `https://${host}`).href, 302
+      );
     }
-  }
+  };
 
-  if (host === 'professional.jgusewcomputers.com') {
-    const path = url.pathname === '/' ? '/professional' : url.pathname;
-    const assetUrl = new URL(path + url.search, 'https://jgusewcomputers.com');
-    try {
-      return await env.ASSETS.fetch(new Request(assetUrl, request));
-    } catch {
-      return Response.redirect(new URL('/professional', url).href, 302);
-    }
-  }
-
-  if (host === 'admin.jgusewcomputers.com') {
-    // Serve the admin dashboard.
-    // Cloudflare Access (Zero Trust) handles Google auth before this runs.
-    const assetUrl = new URL('/admin' + url.search, 'https://jgusewcomputers.com');
-    try {
-      return await env.ASSETS.fetch(new Request(assetUrl, request));
-    } catch {
-      return Response.redirect(new URL('/admin', url).href, 302);
-    }
-  }
+  if (host === 'community.jgusewcomputers.com')    return serveFile('/community.html',    '/community');
+  if (host === 'professional.jgusewcomputers.com') return serveFile('/professional.html', '/professional');
+  if (host === 'admin.jgusewcomputers.com')        return serveFile('/admin.html',        '/admin');
 
   return next();
 }
