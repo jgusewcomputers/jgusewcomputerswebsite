@@ -1,451 +1,809 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JGusew Computers | Jehiah Gusew — Local IT Help &amp; Professional Tech Services</title>
-  <meta name="description" content="JGusew Computers by Jehiah Gusew, Sunbury VIC. Local computer help for everyday people, and professional technology services for homes and small businesses.">
-  <link rel="canonical" href="https://jgusewcomputers.com/">
+  <title>JGusew Computers | Practical Tech Help, Websites and AI Automation</title>
+  <meta name="description" content="Practical technology help for homes and small businesses. JGusew Computers helps with computers, websites, forms, email setup, AI automation and sensible tech advice without hype or jargon.">
   <link rel="icon" href="assets/logos/monogram-flat-navy.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="premium.css">
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website">
-  <meta property="og:url"         content="https://jgusewcomputers.com/">
-  <meta property="og:site_name"   content="JGusew Computers">
-  <meta property="og:locale"      content="en_AU">
-  <meta property="og:title"       content="JGusew Computers | Local IT Help &amp; Professional Tech Services">
-  <meta property="og:description" content="Local computer help for everyday people in Sunbury, and professional technology services for homes and small businesses.">
-  <meta property="og:image"       content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
-  <meta name="twitter:card"       content="summary_large_image">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://jgusewcomputers.com/">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jgusewcomputers.com/">
+  <meta property="og:site_name" content="JGusew Computers">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:title" content="JGusew Computers | Practical Tech Help, Websites and AI Automation">
+  <meta property="og:description" content="Practical technology help for homes and small businesses. Computers, websites, forms, email setup, AI automation and sensible tech advice — without hype or jargon.">
+  <meta property="og:image" content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JGusew Computers | Practical Tech Help, Websites and AI Automation">
+  <meta name="twitter:description" content="Practical technology help for homes and small businesses. Computers, websites, email, AI automation — without hype or jargon.">
+  <meta name="twitter:image" content="https://jgusewcomputers.com/assets/logos/horizontal-lockup-light.png">
 
-    :root {
-      --orange:    #f97316;
-      --orange-lt: #fed7aa;
-      --blue:      #3b82f6;
-      --blue-lt:   #bfdbfe;
-      --navy:      #060f24;
-      --ease:      cubic-bezier(0.2, 0.85, 0.2, 1);
-    }
-
-    html, body {
-      height: 100%;
-      background: var(--navy);
-      color: #fff;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      overflow: hidden;
-    }
-
-    /* Subtle grain */
-    .grain {
-      position: fixed; inset: 0; z-index: 200; pointer-events: none;
-      opacity: 0.07; mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    }
-
-    /* ---- Three-panel layout ---- */
-    .tri {
-      display: flex;
-      height: 100vh;
-    }
-
-    .panel {
-      flex: 1 1 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      transition: flex 600ms var(--ease), background 400ms;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .panel.community,
-    .panel.professional { cursor: pointer; }
-
-    .panel.community:hover  { flex: 1.7 1 0; }
-    .panel.professional:hover { flex: 1.7 1 0; }
-    .panel.about:hover { flex: 1.15 1 0; }
-
-    /* Panel backgrounds */
-    .panel.community {
-      background:
-        radial-gradient(75% 85% at 15% 28%, rgba(249,115,22,0.22), transparent 65%),
-        radial-gradient(50% 55% at 8%  82%, rgba(249,115,22,0.10), transparent 65%),
-        var(--navy);
-    }
-    .panel.community:hover {
-      background:
-        radial-gradient(85% 90% at 18% 28%, rgba(249,115,22,0.32), transparent 65%),
-        radial-gradient(60% 65% at 8%  82%, rgba(249,115,22,0.16), transparent 65%),
-        var(--navy);
-    }
-
-    .panel.about {
-      background: var(--navy);
-      border-left:  1px solid rgba(255,255,255,0.06);
-      border-right: 1px solid rgba(255,255,255,0.06);
-      cursor: default;
-      z-index: 1;
-    }
-
-    .panel.professional {
-      background:
-        radial-gradient(75% 85% at 85% 28%, rgba(59,130,246,0.22), transparent 65%),
-        radial-gradient(50% 55% at 92% 82%, rgba(59,130,246,0.10), transparent 65%),
-        var(--navy);
-    }
-    .panel.professional:hover {
-      background:
-        radial-gradient(85% 90% at 82% 28%, rgba(59,130,246,0.32), transparent 65%),
-        radial-gradient(60% 65% at 92% 82%, rgba(59,130,246,0.16), transparent 65%),
-        var(--navy);
-    }
-
-    /* Focus ring */
-    .panel.community:focus-visible,
-    .panel.professional:focus-visible {
-      outline: 2px solid rgba(255,255,255,0.5);
-      outline-offset: -4px;
-    }
-
-    /* ---- Side panel inner content ---- */
-    .panel-inner {
-      padding: 52px 44px;
-      max-width: 400px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .panel-icon {
-      font-size: 34px;
-      line-height: 1;
-      display: block;
-    }
-
-    .panel-eyebrow {
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-    }
-    .community .panel-eyebrow { color: var(--orange); }
-    .professional .panel-eyebrow { color: var(--blue); }
-
-    .panel-heading {
-      font-size: clamp(24px, 2.6vw, 40px);
-      font-weight: 700;
-      line-height: 1.06;
-      letter-spacing: -0.022em;
-      color: #fff;
-    }
-
-    .panel-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 0;
-    }
-    .panel-list li {
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: rgba(255,255,255,0.65);
-      transition: color 220ms;
-    }
-    .panel:hover .panel-list li { color: rgba(255,255,255,0.84); }
-    .panel-list li::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      transition: box-shadow 220ms;
-    }
-    .community .panel-list li::before {
-      background: var(--orange);
-      box-shadow: 0 0 0 rgba(249,115,22,0.7);
-    }
-    .community:hover .panel-list li::before {
-      box-shadow: 0 0 8px rgba(249,115,22,0.7);
-    }
-    .professional .panel-list li::before {
-      background: var(--blue);
-      box-shadow: 0 0 0 rgba(59,130,246,0.7);
-    }
-    .professional:hover .panel-list li::before {
-      box-shadow: 0 0 8px rgba(59,130,246,0.7);
-    }
-
-    .panel-location {
-      font-size: 12.5px;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.04em;
-    }
-
-    .panel-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 13.5px;
-      font-weight: 700;
-      padding: 11px 20px;
-      border-radius: 999px;
-      width: fit-content;
-      transition: transform 240ms var(--ease), box-shadow 240ms;
-    }
-    .community .panel-cta {
-      background: rgba(249,115,22,0.13);
-      border: 1px solid rgba(249,115,22,0.36);
-      color: var(--orange-lt);
-    }
-    .professional .panel-cta {
-      background: rgba(59,130,246,0.13);
-      border: 1px solid rgba(59,130,246,0.36);
-      color: var(--blue-lt);
-    }
-    .panel:hover .panel-cta {
-      transform: translateX(5px);
-    }
-    .community:hover .panel-cta {
-      box-shadow: 0 0 24px rgba(249,115,22,0.24);
-    }
-    .professional:hover .panel-cta {
-      box-shadow: 0 0 24px rgba(59,130,246,0.24);
-    }
-    .cta-arr { transition: transform 240ms var(--ease); }
-    .panel:hover .cta-arr { transform: translateX(3px); }
-
-    /* ---- About centre panel ---- */
-    .about-inner {
-      padding: 52px 40px;
-      max-width: 300px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .about-logo {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-    }
-    .about-wordmark {
-      font-size: 16px; font-weight: 800;
-      letter-spacing: 0.26em; color: #fff;
-    }
-    .about-sub {
-      font-size: 8.5px; letter-spacing: 0.38em;
-      text-transform: uppercase; color: rgba(255,255,255,0.30);
-    }
-
-    .about-rule {
-      width: 32px; height: 1px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .about-name {
-      font-size: 21px; font-weight: 600;
-      letter-spacing: -0.01em; color: #fff;
-    }
-
-    .about-bio {
-      font-size: 13.5px; line-height: 1.68;
-      color: rgba(255,255,255,0.48);
-      max-width: 240px;
-    }
-
-    .about-links {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 10px;
-    }
-    .about-link {
-      font-size: 12px; color: rgba(255,255,255,0.40);
-      text-decoration: none; letter-spacing: 0.02em;
-      transition: color 200ms;
-    }
-    .about-link:hover { color: rgba(255,255,255,0.80); }
-    .about-link.email {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 11px;
-    }
-
-    /* Two-dot bridge: orange · blue */
-    .about-bridge {
-      display: flex; align-items: center; gap: 0;
-      width: 100%; margin-top: 4px;
-    }
-    .bridge-line {
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.10));
-    }
-    .bridge-line.right {
-      background: linear-gradient(to left, transparent, rgba(255,255,255,0.10));
-    }
-    .bridge-dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      margin: 0 8px; flex-shrink: 0;
-    }
-    .bridge-dot.orange {
-      background: var(--orange);
-      box-shadow: 0 0 10px rgba(249,115,22,0.65);
-    }
-    .bridge-dot.blue {
-      background: var(--blue);
-      box-shadow: 0 0 10px rgba(59,130,246,0.65);
-    }
-    .bridge-gap { width: 12px; flex-shrink: 0; }
-
-    /* ---- Reveal on load ---- */
-    .panel-inner,
-    .about-inner {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: panelIn 700ms var(--ease) forwards;
-    }
-    .panel.community  .panel-inner { animation-delay: 60ms; }
-    .panel.about      .about-inner { animation-delay: 160ms; }
-    .panel.professional .panel-inner { animation-delay: 100ms; }
-    @keyframes panelIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---- Mobile ---- */
-    @media (max-width: 768px) {
-      html, body { overflow: auto; height: auto; }
-
-      .tri {
-        flex-direction: column;
-        min-height: 100vh;
-        height: auto;
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Jehiah Gusew",
+        "jobTitle": "Technology advisor",
+        "url": "https://jgusewcomputers.com/",
+        "email": "hello@jgusewcomputers.com",
+        "worksFor": { "@type": "Organization", "name": "JGusew Computers" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "name": "JGusew Computers",
+        "description": "Practical technology help, advice, and automation for everyday people and small businesses. Reviewed by a real person.",
+        "email": "hello@jgusewcomputers.com",
+        "founder": { "@type": "Person", "name": "Jehiah Gusew" },
+        "areaServed": "Online",
+        "serviceType": [
+          "Computer advice",
+          "Slow computer assessment",
+          "Repair vs replace decision",
+          "Website help",
+          "Forms and enquiry systems",
+          "Email cleanup",
+          "Digital organisation",
+          "Small business tech review",
+          "AI automation starter",
+          "Scam and security triage",
+          "Elderly tech help",
+          "Device setup advice"
+        ]
       }
-
-      .panel {
-        flex: none !important;
-        width: 100%;
-        min-height: 300px;
-        justify-content: flex-start;
-        transition: background 400ms;
-      }
-
-      .panel.about {
-        min-height: 260px;
-        border-left: none; border-right: none;
-        border-top: 1px solid rgba(255,255,255,0.06);
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-
-      .panel-inner { padding: 40px 28px; max-width: 100%; }
-      .about-inner { padding: 40px 28px; max-width: 100%; text-align: left; align-items: flex-start; }
-
-      .panel-heading { font-size: clamp(26px, 7vw, 36px); }
-
-      .about-bridge { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      .panel { min-height: 260px; }
-      .panel.about { min-height: 240px; }
-      .panel-inner { padding: 32px 22px; }
-      .about-inner { padding: 32px 22px; }
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
+  <div class="mesh"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
 
-  <div class="grain" aria-hidden="true"></div>
+  <div id="root"></div>
 
-  <div class="tri" role="main">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("dEyzQD3JwgIZVH6vh");</script>
 
-    <!-- ── Left: Community / IT repairs ── -->
-    <a class="panel community"
-       href="/community"
-       aria-label="Local IT help and computer repairs — community site">
-      <div class="panel-inner">
-        <span class="panel-icon" aria-hidden="true">🔧</span>
-        <span class="panel-eyebrow">Local IT Help · Sunbury VIC</span>
-        <h2 class="panel-heading">Tech problems<br>sorted by a real<br>local person.</h2>
-        <ul class="panel-list">
-          <li>Slow computer cleanup</li>
-          <li>Virus &amp; pop-up removal</li>
-          <li>New device setup</li>
-          <li>Email &amp; account help</li>
-          <li>Elderly tech support</li>
-          <li>Scam &amp; security concerns</li>
-        </ul>
-        <div class="panel-location">📍 Based in Sunbury, VIC</div>
-        <div class="panel-cta">
-          Get help today <span class="cta-arr" aria-hidden="true">→</span>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+    // ---------- Chrome icons (transparent renders) ----------
+    const ICON = {
+      check:    "assets/icons/check-circle.webp",
+      shield:   "assets/icons/shield.webp",
+      chat:     "assets/icons/chat.webp",
+      pencil:   "assets/icons/pencil.webp",
+      alert:    "assets/icons/alert-shield.webp",
+      checkAlt: "assets/icons/check-circle-on-light.png",
+    };
+
+    const Arrow = ({ size = 16 }) => (
+      <svg aria-hidden="true" focusable="false" className="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+      </svg>
+    );
+
+    function useReveal() {
+      React.useEffect(() => {
+        const els = document.querySelectorAll(".reveal");
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+          }
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+        els.forEach((el) => io.observe(el));
+        return () => io.disconnect();
+      }, []);
+    }
+
+    // ---------- Nav ----------
+    function Nav({ current, onNav }) {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const closeMenu = () => setMenuOpen(false);
+      const items = [
+        { id: "home", label: "Home" },
+        { id: "services", label: "Services" },
+        { id: "process", label: "How it works" },
+        { id: "safety", label: "Safety", href: "safety.html" },
+        { id: "about", label: "About", href: "about.html" },
+        { id: "contact", label: "Contact" },
+      ];
+      return (
+        <header className="nav">
+          <div className="inner">
+            <button
+              className="brand"
+              onClick={() => { onNav("home"); closeMenu(); }}
+              aria-label="JGusew Computers — back to top"
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
+              <img src="assets/logos/monogram-light.webp" alt="JGC monogram" />
+              <div className="txt">
+                <span className="name">JGUSEW COMPUTERS</span>
+                <span className="tag">Computer problems. Sorted.</span>
+              </div>
+              <span className="stage-pill" title="Paid work is scoped and quoted before it starts.">Quoted before work starts</span>
+            </button>
+            <button
+              className={"hamburger" + (menuOpen ? " open" : "")}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-controls="nav-menu"
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}>
+              <span></span><span></span><span></span>
+            </button>
+            <div className={"menu" + (menuOpen ? " open" : "")} id="nav-menu">
+              {items.map(i => (
+                i.href
+                  ? <a key={i.id} href={i.href} className="nav-link" onClick={closeMenu}>{i.label}</a>
+                  : <button key={i.id}
+                      className={current === i.id ? "active" : ""}
+                      onClick={() => { onNav(i.id); closeMenu(); }}>{i.label}</button>
+              ))}
+              <button className="cta" onClick={() => { onNav("contact"); closeMenu(); }}>Get help by email</button>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    // ---------- Hero ----------
+    function HeroStage() {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const el = ref.current; if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const onMove = (ev) => {
+          const r = el.getBoundingClientRect();
+          const x = (ev.clientX - r.left) / r.width - 0.5;
+          const y = (ev.clientY - r.top) / r.height - 0.5;
+          el.style.setProperty("--tilt-y", (x * 14) + "deg");
+          el.style.setProperty("--tilt-x", (-y * 14) + "deg");
+          el.style.setProperty("--plx-x", (x * 18) + "px");
+          el.style.setProperty("--plx-y", (y * 18) + "px");
+        };
+        const onLeave = () => {
+          el.style.setProperty("--tilt-y", "0deg");
+          el.style.setProperty("--tilt-x", "0deg");
+          el.style.setProperty("--plx-x", "0px");
+          el.style.setProperty("--plx-y", "0px");
+        };
+        window.addEventListener("mousemove", onMove);
+        el.addEventListener("mouseleave", onLeave);
+        return () => { window.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
+      }, []);
+      return (
+        <div className="stage" ref={ref}>
+          <div className="ring"></div>
+          <div className="ring-lines"></div>
+          <div className="orb">
+            <img className="monogram" src="assets/logos/monogram-dark.webp" alt="" />
+          </div>
+          <div className="satellite s1"><img src={ICON.check} alt="" /></div>
+          <div className="satellite s2"><img src={ICON.chat} alt="" /></div>
+          <div className="satellite s3"><img src={ICON.shield} alt="" /></div>
+          <div className="satellite s4"><img src={ICON.pencil} alt="" /></div>
         </div>
-      </div>
-    </a>
+      );
+    }
 
-    <!-- ── Centre: About Jehiah ── -->
-    <div class="panel about" aria-label="About Jehiah Gusew">
-      <div class="about-inner">
-        <div class="about-logo">
-          <span class="about-wordmark">JGUSEW</span>
-          <span class="about-sub">Computers</span>
+    function Hero({ onContact, onServices }) {
+      return (
+        <section className="hero">
+          <div className="inner">
+            <div className="hero-copy">
+              <div className="eyebrow-row reveal">
+                <span className="dot"></span>
+                <strong>Reply within 1 working day</strong>
+                <span style={{ opacity: 0.5 }}>·</span>
+                <span>Led by Jehiah Gusew</span>
+              </div>
+              <h1 className="reveal d1">
+                <span className="chrome">Practical</span>
+                <span className="chrome">technology help</span>
+                <span className="muted">without the hype.</span>
+              </h1>
+              <p className="lead reveal d2">
+                Practical tech advice for everyday people and small
+                businesses. Plain English. Reviewed by a real person
+                before anything important goes out.
+              </p>
+              <div className="quiet reveal d3">
+                <span className="l"></span>
+                <span>No hype · No pressure · No pretending it's easy</span>
+              </div>
+              <div className="hero-actions reveal d3">
+                <button className="btn primary pill" onClick={onContact}>
+                  Ask for tech help <Arrow />
+                </button>
+                <button className="btn glass" onClick={onServices}>
+                  See how I can help <Arrow />
+                </button>
+              </div>
+              <div className="reveal d3" style={{
+                marginTop: 18, fontSize: 13.5, color: "var(--jgc-fg-on-navy-2)", maxWidth: 540, lineHeight: 1.55
+              }}>
+                <strong style={{ color: "#fff", fontWeight: 600 }}>Clear scope before paid work starts.</strong>{" "}
+                We'll confirm the next step, expected effort, and any cost before you commit.
+                No obligation, no marketing list, no upsell.
+              </div>
+            </div>
+            <HeroStage />
+          </div>
+
+          <div className="hero-strip reveal d4">
+            <div className="group">
+              <div className="item"><span className="dot"></span><span>Currently <strong>accepting enquiries</strong></span></div>
+              <div className="item"><span>Help by email · <strong>reply within 1 working day</strong></span></div>
+              <div className="item"><span>AI drafts · <strong>Jehiah reviews</strong></span></div>
+            </div>
+            <div className="mail">hello@jgusewcomputers.com →</div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- "What this means" explainer band ----------
+    function ExplainerBand() {
+      return (
+        <section className="explainer">
+          <div className="container">
+            <div className="explainer-grid">
+              <div className="ex reveal">
+                <div className="ex-h">
+                  <span className="ex-num">01</span>
+                  <h2>What "quoted before work starts" means</h2>
+                </div>
+                <p>You can send an enquiry without obligation. If the issue needs paid work, we'll explain the scope, likely effort, and price before anything begins. Nothing paid goes ahead without your approval.</p>
+              </div>
+              <div className="ex reveal d1">
+                <div className="ex-h">
+                  <span className="ex-num">02</span>
+                  <h2>What "help by email" means</h2>
+                </div>
+                <p>You explain the issue in plain English by email. We reply with questions, options, and a clear next step — usually within one working day. No phone queues, no remote-control software at this stage. Just careful written advice.</p>
+              </div>
+              <div className="ex reveal d2">
+                <div className="ex-h">
+                  <span className="ex-num">03</span>
+                  <h2>What "AI drafts, Jehiah reviews" means</h2>
+                </div>
+                <p>AI tools may help organise your message or prepare a draft reply. But Jehiah Gusew (who runs JGusew Computers) reviews anything important before it's sent. Nothing goes out on autopilot. No automated bot replies.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Marquee ----------
+    function Marquee() {
+      const items = [
+        "New computer advice", "Slow computer assessment", "Repair vs replace",
+        "Website help", "Forms and enquiry systems", "Email cleanup",
+        "Digital organisation", "Small business tech review",
+        "AI automation starter", "Scam & security triage", "Elderly tech help",
+        "Device setup advice",
+      ];
+      const row = [...items, ...items];
+      return (
+        <div className="marquee">
+          <div className="track">
+            {row.map((t, i) => (
+              <span className="item" key={i}>
+                {t} <span className="sep"></span>
+              </span>
+            ))}
+          </div>
         </div>
+      );
+    }
 
-        <div class="about-bridge" aria-hidden="true">
-          <span class="bridge-dot orange"></span>
-          <span class="bridge-line"></span>
-          <span class="bridge-gap"></span>
-          <span class="bridge-line right"></span>
-          <span class="bridge-dot blue"></span>
+    // ---------- Bento ----------
+    function BentoCard({ size, icon, title, body, href }) {
+      const ref = React.useRef(null);
+      const tilt = (ev) => {
+        const el = ref.current; if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const r = el.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width - 0.5;
+        const y = (ev.clientY - r.top) / r.height - 0.5;
+        el.style.setProperty("--tx", (-y * 6) + "deg");
+        el.style.setProperty("--ty", (x * 6) + "deg");
+        el.style.setProperty("--gx", ((ev.clientX - r.left) / r.width) * 100 + "%");
+        el.style.setProperty("--gy", ((ev.clientY - r.top) / r.height) * 100 + "%");
+      };
+      const leave = () => {
+        const el = ref.current; if (!el) return;
+        el.style.setProperty("--tx", "0deg");
+        el.style.setProperty("--ty", "0deg");
+      };
+      return (
+        <div ref={ref} className={"bento-card " + size + " reveal"} onMouseMove={tilt} onMouseLeave={leave}>
+          <div className="ico"><img src={icon} alt="" loading="lazy" /></div>
+          <h3>{title}</h3>
+          <p>{body}</p>
+          {href && (
+            <a href={href} style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              fontSize: 13, fontWeight: 500, marginTop: 10,
+              color: "var(--jgc-glow-300)", textDecoration: "none",
+              letterSpacing: "0.01em",
+              padding: "6px 10px", margin: "-6px -10px",
+            }}>
+              Details
+              <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+          )}
         </div>
+      );
+    }
 
-        <p class="about-name">Jehiah Gusew</p>
-
-        <p class="about-bio">
-          I'm a one-person technology practice in Sunbury, VIC. I help everyday people sort out their computers, and work with homes and small businesses on websites, systems and automation.
-        </p>
-
-        <div class="about-rule"></div>
-
-        <div class="about-links">
-          <a href="about.html" class="about-link">About me →</a>
-          <a href="mailto:hello@jgusewcomputers.com" class="about-link email">hello@jgusewcomputers.com</a>
+    function BentoServices() {
+      return (
+        <div className="bento">
+          <BentoCard size="feature" icon={ICON.check}
+            title="New computer advice"
+            href="services/computer-help.html"
+            body="When every store says something different, we help you understand what suits your needs, what specs matter, what's overkill, and what's likely poor value. Refurbished, new, repair, replace — we compare honestly so you don't overspend." />
+          <BentoCard size="std" icon={ICON.pencil}
+            title="Slow computer assessment"
+            href="services/computer-help.html"
+            body="If it's slow, the answer isn't always 'buy a new one'. Cleanup, backup, upgrade, repair quote, replacement, or further diagnosis — we work out which." />
+          <BentoCard size="std" icon={ICON.check}
+            title="Repair vs replace decision"
+            href="services/computer-help.html"
+            body="Sometimes the real question is not 'can this be fixed?' but 'is it worth fixing?'. We help compare age, likely repair cost, replacement cost, and risk of future problems." />
+          <BentoCard size="std" icon={ICON.pencil}
+            title="Website help"
+            href="services/website-help.html"
+            body="A new small-business website or improvements to an existing one. Plain static pages, contact forms, domain and hosting setup — built simply, without ongoing platform fees or lock-in." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Forms and enquiry systems"
+            href="services/forms-enquiry-systems.html"
+            body="A structured contact or enquiry form that collects the right information from your customers. Set up without complex tools, monthly subscriptions, or a developer on call." />
+          <BentoCard size="wide" icon={ICON.chat}
+            title="Email cleanup & digital organisation"
+            href="services/email-account-cleanup.html"
+            body="Account separation, labels, retirement of old accounts, safer habits, file structures, a simple device map — a clear picture of where everything lives. We don't log in or ask for your password." />
+          <BentoCard size="wide" icon={ICON.check}
+            title="AI automation starter"
+            href="services/ai-automation.html"
+            body="AI is useful only when the workflow is understood. We map a process, identify repetitive tasks, suggest free-first automation options, and separate safe ideas from risky ones — without recommending automation for sensitive work." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Small business tech review"
+            href="services/small-business-tech-advice.html"
+            body="Tools, subscriptions, manual processes, security gaps, workflow pain. A clear picture of where money is going and where it shouldn't be." />
+          <BentoCard size="std" icon={ICON.alert}
+            title="Scam & security triage"
+            body="If something feels off, slow down. We help organise the situation and suggest safe next steps — never asking for passwords or codes." />
+          <BentoCard size="std" icon={ICON.chat}
+            title="Elderly tech help"
+            body="Patient, plain-English advice for computer choices, basic device issues, email confusion, and avoiding poor-value purchases." />
         </div>
-      </div>
-    </div>
+      );
+    }
 
-    <!-- ── Right: Professional / Business services ── -->
-    <a class="panel professional"
-       href="/professional"
-       aria-label="Professional technology services — professional site">
-      <div class="panel-inner">
-        <span class="panel-icon" aria-hidden="true">⚡</span>
-        <span class="panel-eyebrow">Professional Services</span>
-        <h2 class="panel-heading">Websites, systems<br>and automation<br>that hold up.</h2>
-        <ul class="panel-list">
-          <li>Websites &amp; contact forms</li>
-          <li>AI automation starter</li>
-          <li>Email cleanup &amp; organisation</li>
-          <li>Small business tech review</li>
-          <li>Digital organisation</li>
-          <li>Scam &amp; security triage</li>
-        </ul>
-        <div class="panel-cta">
-          Start a project <span class="cta-arr" aria-hidden="true">→</span>
+    // ---------- How it works ----------
+    const STEPS = [
+      { n: "Step 01", t: "You explain the issue", b: "Send a plain-English description of what you need help with. No technical wording needed.", icon: ICON.chat },
+      { n: "Step 02", t: "We ask the right questions", b: "If more information is needed, we ask before guessing. Better to be slow and careful than rush.", icon: ICON.pencil },
+      { n: "Step 03", t: "We prepare advice", b: "The issue is reviewed and organised into clear, practical next steps.", icon: ICON.check },
+      { n: "Step 04", t: "Jehiah reviews it", b: "Important recommendations are human-reviewed before being sent. AI drafts; Jehiah reviews.", icon: ICON.shield },
+      { n: "Step 05", t: "You get a clear next step", b: "Understand what to do next, what not to waste money on, and when a specialist is needed.", icon: ICON.check },
+    ];
+
+    function HowItWorks() {
+      const [active, setActive] = React.useState(0);
+      const refs = React.useRef([]);
+      React.useEffect(() => {
+        const io = new IntersectionObserver((entries) => {
+          let best = null;
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+            }
+          }
+          if (best) {
+            const idx = refs.current.indexOf(best.target);
+            if (idx !== -1) setActive(idx);
+          }
+        }, { threshold: [0.5, 0.7, 0.9] });
+        refs.current.forEach((el) => el && io.observe(el));
+        return () => io.disconnect();
+      }, []);
+      return (
+        <section id="process" className="how">
+          <div className="container">
+            <div className="section-head reveal">
+              <span className="num">02 — Process</span>
+              <h2>Five steps.<br />One rule: <span style={{ color: "var(--jgc-glow-300)" }}>AI drafts. Jehiah reviews.</span></h2>
+              <p>Every important reply goes through a human before it leaves the inbox. That's the whole point. Nothing is sent on autopilot.</p>
+            </div>
+            <div className="grid">
+              <div className="steps">
+                {STEPS.map((s, i) => (
+                  <div ref={el => (refs.current[i] = el)}
+                       key={i}
+                       className={"step" + (i === active ? " active" : "")}>
+                    <span className="stepnum">{s.n}</span>
+                    <h3>{s.t}</h3>
+                    <p>{s.b}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div className="stick">
+                  <div className="stick-card">
+                    <span className="stepnum">{STEPS[active].n}</span>
+                    <div className="icon-host">
+                      {STEPS.map((s, i) => (
+                        <img key={i} src={s.icon} alt="" className={i === active ? "" : "fade"} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- AI callout ----------
+    function AICallout() {
+      return (
+        <section className="callout">
+          <div className="container reveal">
+            <div className="rule-pre">Brand pillar · trust statement</div>
+            <div className="rule">
+              <span className="chrome">Agents can help prepare information,</span><br />
+              <span className="quiet">but Jehiah reviews important advice</span><br />
+              <span className="chrome">before it is sent.</span>
+            </div>
+            <div className="signature">— JGusew Computers, led by Jehiah Gusew</div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Jehiah note ----------
+    function JehiahNote() {
+      return (
+        <section className="jehiah-note">
+          <div className="container">
+            <div className="note-card reveal">
+              <div className="signature-block">
+                <span className="hello">Hello.</span>
+                <span className="byline">A short note from Jehiah</span>
+              </div>
+              <p>
+                I'm a one-person operation. If you email <a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a>,
+                I'm the one who reads it, asks questions if needed, and writes you back. The chrome and the
+                glass on this page is the brand; the help underneath is just me — being careful with your
+                time, your money, and your details.
+              </p>
+              <p className="sign-off">— Jehiah Gusew</p>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Safety ----------
+    function SafetyBand() {
+      return (
+        <section id="safety" className="safety-band">
+          <div className="container">
+            <div className="panel reveal">
+              <img className="shield" src={ICON.alert} alt="" />
+              <div>
+                <div className="pill" style={{ marginBottom: 14, display: "inline-block" }}>SAFETY FIRST</div>
+                <h2>Please don't send passwords, banking codes, or identity documents.</h2>
+                <p>JGusew Computers does not need those details to start helping. If something feels suspicious, slow down before clicking, paying, or sharing details — and we'll help organise the next step.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Contact ----------
+    const EMPTY_FORM = { name: "", email: "", phone: "", enquiry_type: "", service: "", urgency: "", message: "", consent: false };
+    const SERVICES = [
+      "Computer help (slow, broken, advice)",
+      "Website help",
+      "Forms and enquiry systems",
+      "Email cleanup and organisation",
+      "AI automation",
+      "Small business tech advice",
+      "Scam or security concern",
+      "Something else",
+    ];
+    const URGENCY_OPTS = [
+      { val: "No rush", label: "No rush" },
+      { val: "Soon — within a fortnight", label: "Soon — within a fortnight" },
+      { val: "Fairly urgent — within a few days", label: "Fairly urgent — a few days" },
+    ];
+
+    function TogglePills({ label, options, value, onChange }) {
+      return (
+        <div className="field">
+          <label>{label}</label>
+          <div style={{ display: "flex", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
+            {options.map(opt => {
+              const active = value === (opt.val || opt);
+              return (
+                <button type="button" key={opt.val || opt}
+                  onClick={() => onChange(opt.val || opt)}
+                  style={{
+                    flex: "1 1 auto", padding: "10px 14px", borderRadius: 10,
+                    fontSize: 13.5, fontWeight: active ? 600 : 400, cursor: "pointer",
+                    background: active ? "rgba(95,163,232,0.18)" : "rgba(255,255,255,0.05)",
+                    border: active ? "1px solid rgba(95,163,232,0.45)" : "1px solid rgba(255,255,255,0.10)",
+                    color: active ? "var(--jgc-glow-200, #a8cef5)" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
+                    transition: "all 180ms",
+                  }}>
+                  {opt.label || opt}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </a>
+      );
+    }
 
-  </div>
+    function Contact() {
+      const [s, setS] = React.useState(EMPTY_FORM);
+      const [status, setStatus] = React.useState("idle"); // idle | sending | sent | error
+      const u = (k) => (e) => setS(prev => ({ ...prev, [k]: e.target.value }));
+      const set = (k, v) => setS(prev => ({ ...prev, [k]: v }));
+      const submit = (e) => {
+        e.preventDefault();
+        if (!s.consent) return;
+        setStatus("sending");
+        emailjs.send("service_59pweih", "template_wnuvasi", {
+          from_name:    s.name,
+          from_email:   s.email,
+          phone:        s.phone || "Not provided",
+          enquiry_type: s.enquiry_type || "Not specified",
+          service:      s.service || "Not specified",
+          urgency:      s.urgency || "Not specified",
+          message:      s.message,
+        })
+        .then(() => { setStatus("sent"); setS(EMPTY_FORM); })
+        .catch(() => setStatus("error"));
+      };
+      return (
+        <section id="contact" className="contact">
+          <div className="container">
+            <div className="grid">
+              <div className="copy reveal">
+                <div className="section-head" style={{ marginBottom: 0 }}>
+                  <span className="num">03 — Get in touch</span>
+                </div>
+                <h2>Send through what's going on,<br />and we'll work out the safest next step.</h2>
+                <p>You don't need to know what's wrong. A plain-English description is enough. We only ask for the details needed to understand your enquiry — nothing more.</p>
+                <div className="facts">
+                  <div className="fact"><span className="dot"></span>Paid work is quoted before it starts.</div>
+                  <div className="fact"><span className="dot"></span>AI may help draft. Jehiah reviews before anything is sent.</div>
+                  <div className="fact"><span className="dot"></span>If we can't help, we'll tell you who can.</div>
+                </div>
+                <div className="quiet" style={{ marginTop: 28 }}>
+                  Or write to <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>hello@jgusewcomputers.com</a>
+                </div>
+              </div>
+              <form className="glass-form reveal d2" onSubmit={submit}>
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="f-name">Your name</label>
+                    <input id="f-name" value={s.name} onChange={u("name")} placeholder="Sarah Hughes" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="f-email">Email</label>
+                    <input id="f-email" type="email" value={s.email} onChange={u("email")} placeholder="sarah@example.com.au" required />
+                  </div>
+                </div>
 
+                <TogglePills
+                  label="This is for"
+                  options={["Home / personal", "Small business"]}
+                  value={s.enquiry_type}
+                  onChange={v => set("enquiry_type", s.enquiry_type === v ? "" : v)}
+                />
+
+                <div className="field">
+                  <label htmlFor="f-service">What do you need help with?</label>
+                  <select id="f-service" value={s.service} onChange={u("service")}
+                    style={{
+                      width: "100%", padding: "11px 14px", borderRadius: 10,
+                      background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
+                      color: s.service ? "#fff" : "var(--jgc-fg-on-navy-2, #8ca3c0)",
+                      fontSize: 14.5, appearance: "none", cursor: "pointer",
+                      backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238ca3c0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+                      backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center",
+                    }}>
+                    <option value="" disabled>Select a service area…</option>
+                    {SERVICES.map(sv => <option key={sv} value={sv}>{sv}</option>)}
+                  </select>
+                </div>
+
+                <TogglePills
+                  label="How soon do you need a response?"
+                  options={URGENCY_OPTS}
+                  value={s.urgency}
+                  onChange={v => set("urgency", s.urgency === v ? "" : v)}
+                />
+
+                <div className="field">
+                  <label htmlFor="f-phone">Phone (optional)</label>
+                  <input id="f-phone" value={s.phone} onChange={u("phone")} placeholder="Optional" />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="f-message">What's going on?</label>
+                  <textarea id="f-message" value={s.message} onChange={u("message")} placeholder="A plain-English description of what you've noticed. Don't include passwords, banking codes, or identity documents." required></textarea>
+                </div>
+
+                <div className="donot">
+                  <strong>Please don't send:</strong> passwords · banking codes · one-time / MFA codes · credit card numbers · full identity documents · sensitive private documents.
+                </div>
+
+                <label style={{ display: "flex", gap: 12, alignItems: "flex-start", cursor: "pointer", marginTop: 4 }}>
+                  <input type="checkbox" checked={s.consent} onChange={e => set("consent", e.target.checked)} required
+                    style={{ marginTop: 3, flexShrink: 0, accentColor: "#5fa3e8", width: 16, height: 16 }} />
+                  <span style={{ fontSize: 13.5, color: "var(--jgc-fg-on-navy-2, #8ca3c0)", lineHeight: 1.55 }}>
+                    I understand JGusew Computers will use my contact details to respond to this enquiry.{" "}
+                    I've read the <a href="privacy.html" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>privacy notice</a>.
+                  </span>
+                </label>
+
+                <div className="submit" style={{ marginTop: 20 }}>
+                  <span className="note">No marketing list. We don't store anything sensitive. See <a href="safety.html">Safety</a>.</span>
+                  <button className="btn primary" type="submit" disabled={status === "sending" || status === "sent" || !s.consent}>
+                    {status === "sending" ? "Sending…" : status === "sent" ? "Sent — thanks." : <><span>Send enquiry</span><Arrow /></>}
+                  </button>
+                </div>
+                {status === "error" && (
+                  <div style={{
+                    marginTop: 12, padding: "12px 16px", borderRadius: 10,
+                    background: "rgba(196,122,44,0.10)", border: "1px solid rgba(196,122,44,0.30)",
+                    fontSize: 13.5, color: "#f0c896", lineHeight: 1.5
+                  }}>
+                    Something went wrong — the message wasn't sent. You can try again, or write directly to{" "}
+                    <a href="mailto:hello@jgusewcomputers.com" style={{ color: "#fff", textDecoration: "underline" }}>hello@jgusewcomputers.com</a>.
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ---------- Footer ----------
+    function Footer({ onNav }) {
+      return (
+        <footer className="foot">
+          <div className="inner">
+            <div className="brand">
+              <img className="lockup" src="assets/logos/horizontal-lockup-dark.webp" alt="JGusew Computers" loading="lazy" />
+              <p>Practical technology help, advice, and automation for everyday people and small businesses. Led by Jehiah Gusew.</p>
+              <div className="badges">
+                <span>Quoted before work starts</span>
+                <span>Help by email</span>
+                <span>Human-reviewed</span>
+              </div>
+            </div>
+            <div>
+              <h3>Services</h3>
+              <ul>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>New computer advice</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Website help</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Forms and enquiry systems</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Email cleanup</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>AI automation starter</a></li>
+                <li><a href="#services" onClick={(e)=>{e.preventDefault();onNav("services");}}>Small business review</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Trust</h3>
+              <ul>
+                <li><a href="#process" onClick={(e)=>{e.preventDefault();onNav("process");}}>How it works</a></li>
+                <li><a href="safety.html">Safety first</a></li>
+                <li><a href="#contact" onClick={(e)=>{e.preventDefault();onNav("contact");}}>Get in touch</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>About</h3>
+              <ul>
+                <li><a href="about.html">About Jehiah</a></li>
+                <li><a href="safety.html">Safety first</a></li>
+                <li><a href="privacy.html">Privacy notice</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Contact</h3>
+              <ul>
+                <li><a href="mailto:hello@jgusewcomputers.com">hello@jgusewcomputers.com</a></li>
+                <li style={{ opacity: 0.75 }}>Reply within 1 working day</li>
+                <li style={{ opacity: 0.75 }}>Replies are human-reviewed</li>
+              </ul>
+            </div>
+          </div>
+          <div className="legal">
+            <span>© 2026 JGusew Computers · led by Jehiah Gusew · Sunbury, VIC, Australia</span>
+            <span className="mono">
+              <a href="safety.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Safety</a>
+              {" · "}
+              <a href="privacy.html" style={{color:"inherit",textDecoration:"underline",textUnderlineOffset:3}}>Privacy notice</a>
+            </span>
+          </div>
+        </footer>
+      );
+    }
+
+    // ---------- App ----------
+    function App() {
+      const [current, setCurrent] = React.useState("home");
+      useReveal();
+      function nav(id) {
+        setCurrent(id);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return (
+        <>
+          <a href="#main-content" className="skip-link">Skip to main content</a>
+          <Nav current={current} onNav={nav} />
+          <main id="main-content">
+            <div id="home" data-screen-label="01 Home">
+              <Hero onContact={() => nav("contact")} onServices={() => nav("services")} />
+            </div>
+
+            <ExplainerBand />
+
+            <Marquee />
+
+            <section id="services" className="section" data-screen-label="02 Services">
+              <div className="container">
+                <div className="section-head reveal">
+                  <span className="num">01 — Services</span>
+                  <h2>Computers, websites, forms, email, AI automation and small business tech advice.</h2>
+                  <p>We help assess the issue, explain your options, and suggest sensible next steps — in plain English. No guaranteed repairs, no emergency support, no instant fixes.</p>
+                </div>
+                <BentoServices />
+              </div>
+            </section>
+
+            <HowItWorks />
+
+            <AICallout />
+
+            <JehiahNote />
+
+            <SafetyBand />
+
+            <Contact />
+          </main>
+          <Footer onNav={nav} />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
 </body>
 </html>
