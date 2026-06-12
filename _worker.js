@@ -36,14 +36,16 @@ export default {
     }
 
     // ── Subdomain routing ─────────────────────────────────────────────────
+    // Extensionless paths: asking ASSETS for "/community.html" gets a 307
+    // to "/community" (html_handling), which leaks into the address bar.
     if (host === 'community.jgusewcomputers.com' && path === '/') {
-      return serveAsset('/community.html', request, env);
+      return serveAsset('/community', request, env);
     }
     if (host === 'professional.jgusewcomputers.com' && path === '/') {
-      return serveAsset('/professional.html', request, env);
+      return serveAsset('/professional', request, env);
     }
     if (host === 'admin.jgusewcomputers.com' && path === '/') {
-      return serveAsset('/admin.html', request, env);
+      return serveAsset('/admin', request, env);
     }
 
     // ── Static assets (Pages handles everything else) ─────────────────────

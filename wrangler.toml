@@ -11,7 +11,13 @@ routes = [
   { pattern = "admin.jgusewcomputers.com/*", zone_name = "jgusewcomputers.com" }
 ]
 
-# Static assets served via env.ASSETS in _worker.js
+# Static assets served via env.ASSETS in _worker.js.
+# run_worker_first: without it, requests matching an asset (e.g. "/" ->
+# index.html) are served before the worker runs, so the subdomain
+# rewrites in _worker.js never fire and every subdomain shows the apex
+# homepage.
 [assets]
 directory = "."
+binding = "ASSETS"
 not_found_handling = "single-page-application"
+run_worker_first = true
