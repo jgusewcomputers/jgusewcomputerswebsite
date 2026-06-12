@@ -1,8 +1,7 @@
-# Cloudflare Pages redirect rules
-# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+# Cloudflare redirect rules
+# Docs: https://developers.cloudflare.com/workers/static-assets/redirects/
 #
-# IMPORTANT: The www -> apex rule below only fires if www.jgusewcomputers.com
-# is also configured as a custom domain on this Cloudflare Pages project.
-# See JGC_WEBSITE_FIX_LOG.md for the required Cloudflare dashboard steps.
-
-https://www.jgusewcomputers.com/* https://jgusewcomputers.com/:splat 301
+# NOTE: The www -> apex redirect is handled in _worker.js, because Workers
+# static assets _redirects rules only allow relative URLs (error 100324).
+# www.jgusewcomputers.com must still be configured as a custom domain on
+# the Worker for that redirect to fire.

@@ -18,6 +18,12 @@ export default {
     const host = url.hostname;
     const path = url.pathname;
 
+    // ── www → apex (Workers static assets _redirects can't use absolute URLs)
+    if (host === 'www.jgusewcomputers.com') {
+      url.hostname = 'jgusewcomputers.com';
+      return Response.redirect(url.href, 301);
+    }
+
     // ── API: CreateSecret metrics ─────────────────────────────────────────
     if (path === '/api/createsecret-metrics') {
       return handleMetrics(request, env);
