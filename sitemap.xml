@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/9/0">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jgusewcomputers.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/about.html</loc>
+    <loc>https://jgusewcomputers.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/safety.html</loc>
+    <loc>https://jgusewcomputers.com/safety</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/privacy.html</loc>
+    <loc>https://jgusewcomputers.com/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/computer-help.html</loc>
+    <loc>https://jgusewcomputers.com/professional</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jgusewcomputers.com/community</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jgusewcomputers.com/services/computer-help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/website-help.html</loc>
+    <loc>https://jgusewcomputers.com/services/website-help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/forms-enquiry-systems.html</loc>
+    <loc>https://jgusewcomputers.com/services/forms-enquiry-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/ai-automation.html</loc>
+    <loc>https://jgusewcomputers.com/services/ai-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/email-account-cleanup.html</loc>
+    <loc>https://jgusewcomputers.com/services/email-account-cleanup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jgusewcomputers.com/services/small-business-tech-advice.html</loc>
+    <loc>https://jgusewcomputers.com/services/small-business-tech-advice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

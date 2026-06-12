@@ -25,7 +25,13 @@ export default {
     }
 
     // ── API: CreateSecret metrics ─────────────────────────────────────────
+    // Only answered on the admin subdomain. NOTE: this is obscurity, not
+    // auth — put a Cloudflare Access policy on admin.jgusewcomputers.com
+    // before setting CREATESECRET_METRICS_TOKEN in production.
     if (path === '/api/createsecret-metrics') {
+      if (host !== 'admin.jgusewcomputers.com') {
+        return notFound(request, env);
+      }
       return handleMetrics(request, env);
     }
 
@@ -41,9 +47,31 @@ export default {
     }
 
     // ── Static assets (Pages handles everything else) ─────────────────────
-    return env.ASSETS.fetch(request);
+    try {
+      const response = await env.ASSETS.fetch(request);
+      if (response.status === 404) return notFound(request, env);
+      return response;
+    } catch {
+      return notFound(request, env);
+    }
   },
 };
+
+// ── Branded 404 (env.ASSETS throws or 404s on unknown paths; without this
+//    visitors get a raw Cloudflare "error code: 1101" page) ─────────────────
+async function notFound(request, env) {
+  try {
+    const homeUrl = new URL('/index.html', request.url);
+    const home = await env.ASSETS.fetch(new Request(homeUrl, { headers: { Accept: 'text/html' } }));
+    if (home.ok) {
+      return new Response(home.body, {
+        status: 404,
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
+  } catch {}
+  return new Response('Not found', { status: 404, headers: { 'Content-Type': 'text/plain' } });
+}
 
 // ── Serve a specific static file from the Pages asset manifest ──────────────
 async function serveAsset(filename, request, env) {
@@ -67,7 +95,7 @@ async function handleMetrics(request, env) {
   const token = env.CREATESECRET_METRICS_TOKEN;
   if (!token) {
     return new Response(
-      JSON.stringify({ error: 'CREATESECRET_METRICS_TOKEN is not set in environment secrets.' }),
+      JSON.stringify({ error: 'Metrics are not configured.' }),
       { status: 500, headers: h }
     );
   }
@@ -80,7 +108,7 @@ async function handleMetrics(request, env) {
     });
   } catch (err) {
     return new Response(
-      JSON.stringify({ error: `CreateSecret API unreachable: ${err.message}` }),
+      JSON.stringify({ error: 'Upstream metrics service unreachable.' }),
       { status: 503, headers: h }
     );
   }

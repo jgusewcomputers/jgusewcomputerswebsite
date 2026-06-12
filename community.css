@@ -105,8 +105,8 @@ body {
 }
 
 /* ---- Section numbers ---- */
-.num { color: rgba(249, 115, 22, 0.78) !important; }
-.ex-num { color: rgba(249, 115, 22, 0.52) !important; }
+.num { color: #fdba74 !important; }
+.ex-num { color: #fdba74 !important; }
 
 /* ---- How it works steps ---- */
 .step::before       { background: rgba(249, 115, 22, 0.22) !important; }
@@ -157,7 +157,7 @@ body {
 .jehiah-note .hello { color: #fdba74 !important; }
 
 /* ---- Callout signature ---- */
-.callout .signature { color: rgba(249, 115, 22, 0.55) !important; }
+.callout .signature { color: #fdba74 !important; }
 
 /* ---- intake-side-panel kicker ---- */
 .panel-kicker { color: rgba(249, 115, 22, 0.80) !important; }

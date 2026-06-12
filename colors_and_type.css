@@ -172,6 +172,9 @@
 
   --jgc-bg: var(--jgc-navy-950);
   --jgc-bg-elev: var(--jgc-navy-900);
+  --jgc-bg-deep: var(--jgc-navy-950);
+  --jgc-border-glass: rgba(255, 255, 255, 0.08);
+  --jgc-shadow-premium: 0 40px 90px -40px rgba(0, 0, 0, 0.65);
 
   --jgc-border-1: rgba(255, 255, 255, 0.08);
   --jgc-border-2: rgba(255, 255, 255, 0.16);

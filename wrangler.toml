@@ -2,6 +2,15 @@ name            = "crimson-water-8c29"
 main            = "_worker.js"
 compatibility_date = "2024-09-23"
 
+# Subdomain routes: without these, community./professional./admin. traffic
+# never reaches _worker.js (visitors were getting the apex homepage instead
+# of their edition). The apex + www are attached as custom domains already.
+routes = [
+  { pattern = "community.jgusewcomputers.com/*", zone_name = "jgusewcomputers.com" },
+  { pattern = "professional.jgusewcomputers.com/*", zone_name = "jgusewcomputers.com" },
+  { pattern = "admin.jgusewcomputers.com/*", zone_name = "jgusewcomputers.com" }
+]
+
 # Static assets served via env.ASSETS in _worker.js
 [assets]
 directory = "."

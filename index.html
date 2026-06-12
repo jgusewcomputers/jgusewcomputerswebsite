@@ -6,8 +6,8 @@
   <title>JGusew Computers | Practical Tech Help, Websites and AI Automation</title>
   <meta name="description" content="Practical technology help for homes and small businesses. JGusew Computers helps with computers, websites, forms, email setup, AI automation and sensible tech advice without hype or jargon.">
   <link rel="icon" href="assets/logos/monogram-flat-navy.png">
-  <link rel="stylesheet" href="colors_and_type.css?v=20260612">
-  <link rel="stylesheet" href="premium.css?v=20260612">
+  <link rel="stylesheet" href="colors_and_type.css?v=20260612b">
+  <link rel="stylesheet" href="premium.css?v=20260612b">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://jgusewcomputers.com/">
@@ -71,11 +71,11 @@
 
   <div id="root"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS" crossorigin="anonymous"></script>
   <script>emailjs.init("dEyzQD3JwgIZVH6vh");</script>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <script type="text/babel">
@@ -764,6 +764,17 @@
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         else window.scrollTo({ top: 0, behavior: "smooth" });
       }
+      // Links like about.html -> index.html#contact arrive before React has
+      // rendered the target ids, so the browser's native anchor jump misses.
+      React.useEffect(() => {
+        const id = window.location.hash.slice(1);
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el) {
+          setCurrent(id);
+          el.scrollIntoView({ block: "start" });
+        }
+      }, []);
       return (
         <>
           <a href="#main-content" className="skip-link">Skip to main content</a>

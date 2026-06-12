@@ -1,0 +1,30 @@
+# JGusew Computers
+
+> Practical, plain-English technology help for everyday people and small businesses, run by Jehiah Gusew from Sunbury, Victoria, Australia. Help is delivered by email — no phone queues, no call-outs. Paid work is always scoped and quoted before it starts; nothing is charged without the customer's approval. AI may help draft, but a real person (Jehiah) reviews everything before it goes out.
+
+Key facts:
+- Contact: hello@jgusewcomputers.com (email only, reply within 1 working day)
+- Location: Sunbury, VIC, Australia (service available online Australia-wide)
+- Pricing: quoted up front before any work begins; enquiries are free and without obligation
+- Trust model: "AI drafts. Jehiah reviews." — no automated replies, no bots
+
+## Main pages
+
+- [Home](https://jgusewcomputers.com/index.html): Overview of services and how the process works
+- [About Jehiah Gusew](https://jgusewcomputers.com/about.html): Background, approach, and the rules the service follows
+- [Safety](https://jgusewcomputers.com/safety.html): How the service keeps people safe online
+- [Privacy](https://jgusewcomputers.com/privacy.html): What data is collected and how it is used
+
+## Services
+
+- [Computer help](https://jgusewcomputers.com/services/computer-help.html): Slow computers, viruses, crashes, repair-vs-replace advice
+- [Website help](https://jgusewcomputers.com/services/website-help.html): Fast static websites with no monthly CMS fees
+- [Forms and enquiry systems](https://jgusewcomputers.com/services/forms-enquiry-systems.html): Contact and intake forms delivered to email
+- [Email account cleanup](https://jgusewcomputers.com/services/email-account-cleanup.html): Inbox cleanup, spam reduction, account organisation
+- [Small business tech advice](https://jgusewcomputers.com/services/small-business-tech-advice.html): Practical reviews of small-business technology
+- [AI automation](https://jgusewcomputers.com/services/ai-automation.html): Free-first workflow automation without automating sensitive judgement
+
+## Audience editions
+
+- [Professional edition](https://jgusewcomputers.com/professional.html): For small businesses — websites, systems and automation
+- [Community edition](https://jgusewcomputers.com/community.html): For local Sunbury residents — everyday computer help
